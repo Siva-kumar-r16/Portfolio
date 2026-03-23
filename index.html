@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- PHASE 3: SEO & SOCIAL META TAGS -->
     <title>Siva Kumar R | Frontend Engineer & App Developer</title>
     <meta name="description" content="Portfolio of Siva Kumar R, a frontend engineer and app developer specializing in Python, Java, and scalable web architectures.">
     <meta property="og:title" content="Siva Kumar R | Software Engineer Portfolio">
@@ -12,19 +11,13 @@
     <meta property="og:image" content="images/avatar.png">
     <meta property="og:type" content="website">
 
-    <!-- PHASE 1: TAILWIND -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Inter:wght@300;400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
-        /* --- CORE THEME VARIABLES --- */
         :root {
-            --bg-primary: #050505; /* Slightly darker for better contrast */
+            --bg-primary: #050505;
             --bg-secondary: #0a0a0a;
             --bg-tertiary: #141414;
             --text-main: #ffffff;
@@ -68,7 +61,6 @@
             overflow-x: hidden;
         }
 
-        /* Active class for custom cursor logic */
         body.mouse-active {
             cursor: none;
         }
@@ -83,7 +75,6 @@
             font-family: 'Roboto', sans-serif;
         }
 
-        /* --- CUSTOM CURSOR --- */
         #cursor-dot, #cursor-outline {
             position: fixed;
             top: 0;
@@ -95,13 +86,11 @@
             display: none;
         }
 
-        /* Only show when mouse logic is active AND supported */
         body.mouse-active #cursor-dot,
         body.mouse-active #cursor-outline {
             display: block;
         }
 
-        /* MOBILE FIX: Strictly remove custom cursor on touch devices */
         @media (hover: none) and (pointer: coarse) {
             #cursor-dot, #cursor-outline {
                 display: none !important;
@@ -123,7 +112,6 @@
             transition: width 0.2s, height 0.2s, border-color 0.3s;
         }
 
-        /* --- UTILITIES --- */
         ::selection {
             background: var(--accent-red);
             color: #fff;
@@ -140,7 +128,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.3; /* Toned down for readability */
+            opacity: 0.3;
             pointer-events: none;
         }
 
@@ -205,7 +193,7 @@
         }
         .hover-card:hover {
             transform: translateY(-5px);
-            border-color: var(--text-muted); /* More subtle hover border */
+            border-color: var(--text-muted);
             background-color: var(--card-hover);
         }
 
@@ -245,7 +233,7 @@
         .tech-track {
             display: flex;
             width: max-content;
-            animation: tech-scroll 40s linear infinite; /* Slower for professionalism */
+            animation: tech-scroll 40s linear infinite;
         }
         .tech-item {
             font-size: 1.75rem;
@@ -255,7 +243,7 @@
             transition: all 0.3s;
         }
         .tech-item:hover {
-            color: var(--text-main); /* Monochrome hover */
+            color: var(--text-main);
             opacity: 1;
             transform: scale(1.1);
         }
@@ -267,22 +255,17 @@
 </head>
 <body class="antialiased">
 
-    <!-- Custom Cursor Elements -->
     <div id="cursor-dot"></div>
     <div id="cursor-outline"></div>
 
-    <!-- Interactive Background -->
     <canvas id="glyph-canvas"></canvas>
 
-    <!-- Navigation -->
     <nav class="w-full py-6 px-4 md:px-8 flex flex-col md:flex-row justify-between items-center border-b border-theme bg-opacity-95 backdrop-blur-sm sticky top-0 z-50 transition-colors duration-300" style="background-color: var(--bg-primary);">
         <div class="flex items-center justify-between w-full md:w-auto mb-4 md:mb-0">
             <div class="flex items-center gap-4">
                 <div class="text-2xl font-bold brand-font" style="color: var(--text-main);">
                     SIVA KUMAR<span class="text-red-600 animate-pulse">.</span>R
                 </div>
-                <!-- System Status Ticker -->
-                <!-- UPDATED: Changed 'hidden lg:flex' to 'flex' for visibility on all devices -->
                 <div class="flex items-center gap-2 text-[10px] md:text-xs brand-font text-theme-muted border-l border-theme pl-4 tracking-wider">
                     <span class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
                     <span id="system-time">LOADING...</span>
@@ -298,7 +281,6 @@
                 <li><a href="#contact" class="nav-link hover:text-red-600 transition-colors" data-target="contact">CONTACT</a></li>
             </ul>
 
-            <!-- Theme Toggle -->
             <div class="flex items-center gap-2 border-l border-theme pl-6">
                 <i class="fa-solid fa-moon text-xs text-theme-muted"></i>
                 <div class="toggle-switch" id="theme-toggle"></div>
@@ -307,7 +289,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="relative pt-20 pb-40 md:pt-32 md:pb-52 overflow-hidden text-center reveal">
         <div class="container mx-auto px-4 z-10 relative">
             <h2 class="text-xl md:text-2xl text-theme-muted mb-4 font-bold brand-font">Software Engineer Portfolio</h2>
@@ -321,11 +302,9 @@
 
             <div id="model-3d-viewer" class="avatar-container mb-10 group">
                 <div class="w-64 h-80 md:w-80 md:h-96 bg-theme-secondary avatar-frame flex items-center justify-center overflow-hidden relative">
-                    <!-- Subtle Scanline -->
                     <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent h-1 w-full animate-[scan_4s_linear_infinite] pointer-events-none z-20"></div>
                     <img src="images/csk_avatar.png" width="320" height="384" onerror="this.src='https://placehold.co/400x500/121212/D71921?text=SK'" alt="Siva Kumar R" class="w-full h-full object-contain relative z-10 transition-all duration-500">
                 </div>
-                <!-- Decorative elements -->
                 <div class="absolute -top-4 -right-4 w-8 h-8 border-t-2 border-r-2 border-red-600 opacity-50"></div>
                 <div class="absolute -bottom-4 -left-4 w-8 h-8 border-b-2 border-l-2 border-red-600 opacity-50"></div>
             </div>
@@ -336,17 +315,15 @@
         </div>
     </section>
 
-    <!-- Bio Section -->
     <section id="about" class="bg-theme-secondary pt-16 pb-32 text-center border-y border-theme reveal" style="background-color: var(--bg-secondary);">
         <div class="container mx-auto px-4 max-w-3xl">
-            <h3 class="text-2xl md:text-3xl font-bold mb-6 brand-font" style="color: var(--text-main);">Hi, I’m Siva.</h3>
+            <h3 class="text-2xl md:text-3xl font-bold mb-6 brand-font" style="color: var(--text-main);">Hi, I'm Siva.</h3>
             <p class="text-theme-muted leading-relaxed text-lg roboto-font">
                 I am a detail-oriented developer passionate about building cross-platform applications and logic-driven interfaces. My background covers the full development lifecycle—from backend logic in <strong>Java & Python</strong> to interactive frontends using <strong>HTML5 & Tailwind</strong>. Currently deepening my expertise in Data Structures, Algorithms, and Clean Code architecture.
             </p>
         </div>
     </section>
 
-    <!-- FEATURED VENTURE -->
     <section class="pt-20 pb-48 md:pb-64 border-b border-theme relative overflow-hidden reveal" style="background-color: var(--bg-primary);">
         <div class="absolute top-10 right-0 text-9xl font-bold opacity-5 brand-font select-none pointer-events-none" style="color: var(--text-muted);">
             BUILD
@@ -384,11 +361,9 @@
         </div>
     </section>
 
-    <!-- Skills (Floating Widgets) -->
     <section id="skills" class="container mx-auto px-4 pb-20 -mt-20 relative z-20 reveal">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             
-            <!-- Widget 1: Python -->
             <div class="bg-theme-secondary border border-theme p-6 rounded-xl hover-card group flex flex-col items-center text-center float-anim skill-widget" 
                  style="background-color: var(--bg-secondary);" 
                  data-tech="python">
@@ -402,7 +377,6 @@
                 </div>
             </div>
 
-            <!-- Widget 2: Web -->
             <div class="bg-theme-secondary border border-theme p-6 rounded-xl hover-card group flex flex-col items-center text-center float-anim skill-widget" 
                  style="background-color: var(--bg-secondary);"
                  data-tech="web">
@@ -416,7 +390,6 @@
                 </div>
             </div>
 
-            <!-- Widget 3: Android -->
             <div class="bg-theme-secondary border border-theme p-6 rounded-xl hover-card group flex flex-col items-center text-center float-anim skill-widget" 
                  style="background-color: var(--bg-secondary);"
                  data-tech="android">
@@ -430,7 +403,6 @@
                 </div>
             </div>
 
-            <!-- Widget 4: Java/System -->
             <div class="bg-theme-secondary border border-theme p-6 rounded-xl hover-card group flex flex-col items-center text-center float-anim skill-widget" 
                  style="background-color: var(--bg-secondary);"
                  data-tech="java">
@@ -447,11 +419,9 @@
         </div>
     </section>
 
-    <!-- Tech Stack Marquee -->
     <section class="py-12 border-y border-theme bg-theme-secondary overflow-hidden" style="background-color: var(--bg-secondary);">
         <div class="tech-marquee">
             <div class="tech-track brand-font" id="tech-track">
-                <!-- Verified Technologies ONLY (No Git/Linux/Cloud) -->
                 <div class="flex items-center" id="tech-source">
                     <i class="fa-brands fa-python tech-item" title="Python"></i>
                     <i class="fa-brands fa-java tech-item" title="Java"></i>
@@ -466,7 +436,6 @@
         </div>
     </section>
 
-    <!-- Projects -->
     <section id="projects" class="py-20 md:py-32 reveal">
         <div class="container mx-auto px-4">
             <div class="flex items-end justify-between mb-16 border-b border-theme pb-4">
@@ -481,7 +450,6 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="project-grid">
                 
-                <!-- Project 1: Word Game -->
                 <div class="bg-theme-secondary border border-theme rounded-xl overflow-hidden hover-card group flex flex-col float-anim project-card" 
                      style="background-color: var(--bg-secondary);" 
                      data-tech="python android">
@@ -497,7 +465,6 @@
                             Event-driven cross-platform puzzle game using Python logic and Android architecture, integrated with Firebase Realtime Database.
                         </p>
                         <div class="flex justify-between items-center mt-auto">
-                            <!-- Verified: Python, Java, Android, Firebase, Database -->
                             <div class="flex gap-4 text-lg">
                                 <i class="fa-brands fa-python text-theme-muted hover:text-white transition-colors" title="Python"></i>
                                 <i class="fa-brands fa-java text-theme-muted hover:text-white transition-colors" title="Java"></i>
@@ -510,7 +477,6 @@
                     </div>
                 </div>
 
-                <!-- Project 2: Video Game Sales Analytics -->
                 <div class="bg-theme-secondary border border-theme rounded-xl overflow-hidden hover-card group flex flex-col float-anim project-card" 
                      style="background-color: var(--bg-secondary);" 
                      data-tech="python">
@@ -526,7 +492,6 @@
                             Data visualization dashboard utilizing Pandas, Matplotlib, and Scikit-learn for sales trend prediction and analysis.
                         </p>
                         <div class="flex justify-between items-center mt-auto">
-                            <!-- UPDATED TECH STACK: Python, Data, Charts, ML, Database -->
                             <div class="flex gap-4 text-lg">
                                 <i class="fa-brands fa-python text-theme-muted hover:text-white transition-colors" title="Python"></i>
                                 <i class="fa-solid fa-database text-theme-muted hover:text-white transition-colors" title="Data/Pandas"></i>
@@ -539,7 +504,6 @@
                     </div>
                 </div>
 
-                <!-- Project 3: Restaurant -->
                 <div class="bg-theme-secondary border border-theme rounded-xl overflow-hidden hover-card group flex flex-col float-anim project-card" 
                      style="background-color: var(--bg-secondary);" 
                      data-tech="java">
@@ -555,7 +519,6 @@
                             Robust management system built with Java Swing & MySQL (JDBC), demonstrating secure RDBMS and OOP principles.
                         </p>
                         <div class="flex justify-between items-center mt-auto">
-                            <!-- UPDATED TECH STACK: Java, Database, GUI, Auth, Users -->
                             <div class="flex gap-4 text-lg">
                                 <i class="fa-brands fa-java text-theme-muted hover:text-white transition-colors" title="Java"></i>
                                 <i class="fa-solid fa-database text-theme-muted hover:text-white transition-colors" title="MySQL / JDBC"></i>
@@ -568,7 +531,6 @@
                     </div>
                 </div>
 
-                <!-- Project 4: Netflix -->
                 <div class="bg-theme-secondary border border-theme rounded-xl overflow-hidden hover-card group flex flex-col float-anim project-card" 
                      style="background-color: var(--bg-secondary);" 
                      data-tech="web">
@@ -584,7 +546,6 @@
                             Pixel-perfect frontend replication using pure HTML5 & CSS3, featuring responsive layouts and custom animations.
                         </p>
                         <div class="flex justify-between items-center mt-auto">
-                            <!-- UPDATED TECH STACK: HTML, CSS, JS, Mobile, Play -->
                             <div class="flex gap-4 text-lg">
                                 <i class="fa-brands fa-html5 text-theme-muted hover:text-white transition-colors" title="HTML5"></i>
                                 <i class="fa-brands fa-css3-alt text-theme-muted hover:text-white transition-colors" title="CSS3"></i>
@@ -606,7 +567,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer id="contact" class="bg-black pt-16 pb-8 overflow-hidden border-t border-theme" style="background-color: var(--bg-secondary);">
         <div class="container mx-auto px-4 text-center">
             <div class="mb-8 text-6xl font-bold brand-font text-theme-muted hover:text-red-600 transition-colors cursor-default tracking-widest">
@@ -662,7 +622,6 @@
         let mouseX = -1000, mouseY = -1000;
         let lastDraw = 0;
         
-        // OPTIMIZATION: Check for low-end device
         const isLowEnd = window.navigator.hardwareConcurrency <= 4 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         const fpsInterval = isLowEnd ? 1000 / 30 : 1000 / 60;
 
@@ -673,8 +632,6 @@
         window.addEventListener('resize', resize);
         resize();
 
-        // PHASE 1: CURSOR & MOUSE LOGIC FIX
-        // Only active custom cursor class if mouse actually moves
         document.addEventListener('mousemove', (e) => {
             if (!document.body.classList.contains('mouse-active')) {
                 document.body.classList.add('mouse-active');
@@ -772,7 +729,6 @@
         function updateTime() {
             const now = new Date();
             
-            // LOC: Visitor's Local Time
             const locTime = now.toLocaleTimeString('en-US', {
                 hour: '2-digit',
                 minute: '2-digit',
@@ -780,7 +736,6 @@
                 hour12: true
             });
 
-            // IST: Indian Standard Time (Asia/Kolkata)
             const istTime = now.toLocaleTimeString('en-US', {
                 timeZone: 'Asia/Kolkata',
                 hour: '2-digit',
@@ -789,9 +744,6 @@
                 hour12: true
             });
 
-            // Format strictly as requested:
-            // LOC HH:MM:SS AM/PM
-            // IST HH:MM:SS AM/PM (MY LOCAL TIME)
             const displayString = `LOC ${locTime}<br>IST ${istTime} (MY LOCAL TIME)`;
             
             document.getElementById('system-time').innerHTML = displayString;
@@ -799,9 +751,9 @@
         setInterval(updateTime, 1000);
         updateTime();
 
-        // --- 4. SCROLL REVEAL & PHASE 3 NAV HIGHLIGHT ---
+        // --- 4. SCROLL REVEAL & NAV HIGHLIGHT ---
         const observerOptions = {
-            threshold: 0.3, // Trigger when 30% visible
+            threshold: 0.3,
             rootMargin: "0px"
         };
 
@@ -810,7 +762,6 @@
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
                     
-                    // Nav Highlight Logic
                     const id = entry.target.getAttribute('id');
                     if (id) {
                         document.querySelectorAll('.nav-link').forEach(link => {
@@ -826,15 +777,14 @@
 
         document.querySelectorAll('.reveal, section[id]').forEach(el => sectionObserver.observe(el));
 
-        // --- PHASE 2: MARQUEE CLONING ---
+        // --- MARQUEE CLONING ---
         const techTrack = document.getElementById('tech-track');
         const techSource = document.getElementById('tech-source');
-        // Clone 3 times to ensure infinite scroll coverage on large screens
         for(let i=0; i<3; i++) {
             techTrack.appendChild(techSource.cloneNode(true));
         }
 
-        // --- PHASE 4: TECH INTERACTIVITY ---
+        // --- TECH INTERACTIVITY ---
         const skillWidgets = document.querySelectorAll('.skill-widget');
         const projectCards = document.querySelectorAll('.project-card');
 
@@ -859,12 +809,84 @@
             widget.addEventListener('mouseleave', () => {
                 projectCards.forEach(card => {
                     card.classList.remove('card-dimmed');
-                    // Reset inline styles
                     card.style.transform = '';
                     card.style.borderColor = '';
                 });
             });
         });
+
+        // === MATCH AVATAR LOGIC START ===
+        (async function updateAvatarFromMatch() {
+            const CACHE_KEY = 'cricapi_match_avatar';
+            const CACHE_TTL = 24 * 60 * 60 * 1000; // 1 day in ms
+            const DEFAULT_AVATAR = 'images/avatar.png';
+            const avatarImg = document.querySelector('#model-3d-viewer img');
+            if (!avatarImg) return;
+
+            // Helper: get today's date string in IST (YYYY-MM-DD)
+            function getTodayIST() {
+                return new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+            }
+
+            // Helper: resolve avatar path from teams array
+            function resolveAvatar(matches) {
+                const todayIST = getTodayIST();
+                let hasIndia = false;
+
+                for (const match of matches) {
+                    const teams = match.teams || [];
+                    const matchDate = (match.date || '').slice(0, 10); // YYYY-MM-DD
+
+                    if (matchDate !== todayIST) continue;
+
+                    const teamNames = teams.map(t => t.toLowerCase());
+
+                    if (teamNames.some(t => t.includes('chennai super kings'))) {
+                        return 'images/csk_avatar.png'; // CSK = highest priority
+                    }
+                    if (teamNames.some(t => t === 'india' || t.includes('india'))) {
+                        hasIndia = true;
+                    }
+                }
+
+                if (hasIndia) return 'images/india_avatar.png';
+                return DEFAULT_AVATAR;
+            }
+
+            // Check localStorage cache
+            try {
+                const cached = localStorage.getItem(CACHE_KEY);
+                if (cached) {
+                    const { timestamp, avatar } = JSON.parse(cached);
+                    if (Date.now() - timestamp < CACHE_TTL) {
+                        avatarImg.src = avatar;
+                        return;
+                    }
+                }
+            } catch (_) {}
+
+            // Fetch from API
+            try {
+                const res = await fetch(
+                    'https://api.cricapi.com/v1/matches?apikey=201516e1-eb78-4faa-8bf1-372d8fb2280a&offset=0'
+                );
+                if (!res.ok) throw new Error('API error');
+                const data = await res.json();
+                const matches = data.data || [];
+                const avatar = resolveAvatar(matches);
+
+                avatarImg.src = avatar;
+
+                // Cache result
+                localStorage.setItem(CACHE_KEY, JSON.stringify({
+                    timestamp: Date.now(),
+                    avatar
+                }));
+            } catch (_) {
+                avatarImg.src = DEFAULT_AVATAR;
+            }
+        })();
+        // === MATCH AVATAR LOGIC END ===
 
     </script>
 </body>
