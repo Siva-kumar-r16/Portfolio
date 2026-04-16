@@ -192,7 +192,7 @@
             border: 1px solid var(--border-color);
         }
         .hover-card:hover {
-            transform: translateY(-5px);
+            transform: scale(1.05) translateY(-5px);
             border-color: var(--text-muted);
             background-color: var(--card-hover);
         }
@@ -251,6 +251,49 @@
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
+
+        /* FAVORITES SECTION SPECIFIC STYLES */
+        .favorite-card {
+            transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-secondary);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .favorite-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            border-color: var(--text-muted);
+            background-color: var(--card-hover);
+        }
+        .image-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            transition: border-color 0.3s ease;
+            height: 282px; /* Ensure uniform height across grid */
+        }
+        html.light-mode .image-container {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        .favorite-card:hover .image-container {
+            border-color: var(--accent-red);
+        }
+        .image-container img {
+            max-height: 250px;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 0.5rem;
+            position: relative;
+            z-index: 10;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -278,6 +321,7 @@
                 <li><a href="#about" class="nav-link hover:text-red-600 transition-colors" data-target="about">ABOUT</a></li>
                 <li><a href="#skills" class="nav-link hover:text-red-600 transition-colors" data-target="skills">SKILLS</a></li>
                 <li><a href="#projects" class="nav-link hover:text-red-600 transition-colors" data-target="projects">PROJECTS</a></li>
+                <li><a href="#favorites" class="nav-link hover:text-red-600 transition-colors" data-target="favorites">FAVS</a></li>
                 <li><a href="#contact" class="nav-link hover:text-red-600 transition-colors" data-target="contact">CONTACT</a></li>
             </ul>
 
@@ -507,7 +551,7 @@
                 <div class="bg-theme-secondary border border-theme rounded-xl overflow-hidden hover-card group flex flex-col float-anim project-card" 
                      style="background-color: var(--bg-secondary);" 
                      data-tech="java">
-                    <div class="h-48 bg-neutral-900 border-b border-theme relative overflow-hidden">
+                    <div class="h-48 bg-neutral-900 border-b border-theme relative overflow-hidden group-hover:border-red-600 transition-colors">
                         <div class="absolute inset-0 flex items-center justify-center text-theme-muted">
                              <i class="fa-solid fa-utensils text-4xl"></i>
                         </div>
@@ -534,7 +578,7 @@
                 <div class="bg-theme-secondary border border-theme rounded-xl overflow-hidden hover-card group flex flex-col float-anim project-card" 
                      style="background-color: var(--bg-secondary);" 
                      data-tech="web">
-                    <div class="h-48 bg-neutral-900 border-b border-theme relative overflow-hidden">
+                    <div class="h-48 bg-neutral-900 border-b border-theme relative overflow-hidden group-hover:border-red-600 transition-colors">
                         <div class="absolute inset-0 flex items-center justify-center text-theme-muted">
                              <i class="fa-solid fa-tv text-4xl"></i>
                         </div>
@@ -563,6 +607,25 @@
                 <a href="https://github.com/Siva-kumar-r16" target="_blank" class="inline-block border border-theme text-theme-muted px-8 py-3 rounded-full font-bold hover:bg-white hover:text-black hover:border-white transition-all brand-font">
                     <i class="fa-brands fa-github mr-2"></i> REPOSITORY ARCHIVE
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW FAVORITES SECTION -->
+    <section id="favorites" class="py-20 md:py-32 reveal bg-theme-secondary border-t border-theme">
+        <div class="container mx-auto px-4">
+            <div class="flex items-end justify-between mb-16 border-b border-theme pb-4">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold brand-font" style="color: var(--text-main);">Favorites</h2>
+                    <p class="text-theme-muted mt-2 brand-font">/// MOVIES & SERIES</p>
+                </div>
+                <div class="hidden md:block text-4xl text-theme-muted opacity-20">
+                    <i class="fa-solid fa-film"></i>
+                </div>
+            </div>
+
+            <!-- This grid will be populated dynamically by JavaScript -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="favorites-grid">
             </div>
         </div>
     </section>
@@ -815,74 +878,224 @@
             });
         });
 
+        // === FAVORITES RENDER LOGIC START ===
+        const favorites = [
+            {
+                title: "Manichithrathazhu",
+                type: "Movie",
+                image: "https://c.saavncdn.com/867/Manichitrathazhu-Malayalam-1993-20250402200537-500x500.jpg",
+                link: "https://www.imdb.com/title/tt0214915/"
+            },
+            {
+                title: "Rocketry: The Nambi Effect",
+                type: "Movie",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5sAx2It7GtKVauDlgoQAjFqAln1HFbALNkg&s",
+                link: "https://www.imdb.com/title/tt9263550/"
+            },
+            {
+                title: "Drishyam",
+                type: "Movie",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7qIaSR-cA-tjiVrFjMouWA2E28umfAcU5Uw&s",
+                link: "https://www.imdb.com/title/tt3417422/"
+            },
+            {
+                title: "Drishyam 2",
+                type: "Movie",
+                image: "https://jiotvimages.cdn.jio.com/imagespublic/metadata/297b7c9d19cb9ec65989bc33444633d1.jpg",
+                link: "https://www.imdb.com/title/tt12361178/"
+            },
+            {
+                title: "Maharaja (Tamil)",
+                type: "Movie",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP4aWFAArN7W6FNSqZAsTNXmGGmjRZTLpLUQ&s",
+                link: "https://www.imdb.com/title/tt26548265/"
+            },
+            {
+                title: "Young Sheldon",
+                type: "Series",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQul-gBYv3KQZdMz_CVWydNbh8MsnebnCNzOQ&s",
+                link: "https://www.imdb.com/title/tt6226232/"
+            },
+            {
+                title: "The Big Bang Theory",
+                type: "Series",
+                image: "https://m.media-amazon.com/images/S/pv-target-images/4b63ef0284ce2942556d96bd39cef16f93384e974dabe61ff5e6b0ae1d794194.jpg",
+                link: "https://www.imdb.com/title/tt0898266/"
+            },
+            {
+                title: "Loki",
+                type: "Series",
+                image: "https://upload.wikimedia.org/wikipedia/en/4/4e/Loki_%28TV_series%29_logo.png",
+                link: "https://www.imdb.com/title/tt9140554/"
+            }
+        ];
+
+        const favoritesGrid = document.getElementById('favorites-grid');
+        if (favoritesGrid) {
+            favoritesGrid.innerHTML = favorites.map(item => {
+                const isSeries = item.type === 'Series';
+                const badgeClass = isSeries 
+                    ? 'bg-red-600/80 text-white border-red-800' 
+                    : 'bg-black/80 text-white border-theme';
+
+                return `
+                    <div onclick="window.open('${item.link}', '_blank')" class="favorite-card float-anim group">
+                        <div class="image-container">
+                            <div class="absolute top-2 right-2 ${badgeClass} text-[10px] font-bold px-2 py-1 rounded border z-20 tracking-widest brand-font uppercase">${item.type}</div>
+                            <i class="fa-solid fa-image text-3xl text-theme-muted absolute z-0"></i>
+                            <img src="${item.image}" onerror="this.src='https://placehold.co/400x600/121212/D71921?text=${encodeURIComponent(item.title)}'" alt="${item.title}">
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col items-center justify-center text-center">
+                            <h3 class="text-md font-bold brand-font" style="color: var(--text-main);">${item.title}</h3>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        // === FAVORITES RENDER LOGIC END ===
+
         // === MATCH AVATAR LOGIC START ===
         (async function updateAvatarFromMatch() {
-            const CACHE_KEY = 'cricapi_match_avatar';
-            const CACHE_TTL = 24 * 60 * 60 * 1000; // 1 day in ms
             const DEFAULT_AVATAR = 'images/avatar.png';
-            const avatarImg = document.querySelector('#model-3d-viewer img');
-            if (!avatarImg) return;
+            const avatarContainer = document.getElementById('model-3d-viewer');
+            const avatarImg = avatarContainer.querySelector('img');
+            if (!avatarImg || !avatarContainer) return;
 
-            // Helper: get today's date string in IST (YYYY-MM-DD)
+            // 1. Create matching tooltip component
+            const tooltip = document.createElement('div');
+            tooltip.className = 'absolute -top-12 left-1/2 transform -translate-x-1/2 bg-black/90 text-white text-xs px-3 py-1.5 rounded border border-theme opacity-0 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50 brand-font shadow-lg';
+            avatarContainer.appendChild(tooltip);
+
+            // 2. Add Hover events for Tooltip
+            avatarContainer.addEventListener('mouseenter', () => {
+                if(tooltip.innerText !== '') tooltip.style.opacity = '1';
+            });
+            avatarContainer.addEventListener('mouseleave', () => {
+                tooltip.style.opacity = '0';
+            });
+
+            // Helpers for dates
             function getTodayIST() {
                 return new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
             }
 
-            // Helper: resolve avatar path from teams array
-            function resolveAvatar(matches) {
-                const todayIST = getTodayIST();
-                let hasIndia = false;
-
-                for (const match of matches) {
-                    const teams = match.teams || [];
-                    const matchDate = (match.date || '').slice(0, 10); // YYYY-MM-DD
-
-                    if (matchDate !== todayIST) continue;
-
-                    const teamNames = teams.map(t => t.toLowerCase());
-
-                    if (teamNames.some(t => t.includes('chennai super kings'))) {
-                        return 'images/csk_avatar.png'; // CSK = highest priority
-                    }
-                    if (teamNames.some(t => t === 'india' || t.includes('india'))) {
-                        hasIndia = true;
-                    }
-                }
-
-                if (hasIndia) return 'images/india_avatar.png';
-                return DEFAULT_AVATAR;
+            // Return difference in days
+            function getDaysDiff(matchDateStr, todayStr) {
+                const matchD = new Date(matchDateStr + "T00:00:00");
+                const todayD = new Date(todayStr + "T00:00:00");
+                const diffTime = todayD - matchD;
+                return Math.floor(diffTime / (1000 * 60 * 60 * 24));
             }
 
-            // Check localStorage cache
+            // Clean team name for tooltip and search
+            function getShortName(team) {
+                const map = {
+                    "Chennai Super Kings": "CSK",
+                    "Mumbai Indians": "MI",
+                    "Sunrisers Hyderabad": "SRH",
+                    "Gujarat Titans": "GT",
+                    "Delhi Capitals": "DC",
+                    "Lucknow Super Giants": "LSG",
+                    "India": "IND",
+                    "India Women": "INDW",
+                    "Australia Women": "AUSW",
+                    "Pakistan Women": "PAKW",
+                    "England": "ENG",
+                    "Afghanistan": "AFG",
+                    "Ireland": "IRE",
+                    "Netherlands Women": "NEDW"
+                };
+                return map[team] || team;
+            }
+
             try {
-                const cached = localStorage.getItem(CACHE_KEY);
-                if (cached) {
-                    const { timestamp, avatar } = JSON.parse(cached);
-                    if (Date.now() - timestamp < CACHE_TTL) {
-                        avatarImg.src = avatar;
-                        return;
+                let matches = [];
+                try {
+                    const res = await fetch('matches.json');
+                    if(res.ok) {
+                        matches = await res.json();
+                    } else {
+                        throw new Error('Local fetch failed');
+                    }
+                } catch(e) {
+                    // Fallback to local array in case the user opens the file via file:// protocol (CORS block on fetch)
+                    matches = [
+                        {"date": "2026-04-18", "team1": "Sunrisers Hyderabad", "team2": "Chennai Super Kings", "type": "IPL", "category": "league"},
+                        {"date": "2026-04-23", "team1": "Mumbai Indians", "team2": "Chennai Super Kings", "type": "IPL", "category": "league"},
+                        {"date": "2026-06-06", "team1": "India", "team2": "Afghanistan", "type": "Test", "category": "men"},
+                        {"date": "2026-06-14", "team1": "India", "team2": "Afghanistan", "type": "ODI", "category": "men"},
+                        {"date": "2027-06-14", "team1": "India Women", "team2": "Pakistan Women", "type": "T20I", "category": "women"}
+                    ];
+                }
+
+                const todayIST = getTodayIST();
+                let priority = 0; // 0=None, 1=India, 2=CSK
+                let activeAvatar = DEFAULT_AVATAR;
+                let activeTooltip = "";
+                let activeSearchQuery = "";
+
+                for (const match of matches) {
+                    const diff = getDaysDiff(match.date, todayIST);
+                    let isActive = false;
+                    let matchLabel = "";
+
+                    // Calculate active match based on Type durations
+                    if (match.type === "Test") {
+                        // Tests active from day 0 to day 4 (5 days)
+                        if (diff >= 0 && diff <= 4) {
+                            isActive = true;
+                            matchLabel = `Test Day ${diff + 1}`;
+                        }
+                    } else {
+                        // ODI, T20I, IPL active only on Day 0
+                        if (diff === 0) {
+                            isActive = true;
+                            matchLabel = match.type === "IPL" ? "Today" : match.type;
+                        }
+                    }
+
+                    if (isActive) {
+                        const t1 = match.team1.toLowerCase();
+                        const t2 = match.team2.toLowerCase();
+                        const isCSK = t1.includes('chennai super kings') || t2.includes('chennai super kings');
+                        const isIndia = t1.includes('india') || t2.includes('india');
+
+                        let currentPriority = 0;
+                        if (isCSK) currentPriority = 2;
+                        else if (isIndia) currentPriority = 1;
+
+                        if (currentPriority > priority) {
+                            priority = currentPriority;
+                            
+                            const shortT1 = getShortName(match.team1);
+                            const shortT2 = getShortName(match.team2);
+                            
+                            activeTooltip = `${shortT1} vs ${shortT2} - ${matchLabel}`;
+                            activeSearchQuery = `${shortT1} vs ${shortT2}`;
+
+                            if (isCSK) activeAvatar = 'images/csk_avatar.png';
+                            else activeAvatar = 'images/india_avatar.png';
+                        }
                     }
                 }
-            } catch (_) {}
 
-            // Fetch from API
-            try {
-                const res = await fetch(
-                    'https://api.cricapi.com/v1/matches?apikey=201516e1-eb78-4faa-8bf1-372d8fb2280a&offset=0'
-                );
-                if (!res.ok) throw new Error('API error');
-                const data = await res.json();
-                const matches = data.data || [];
-                const avatar = resolveAvatar(matches);
+                // Apply determined states
+                avatarImg.src = activeAvatar;
+                
+                if (priority > 0) {
+                    tooltip.innerText = activeTooltip;
+                    avatarContainer.classList.add('cursor-pointer');
+                    
+                    // Click Search feature
+                    avatarContainer.addEventListener('click', () => {
+                        window.open(`https://www.google.com/search?q=${encodeURIComponent(activeSearchQuery)}`, '_blank');
+                    });
+                } else {
+                    tooltip.innerText = '';
+                }
 
-                avatarImg.src = avatar;
-
-                // Cache result
-                localStorage.setItem(CACHE_KEY, JSON.stringify({
-                    timestamp: Date.now(),
-                    avatar
-                }));
-            } catch (_) {
+            } catch (err) {
+                console.error('Error applying avatar logic:', err);
                 avatarImg.src = DEFAULT_AVATAR;
             }
         })();
