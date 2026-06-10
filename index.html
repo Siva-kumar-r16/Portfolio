@@ -347,7 +347,7 @@
             <div id="model-3d-viewer" class="avatar-container mb-10 group">
                 <div class="w-64 h-80 md:w-80 md:h-96 bg-theme-secondary avatar-frame flex items-center justify-center overflow-hidden relative">
                     <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent h-1 w-full animate-[scan_4s_linear_infinite] pointer-events-none z-20"></div>
-                    <img src="images/csk_avatar.png" width="320" height="384" onerror="this.src='https://placehold.co/400x500/121212/D71921?text=SK'" alt="Siva Kumar R" class="w-full h-full object-contain relative z-10 transition-all duration-500">
+                    <img src="images/avatar.png" width="320" height="384" onerror="this.src='https://placehold.co/400x500/121212/D71921?text=SK'" alt="Siva Kumar R" class="w-full h-full object-contain relative z-10 transition-all duration-500">
                 </div>
                 <div class="absolute -top-4 -right-4 w-8 h-8 border-t-2 border-r-2 border-red-600 opacity-50"></div>
                 <div class="absolute -bottom-4 -left-4 w-8 h-8 border-b-2 border-l-2 border-red-600 opacity-50"></div>
@@ -611,7 +611,6 @@
         </div>
     </section>
 
-    <!-- NEW FAVORITES SECTION -->
     <section id="favorites" class="py-20 md:py-32 reveal bg-theme-secondary border-t border-theme">
         <div class="container mx-auto px-4">
             <div class="flex items-end justify-between mb-16 border-b border-theme pb-4">
@@ -624,7 +623,6 @@
                 </div>
             </div>
 
-            <!-- This grid will be populated dynamically by JavaScript -->
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="favorites-grid">
             </div>
         </div>
@@ -911,6 +909,12 @@
                 link: "https://www.imdb.com/title/tt26548265/"
             },
             {
+                title: "Drishyam 3",
+                type: "Movie",
+                image: "https://www.imdb.com/title/tt14113634/mediaviewer/rm3671634690/",
+                link: "https://www.imdb.com/title/tt14113634/"
+            },
+            {
                 title: "Young Sheldon",
                 type: "Series",
                 image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQul-gBYv3KQZdMz_CVWydNbh8MsnebnCNzOQ&s",
@@ -987,7 +991,7 @@
                 return Math.floor(diffTime / (1000 * 60 * 60 * 24));
             }
 
-            // Clean team name for tooltip and search
+            // Clean team name for tooltip ONLY
             function getShortName(team) {
                 const map = {
                     "Chennai Super Kings": "CSK",
@@ -996,16 +1000,37 @@
                     "Gujarat Titans": "GT",
                     "Delhi Capitals": "DC",
                     "Lucknow Super Giants": "LSG",
+                    "Royal Challengers Bengaluru": "RCB",
+                    "Kolkata Knight Riders": "KKR",
+                    "Punjab Kings": "PBKS",
+                    "Rajasthan Royals": "RR",
                     "India": "IND",
                     "India Women": "INDW",
+                    "Australia": "AUS",
                     "Australia Women": "AUSW",
-                    "Pakistan Women": "PAKW",
                     "England": "ENG",
+                    "England Women": "ENGW",
+                    "Pakistan": "PAK",
+                    "Pakistan Women": "PAKW",
+                    "South Africa": "RSA",
+                    "New Zealand": "NZ",
+                    "Sri Lanka": "SL",
+                    "Bangladesh": "BAN",
                     "Afghanistan": "AFG",
                     "Ireland": "IRE",
+                    "Netherlands": "NED",
                     "Netherlands Women": "NEDW"
                 };
                 return map[team] || team;
+            }
+
+            // Get match duration based on custom property or predefined rules
+            function getDuration(match) {
+                if (match.duration !== undefined) return match.duration;
+                const t = match.type;
+                if (t === 'Test') return 5;
+                if (t === 'FC' || t === 'Youth FC') return 4;
+                return 1; // Default for ODI, T20I, IPL, List A, T20, Women's T20, Youth ODI, Youth T20
             }
 
             try {
@@ -1018,7 +1043,7 @@
                         throw new Error('Local fetch failed');
                     }
                 } catch(e) {
-                    // Fallback to local array in case the user opens the file via file:// protocol (CORS block on fetch)
+                    // Fallback to local array in case the user opens the file via file:// protocol
                     matches = [
                         {"date": "2026-04-18", "team1": "Sunrisers Hyderabad", "team2": "Chennai Super Kings", "type": "IPL", "category": "league"},
                         {"date": "2026-04-23", "team1": "Mumbai Indians", "team2": "Chennai Super Kings", "type": "IPL", "category": "league"},
@@ -1036,21 +1061,17 @@
 
                 for (const match of matches) {
                     const diff = getDaysDiff(match.date, todayIST);
+                    const duration = getDuration(match);
                     let isActive = false;
                     let matchLabel = "";
 
-                    // Calculate active match based on Type durations
-                    if (match.type === "Test") {
-                        // Tests active from day 0 to day 4 (5 days)
-                        if (diff >= 0 && diff <= 4) {
-                            isActive = true;
-                            matchLabel = `Test Day ${diff + 1}`;
-                        }
-                    } else {
-                        // ODI, T20I, IPL active only on Day 0
-                        if (diff === 0) {
-                            isActive = true;
-                            matchLabel = match.type === "IPL" ? "Today" : match.type;
+                    // Calculate active match based on duration handling
+                    if (diff >= 0 && diff < duration) {
+                        isActive = true;
+                        if (duration > 1) {
+                            matchLabel = `${match.type} Day ${diff + 1}`;
+                        } else {
+                            matchLabel = match.type === "IPL" ? "Live Today" : match.type;
                         }
                     }
 
@@ -1071,7 +1092,7 @@
                             const shortT2 = getShortName(match.team2);
                             
                             activeTooltip = `${shortT1} vs ${shortT2} - ${matchLabel}`;
-                            activeSearchQuery = `${shortT1} vs ${shortT2}`;
+                            activeSearchQuery = `${match.team1} vs ${match.team2} live score`;
 
                             if (isCSK) activeAvatar = 'images/csk_avatar.png';
                             else activeAvatar = 'images/india_avatar.png';
@@ -1086,7 +1107,7 @@
                     tooltip.innerText = activeTooltip;
                     avatarContainer.classList.add('cursor-pointer');
                     
-                    // Click Search feature
+                    // Specific Google search logic
                     avatarContainer.addEventListener('click', () => {
                         window.open(`https://www.google.com/search?q=${encodeURIComponent(activeSearchQuery)}`, '_blank');
                     });
