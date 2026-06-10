@@ -1,121 +1,548 @@
 [
-  {
-    "date": "2026-04-18",
-    "team1": "Sunrisers Hyderabad",
-    "team2": "Chennai Super Kings",
-    "type": "IPL",
-    "category": "league"
-  },
-  {
-    "date": "2026-04-23",
-    "team1": "Mumbai Indians",
-    "team2": "Chennai Super Kings",
-    "type": "IPL",
-    "category": "league"
-  },
-  {
-    "date": "2026-04-26",
-    "team1": "Chennai Super Kings",
-    "team2": "Gujarat Titans",
-    "type": "IPL",
-    "category": "league"
-  },
-  {
-    "date": "2026-05-02",
-    "team1": "Chennai Super Kings",
-    "team2": "Mumbai Indians",
-    "type": "IPL",
-    "category": "league"
-  },
-  {
-    "date": "2026-05-05",
-    "team1": "Delhi Capitals",
-    "team2": "Chennai Super Kings",
-    "type": "IPL",
-    "category": "league"
-  },
-  {
-    "date": "2026-05-10",
-    "team1": "Chennai Super Kings",
-    "team2": "Lucknow Super Giants",
-    "type": "IPL",
-    "category": "league"
-  },
-  {
-    "date": "2026-05-15",
-    "team1": "Lucknow Super Giants",
-    "team2": "Chennai Super Kings",
-    "type": "IPL",
-    "category": "league"
-  },
-  {
-    "date": "2026-05-18",
-    "team1": "Chennai Super Kings",
-    "team2": "Sunrisers Hyderabad",
-    "type": "IPL",
-    "category": "league"
-  },
-  {
-    "date": "2026-05-21",
-    "team1": "Gujarat Titans",
-    "team2": "Chennai Super Kings",
-    "type": "IPL",
-    "category": "league"
-  },
-  {
-    "date": "2026-06-06",
-    "team1": "India",
-    "team2": "Afghanistan",
-    "type": "Test",
-    "category": "men"
-  },
-  {
-    "date": "2026-06-14",
-    "team1": "India",
-    "team2": "Afghanistan",
-    "type": "ODI",
-    "category": "men"
-  },
-  {
-    "date": "2026-06-17",
-    "team1": "India",
-    "team2": "Afghanistan",
-    "type": "ODI",
-    "category": "men"
-  },
-  {
-    "date": "2026-06-20",
-    "team1": "India",
-    "team2": "Afghanistan",
-    "type": "ODI",
-    "category": "men"
-  },
-  {
-    "date": "2026-06-26",
-    "team1": "India",
-    "team2": "Ireland",
-    "type": "T20I",
-    "category": "men"
-  },
-  {
-    "date": "2026-06-28",
-    "team1": "India",
-    "team2": "Ireland",
-    "type": "T20I",
-    "category": "men"
-  },
-  {
-    "date": "2027-06-14",
-    "team1": "India Women",
-    "team2": "Pakistan Women",
-    "type": "T20I",
-    "category": "women"
-  },
-  {
-    "date": "2027-06-17",
-    "team1": "India Women",
-    "team2": "Netherlands Women",
-    "type": "T20I",
-    "category": "women"
-  }
+{
+"date": "2026-07-01",
+"team1": "England A (Women)",
+"team2": "India A (Women)",
+"type": "List A",
+"category": "india_a_women"
+},
+{
+"date": "2026-07-01",
+"team1": "England",
+"team2": "India",
+"type": "T20I",
+"category": "men"
+},
+{
+"date": "2026-07-02",
+"team1": "Sri Lanka A",
+"team2": "India A",
+"type": "First-Class",
+"category": "india_a"
+},
+{
+"date": "2026-07-03",
+"team1": "India Women U19",
+"team2": "Sri Lanka Women U19",
+"type": "List A",
+"category": "u19_women"
+},
+{
+"date": "2026-07-03",
+"team1": "England A (Women)",
+"team2": "India A (Women)",
+"type": "List A",
+"category": "india_a_women"
+},
+{
+"date": "2026-07-04",
+"team1": "Sri Lanka U19",
+"team2": "India U19",
+"type": "List A",
+"category": "u19_men"
+},
+{
+"date": "2026-07-04",
+"team1": "England",
+"team2": "India",
+"type": "T20I",
+"category": "men"
+},
+{
+"date": "2026-07-05",
+"team1": "India Women U19",
+"team2": "Sri Lanka Women U19",
+"type": "List A",
+"category": "u19_women"
+},
+{
+"date": "2026-07-06",
+"team1": "Sri Lanka U19",
+"team2": "India U19",
+"type": "List A",
+"category": "u19_men"
+},
+{
+"date": "2026-07-07",
+"team1": "England",
+"team2": "India",
+"type": "T20I",
+"category": "men"
+},
+{
+"date": "2026-07-09",
+"team1": "Sri Lanka U19",
+"team2": "India U19",
+"type": "List A",
+"category": "u19_men"
+},
+{
+"date": "2026-07-09",
+"team1": "England",
+"team2": "India",
+"type": "T20I",
+"category": "men"
+},
+{
+"date": "2026-07-10",
+"team1": "England (Women)",
+"team2": "India (Women)",
+"type": "Test",
+"category": "women"
+},
+{
+"date": "2026-07-11",
+"team1": "England",
+"team2": "India",
+"type": "T20I",
+"category": "men"
+},
+{
+"date": "2026-07-13",
+"team1": "Sri Lanka U19",
+"team2": "India U19",
+"type": "First-Class",
+"category": "u19_men"
+},
+{
+"date": "2026-07-14",
+"team1": "England",
+"team2": "India",
+"type": "ODI",
+"category": "men"
+},
+{
+"date": "2026-07-16",
+"team1": "England",
+"team2": "India",
+"type": "ODI",
+"category": "men"
+},
+{
+"date": "2026-07-19",
+"team1": "England",
+"team2": "India",
+"type": "ODI",
+"category": "men"
+},
+{
+"date": "2026-07-20",
+"team1": "Sri Lanka U19",
+"team2": "India U19",
+"type": "First-Class",
+"category": "u19_men"
+},
+{
+"date": "2026-07-23",
+"team1": "Zimbabwe",
+"team2": "India",
+"type": "T20I",
+"category": "men"
+},
+{
+"date": "2026-07-25",
+"team1": "Zimbabwe",
+"team2": "India",
+"type": "T20I",
+"category": "men"
+},
+{
+"date": "2026-07-26",
+"team1": "Zimbabwe",
+"team2": "India",
+"type": "T20I",
+"category": "men"
+},
+{
+"date": "2026-09-12",
+"team1": "India A Women",
+"team2": "Australia A Women",
+"type": "T20",
+"category": "india_a_women"
+},
+{
+"date": "2026-09-15",
+"team1": "India A Women",
+"team2": "Australia A Women",
+"type": "T20",
+"category": "india_a_women"
+},
+{
+"date": "2026-09-17",
+"team1": "India A Women",
+"team2": "Australia A Women",
+"type": "T20",
+"category": "india_a_women"
+},
+{
+"date": "2026-09-18",
+"team1": "India U19",
+"team2": "Australia U19",
+"type": "List A",
+"category": "u19_men"
+},
+{
+"date": "2026-09-20",
+"team1": "India A Women",
+"team2": "Australia A Women",
+"type": "List A",
+"category": "india_a_women"
+},
+{
+"date": "2026-09-21",
+"team1": "India U19",
+"team2": "Australia U19",
+"type": "List A",
+"category": "u19_men"
+},
+{
+"date": "2026-09-22",
+"team1": "India A",
+"team2": "Australia A",
+"type": "First-Class",
+"category": "india_a"
+},
+{
+"date": "2026-09-23",
+"team1": "India U19",
+"team2": "Australia U19",
+"type": "List A",
+"category": "u19_men"
+},
+{
+"date": "2026-09-23",
+"team1": "India A Women",
+"team2": "Australia A Women",
+"type": "List A",
+"category": "india_a_women"
+},
+{
+"date": "2026-09-25",
+"team1": "India A Women",
+"team2": "Australia A Women",
+"type": "List A",
+"category": "india_a_women"
+},
+{
+"date": "2026-09-27",
+"team1": "India U19",
+"team2": "Australia U19",
+"type": "First-Class",
+"category": "u19_men"
+},
+{
+"date": "2026-09-27",
+"team1": "India",
+"team2": "West Indies",
+"type": "ODI",
+"category": "men"
+},
+{
+"date": "2026-09-29",
+"team1": "India A Women",
+"team2": "Australia A Women",
+"type": "First-Class",
+"category": "india_a_women"
+},
+{
+"date": "2026-09-29",
+"team1": "India A",
+"team2": "Australia A",
+"type": "First-Class",
+"category": "india_a"
+},
+{
+"date": "2026-09-30",
+"team1": "India",
+"team2": "West Indies",
+"type": "ODI",
+"category": "men"
+},
+{
+"date": "2026-10-03",
+"team1": "India",
+"team2": "West Indies",
+"type": "ODI",
+"category": "men"
+},
+{
+"date": "2026-10-05",
+"team1": "India U19",
+"team2": "Australia U19",
+"type": "First-Class",
+"category": "u19_men"
+},
+{
+"date": "2026-10-06",
+"team1": "India A",
+"team2": "Australia A",
+"type": "List A",
+"category": "india_a"
+},
+{
+"date": "2026-10-06",
+"team1": "India",
+"team2": "West Indies",
+"type": "T20I",
+"category": "men"
+},
+{
+"date": "2026-10-09",
+"team1": "India A",
+"team2": "Australia A",
+"type": "List A",
+"category": "india_a"
+},
+{
+"date": "2026-10-09",
+"team1": "India",
+"team2": "West Indies",
+"type": "T20I",
+"category": "men"
+},
+{
+"date": "2026-10-11",
+"team1": "India A",
+"team2": "Australia A",
+"type": "List A",
+"category": "india_a"
+},
+{
+"date": "2026-10-11",
+"team1": "India",
+"team2": "West Indies",
+"type": "T20I",
+"category": "men"
+},
+{
+"date": "2026-10-14",
+"team1": "India",
+"team2": "West Indies",
+"type": "T20I",
+"category": "men"
+},
+{
+"date": "2026-10-16",
+"team1": "India (Women)",
+"team2": "Zimbabwe (Women)",
+"type": "T20I",
+"category": "women"
+},
+{
+"date": "2026-10-17",
+"team1": "India",
+"team2": "West Indies",
+"type": "T20I",
+"category": "men"
+},
+{
+"date": "2026-10-18",
+"team1": "India (Women)",
+"team2": "Zimbabwe (Women)",
+"type": "T20I",
+"category": "women"
+},
+{
+"date": "2026-10-20",
+"team1": "India (Women)",
+"team2": "Zimbabwe (Women)",
+"type": "T20I",
+"category": "women"
+},
+{
+"date": "2026-10-22",
+"team1": "New Zealand",
+"team2": "India",
+"type": "T20I",
+"category": "men"
+},
+{
+"date": "2026-10-23",
+"team1": "India (Women)",
+"team2": "Zimbabwe (Women)",
+"type": "ODI",
+"category": "women"
+},
+{
+"date": "2026-10-24",
+"team1": "New Zealand",
+"team2": "India",
+"type": "T20I",
+"category": "men"
+},
+{
+"date": "2026-10-25",
+"team1": "India (Women)",
+"team2": "Zimbabwe (Women)",
+"type": "ODI",
+"category": "women"
+},
+{
+"date": "2026-10-27",
+"team1": "New Zealand",
+"team2": "India",
+"type": "T20I",
+"category": "men"
+},
+{
+"date": "2026-10-28",
+"team1": "India (Women)",
+"team2": "Zimbabwe (Women)",
+"type": "ODI",
+"category": "women"
+},
+{
+"date": "2026-10-30",
+"team1": "New Zealand",
+"team2": "India",
+"type": "T20I",
+"category": "men"
+},
+{
+"date": "2026-11-01",
+"team1": "New Zealand",
+"team2": "India",
+"type": "T20I",
+"category": "men"
+},
+{
+"date": "2026-11-04",
+"team1": "New Zealand",
+"team2": "India",
+"type": "ODI",
+"category": "men"
+},
+{
+"date": "2026-11-07",
+"team1": "New Zealand",
+"team2": "India",
+"type": "ODI",
+"category": "men"
+},
+{
+"date": "2026-11-10",
+"team1": "New Zealand",
+"team2": "India",
+"type": "ODI",
+"category": "men"
+},
+{
+"date": "2026-11-13",
+"team1": "New Zealand",
+"team2": "India",
+"type": "ODI",
+"category": "men"
+},
+{
+"date": "2026-11-15",
+"team1": "New Zealand",
+"team2": "India",
+"type": "ODI",
+"category": "men"
+},
+{
+"date": "2026-11-19",
+"team1": "New Zealand",
+"team2": "India",
+"type": "Test",
+"category": "men"
+},
+{
+"date": "2026-11-27",
+"team1": "New Zealand",
+"team2": "India",
+"type": "Test",
+"category": "men"
+},
+{
+"date": "2026-11-30",
+"team1": "India A Women",
+"team2": "England A Women",
+"type": "T20",
+"category": "india_a_women"
+},
+{
+"date": "2026-12-03",
+"team1": "India A Women",
+"team2": "England A Women",
+"type": "T20",
+"category": "india_a_women"
+},
+{
+"date": "2026-12-05",
+"team1": "India A Women",
+"team2": "England A Women",
+"type": "T20",
+"category": "india_a_women"
+},
+{
+"date": "2026-12-08",
+"team1": "India A Women",
+"team2": "England A Women",
+"type": "List A",
+"category": "india_a_women"
+},
+{
+"date": "2026-12-11",
+"team1": "India A Women",
+"team2": "England A Women",
+"type": "List A",
+"category": "india_a_women"
+},
+{
+"date": "2026-12-13",
+"team1": "India",
+"team2": "Sri Lanka",
+"type": "ODI",
+"category": "men"
+},
+{
+"date": "2026-12-14",
+"team1": "India A Women",
+"team2": "England A Women",
+"type": "List A",
+"category": "india_a_women"
+},
+{
+"date": "2026-12-16",
+"team1": "India",
+"team2": "Sri Lanka",
+"type": "ODI",
+"category": "men"
+},
+{
+"date": "2026-12-19",
+"team1": "India A Women",
+"team2": "England A Women",
+"type": "First-Class",
+"category": "india_a_women"
+},
+{
+"date": "2026-12-19",
+"team1": "India",
+"team2": "Sri Lanka",
+"type": "ODI",
+"category": "men"
+},
+{
+"date": "2026-12-22",
+"team1": "India",
+"team2": "Sri Lanka",
+"type": "T20I",
+"category": "men"
+},
+{
+"date": "2026-12-24",
+"team1": "India",
+"team2": "Sri Lanka",
+"type": "T20I",
+"category": "men"
+},
+{
+"date": "2026-12-27",
+"team1": "India",
+"team2": "Sri Lanka",
+"type": "T20I",
+"category": "men"
+}
 ]
