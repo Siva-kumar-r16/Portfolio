@@ -71,7 +71,7 @@ You are welcome to use this project as a template for learning or creating your 
 
 ## 👨‍💻 Author
 
-**Sivakumar R**
+**Siva kumar R**
 
 GitHub: https://github.com/Siva-kumar-r16
 
