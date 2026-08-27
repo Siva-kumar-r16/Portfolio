@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Personal Entertainment Recommendations | Siva Kumar R</title>
+    <meta name="description" content="Curated personal entertainment recommendations, cinema masterpieces, and captivating television series by Siva Kumar R.">
+    <meta property="og:title" content="Entertainment Recommendations | Siva Kumar R Portfolio">
+    <meta property="og:description" content="Explore top movies and TV shows across mystery, sci-fi, comedy, and tech genres.">
+    <meta property="og:image" content="images/avatar.png">
+    <meta property="og:type" content="website">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Inter:wght@300;400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .favorite-card {
+            transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-secondary);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .favorite-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            border-color: var(--text-muted);
+            background-color: var(--card-hover);
+        }
+        .image-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            transition: border-color 0.3s ease;
+            height: 280px;
+        }
+        html.light-mode .image-container {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        .favorite-card:hover .image-container {
+            border-color: var(--accent-red);
+        }
+        .image-container img {
+            max-height: 250px;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 0.5rem;
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
+
+    <canvas id="glyph-canvas"></canvas>
+
+    <!-- NAVIGATION HEADER -->
+    <nav class="w-full py-5 px-4 md:px-8 flex flex-col md:flex-row justify-between items-center border-b border-theme bg-opacity-95 backdrop-blur-sm sticky top-0 z-50 transition-colors duration-300" style="background-color: var(--bg-primary);">
+        <div class="flex items-center justify-between w-full md:w-auto mb-3 md:mb-0">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-xl md:text-2xl font-bold brand-font tracking-wider" style="color: var(--text-main);">
+                    SIVA KUMAR<span class="text-red-600 animate-pulse">.</span>R
+                </a>
+                <div class="flex items-center gap-2 text-[10px] md:text-xs brand-font text-theme-muted border-l border-theme pl-3 tracking-widest">
+                    <span class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
+                    <span id="system-time">07:14:50 PM</span>
+                </div>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden text-theme-muted hover:text-white text-xl p-1 focus:outline-none" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="nav-menu" class="hidden md:flex flex-col md:flex-row items-center gap-5 lg:gap-7 w-full md:w-auto mt-3 md:mt-0 pt-3 md:pt-0 border-t md:border-t-0 border-theme">
+            <ul class="flex flex-wrap md:flex-nowrap items-center justify-center gap-4 md:gap-5 lg:gap-6 text-xs lg:text-sm brand-font tracking-wider" style="color: var(--text-main);">
+                <li><a href="index.html#about" class="nav-link hover:text-red-600 transition-colors">ABOUT</a></li>
+                <li><a href="index.html#skills" class="nav-link hover:text-red-600 transition-colors">SKILLS</a></li>
+                <li><a href="projects.html" class="nav-link hover:text-red-600 transition-colors">PROJECTS</a></li>
+                <li><a href="certifications.html" class="nav-link hover:text-red-600 transition-colors">CERTIFICATIONS</a></li>
+                <li><a href="resume.html" class="nav-link hover:text-red-600 transition-colors">RESUME</a></li>
+                <li><a href="entertainment.html" class="nav-link text-red-600 font-bold transition-colors">ENTERTAINMENT</a></li>
+                <li><a href="#contact" class="nav-link hover:text-red-600 transition-colors">CONTACT</a></li>
+            </ul>
+
+            <div class="flex items-center gap-2 border-t md:border-t-0 md:border-l border-theme pt-3 md:pt-0 md:pl-5 mt-2 md:mt-0">
+                <i class="fa-solid fa-moon text-xs text-theme-muted"></i>
+                <div class="toggle-switch" id="theme-toggle" role="button" aria-label="Toggle theme" tabindex="0"></div>
+                <i class="fa-solid fa-sun text-xs text-theme-muted"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <section class="pt-16 pb-12 text-center reveal">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme bg-theme-secondary text-xs brand-font text-theme-muted mb-4">
+                <span class="w-2 h-2 bg-red-600 rounded-full animate-ping"></span>
+                CINEMA &amp; TELEVISION
+            </div>
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold brand-font mb-4" style="color: var(--text-main);">
+                PERSONAL ENTERTAINMENT <span class="glitch-text cursor-default">RECOMMENDATIONS</span>
+            </h1>
+            <p class="text-theme-muted text-base md:text-lg max-w-2xl mx-auto roboto-font">
+                Curated cinema classics, riveting mystery thrillers, mind-bending sci-fi, and intellectual sitcoms.
+            </p>
+
+            <!-- TABS -->
+            <div class="flex flex-wrap justify-center gap-2 md:gap-3 mt-8">
+                <button class="filter-tab active px-4 py-1.5 rounded-full text-xs brand-font border border-red-600 bg-red-600 text-white transition-all" data-type="all">ALL PICKS</button>
+                <button class="filter-tab px-4 py-1.5 rounded-full text-xs brand-font border border-theme text-theme-muted hover:border-red-600 hover:text-white transition-all" data-type="Movie">MOVIES</button>
+                <button class="filter-tab px-4 py-1.5 rounded-full text-xs brand-font border border-theme text-theme-muted hover:border-red-600 hover:text-white transition-all" data-type="Series">SERIES</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- RECOMMENDATIONS GRID -->
+    <section class="py-8 pb-32">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="entertainment-grid">
+                <!-- Javascript will populate recommendations -->
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-black pt-16 pb-12 overflow-hidden border-t border-theme" style="background-color: var(--bg-secondary);">
+        <div class="container mx-auto px-4 text-center max-w-4xl">
+            <div class="mb-6 text-5xl md:text-6xl font-bold brand-font text-theme-muted hover:text-red-600 transition-colors cursor-default tracking-widest">
+                S<span class="text-red-600">.</span>K
+            </div>
+            <p class="text-theme-muted text-lg md:text-xl font-light mb-8 italic roboto-font">
+                "Living, learning, &amp; leveling up one day at a time."
+            </p>
+
+            <div class="flex flex-wrap justify-center items-center gap-6 md:gap-8 mb-10">
+                <a href="https://github.com/Siva-kumar-r16" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/siva-kumar-r-a90a482b1" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="LinkedIn">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="https://www.instagram.com/sir_sivakumar?igsh=cng0Mnd1b2ZxczFp" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://leetcode.com/u/cskskjaddu/" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="LeetCode">
+                    <i class="fa-solid fa-code"></i>
+                </a>
+                <a href="https://www.hackerrank.com/profile/ksuja20" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="HackerRank">
+                    <i class="fa-brands fa-hackerrank"></i>
+                </a>
+                <a href="mailto:sirsivakumar@outlook.com" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="Email">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+            </div>
+
+            <div class="text-theme-muted text-sm space-y-2">
+                <p class="brand-font tracking-wider">Handcrafted by Siva Kumar <i class="fa-regular fa-copyright ml-1"></i> 2025</p>
+                <p class="mt-2 text-xs roboto-font opacity-60">Made with Nothing OS vibes.</p>
+                <div>
+                    <a href="https://github.com/Siva-kumar-r16/Portfolio" target="_blank" rel="noopener noreferrer" class="inline-block mt-3 text-xs brand-font border border-theme px-4 py-2 rounded-full hover:border-red-600 hover:text-white transition-all">
+                        <i class="fa-brands fa-github mr-1"></i> VIEW PORTFOLIO SOURCE
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        const recommendations = [
+            {
+                title: "Manichithrathazhu",
+                type: "Movie",
+                genre: "Psychological Thriller",
+                image: "https://c.saavncdn.com/867/Manichitrathazhu-Malayalam-1993-20250402200537-500x500.jpg",
+                link: "https://www.imdb.com/title/tt0214915/"
+            },
+            {
+                title: "Rocketry: The Nambi Effect",
+                type: "Movie",
+                genre: "Biography / Drama",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5sAx2It7GtKVauDlgoQAjFqAln1HFbALNkg&s",
+                link: "https://www.imdb.com/title/tt9263550/"
+            },
+            {
+                title: "Drishyam",
+                type: "Movie",
+                genre: "Crime / Drama / Thriller",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7qIaSR-cA-tjiVrFjMouWA2E28umfAcU5Uw&s",
+                link: "https://www.imdb.com/title/tt3417422/"
+            },
+            {
+                title: "Drishyam 2",
+                type: "Movie",
+                genre: "Mystery / Thriller",
+                image: "https://jiotvimages.cdn.jio.com/imagespublic/metadata/297b7c9d19cb9ec65989bc33444633d1.jpg",
+                link: "https://www.imdb.com/title/tt12361178/"
+            },
+            {
+                title: "Drishyam 3",
+                type: "Movie",
+                genre: "Mystery / Thriller",
+                image: "https://placehold.co/400x600/121212/D71921?text=Drishyam+3",
+                link: "https://www.imdb.com/title/tt14113634/"
+            },
+            {
+                title: "Maharaja (Tamil)",
+                type: "Movie",
+                genre: "Action / Crime / Drama",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP4aWFAArN7W6FNSqZAsTNXmGGmjRZTLpLUQ&s",
+                link: "https://www.imdb.com/title/tt26548265/"
+            },
+            {
+                title: "Young Sheldon",
+                type: "Series",
+                genre: "Comedy",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQul-gBYv3KQZdMz_CVWydNbh8MsnebnCNzOQ&s",
+                link: "https://www.imdb.com/title/tt6226232/"
+            },
+            {
+                title: "The Big Bang Theory",
+                type: "Series",
+                genre: "Sitcom / Comedy",
+                image: "https://m.media-amazon.com/images/S/pv-target-images/4b63ef0284ce2942556d96bd39cef16f93384e974dabe61ff5e6b0ae1d794194.jpg",
+                link: "https://www.imdb.com/title/tt0898266/"
+            },
+            {
+                title: "Loki",
+                type: "Series",
+                genre: "Sci-Fi / Action / Adventure",
+                image: "https://upload.wikimedia.org/wikipedia/en/4/4e/Loki_%28TV_series%29_logo.png",
+                link: "https://www.imdb.com/title/tt9140554/"
+            },
+            {
+                title: "Interstellar",
+                type: "Movie",
+                genre: "Sci-Fi / Adventure",
+                image: "https://m.media-amazon.com/images/M/MV5BYzdjMDAxZGItMjI2My00ODA1LTlkNzItOWFjMDU5ZDJlYWY3XkEyXkFqcGc@._V1_.jpg",
+                link: "https://www.imdb.com/title/tt0816692/"
+            },
+            {
+                title: "Silicon Valley",
+                type: "Series",
+                genre: "Tech / Comedy",
+                image: "https://m.media-amazon.com/images/M/MV5BOTc5NmFmMjUtN2RhMS00NDZhLTk5MDAtYzZhYjQ1MGNlYTk3XkEyXkFqcGc@._V1_.jpg",
+                link: "https://www.imdb.com/title/tt2575988/"
+            },
+            {
+                title: "Mr. Robot",
+                type: "Series",
+                genre: "Cybersecurity / Drama",
+                image: "https://m.media-amazon.com/images/M/MV5BMzgxMmQxZjQtNDdmMC00MjM5LTlmAi00N2EzLWE4MTEwODUxXkEyXkFqcGc@._V1_.jpg",
+                link: "https://www.imdb.com/title/tt4158110/"
+            }
+        ];
+
+        function renderRecommendations(filter = 'all') {
+            const grid = document.getElementById('entertainment-grid');
+            if (!grid) return;
+
+            const filtered = filter === 'all' 
+                ? recommendations 
+                : recommendations.filter(item => item.type === filter);
+
+            grid.innerHTML = filtered.map(item => {
+                const isSeries = item.type === 'Series';
+                const badgeClass = isSeries 
+                    ? 'bg-red-600/80 text-white border-red-800' 
+                    : 'bg-black/80 text-white border-theme';
+
+                return `
+                    <div onclick="window.open('${item.link}', '_blank')" class="favorite-card float-anim group">
+                        <div class="image-container">
+                            <div class="absolute top-2 right-2 ${badgeClass} text-[10px] font-bold px-2 py-1 rounded border z-20 tracking-widest brand-font uppercase">
+                                ${item.type}
+                            </div>
+                            <i class="fa-solid fa-film text-3xl text-theme-muted absolute z-0"></i>
+                            <img src="${item.image}" onerror="this.src='https://placehold.co/400x600/121212/D71921?text=${encodeURIComponent(item.title)}'" alt="${item.title}">
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col items-center justify-center text-center">
+                            <h3 class="text-sm md:text-md font-bold brand-font mb-1" style="color: var(--text-main);">${item.title}</h3>
+                            <p class="text-[11px] text-theme-muted roboto-font">${item.genre}</p>
+                            <span class="mt-2 text-[10px] brand-font text-red-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                                VIEW ON IMDB <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                            </span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        renderRecommendations();
+
+        // Tab filter listeners
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.filter-tab').forEach(t => {
+                    t.classList.remove('bg-red-600', 'text-white', 'border-red-600');
+                    t.classList.add('text-theme-muted', 'border-theme');
+                });
+                tab.classList.remove('text-theme-muted', 'border-theme');
+                tab.classList.add('bg-red-600', 'text-white', 'border-red-600');
+
+                renderRecommendations(tab.getAttribute('data-type'));
+            });
+        });
+    </script>
+</body>
+</html>

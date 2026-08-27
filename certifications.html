@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Certifications & Credentials | Siva Kumar R</title>
+    <meta name="description" content="Verified credentials and professional certifications in Python, AI, Software Engineering, Cloud, and Web Development for Siva Kumar R.">
+    <meta property="og:title" content="Certifications | Siva Kumar R Portfolio">
+    <meta property="og:description" content="View verified certifications from Infosys Springboard, HP LIFE, IBM SkillsBuild, Google Cloud, Wadhwani Foundation, and InternPe.">
+    <meta property="og:image" content="images/avatar.png">
+    <meta property="og:type" content="website">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Inter:wght@300;400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="antialiased">
+
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
+
+    <canvas id="glyph-canvas"></canvas>
+
+    <!-- NAVIGATION HEADER -->
+    <nav class="w-full py-5 px-4 md:px-8 flex flex-col md:flex-row justify-between items-center border-b border-theme bg-opacity-95 backdrop-blur-sm sticky top-0 z-50 transition-colors duration-300" style="background-color: var(--bg-primary);">
+        <div class="flex items-center justify-between w-full md:w-auto mb-3 md:mb-0">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-xl md:text-2xl font-bold brand-font tracking-wider" style="color: var(--text-main);">
+                    SIVA KUMAR<span class="text-red-600 animate-pulse">.</span>R
+                </a>
+                <div class="flex items-center gap-2 text-[10px] md:text-xs brand-font text-theme-muted border-l border-theme pl-3 tracking-widest">
+                    <span class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
+                    <span id="system-time">07:14:50 PM</span>
+                </div>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden text-theme-muted hover:text-white text-xl p-1 focus:outline-none" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="nav-menu" class="hidden md:flex flex-col md:flex-row items-center gap-5 lg:gap-7 w-full md:w-auto mt-3 md:mt-0 pt-3 md:pt-0 border-t md:border-t-0 border-theme">
+            <ul class="flex flex-wrap md:flex-nowrap items-center justify-center gap-4 md:gap-5 lg:gap-6 text-xs lg:text-sm brand-font tracking-wider" style="color: var(--text-main);">
+                <li><a href="index.html#about" class="nav-link hover:text-red-600 transition-colors">ABOUT</a></li>
+                <li><a href="index.html#skills" class="nav-link hover:text-red-600 transition-colors">SKILLS</a></li>
+                <li><a href="projects.html" class="nav-link hover:text-red-600 transition-colors">PROJECTS</a></li>
+                <li><a href="certifications.html" class="nav-link text-red-600 font-bold transition-colors">CERTIFICATIONS</a></li>
+                <li><a href="resume.html" class="nav-link hover:text-red-600 transition-colors">RESUME</a></li>
+                <li><a href="entertainment.html" class="nav-link hover:text-red-600 transition-colors">ENTERTAINMENT</a></li>
+                <li><a href="#contact" class="nav-link hover:text-red-600 transition-colors">CONTACT</a></li>
+            </ul>
+
+            <div class="flex items-center gap-2 border-t md:border-t-0 md:border-l border-theme pt-3 md:pt-0 md:pl-5 mt-2 md:mt-0">
+                <i class="fa-solid fa-moon text-xs text-theme-muted"></i>
+                <div class="toggle-switch" id="theme-toggle" role="button" aria-label="Toggle theme" tabindex="0"></div>
+                <i class="fa-solid fa-sun text-xs text-theme-muted"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <section class="pt-16 pb-12 text-center reveal">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme bg-theme-secondary text-xs brand-font text-theme-muted mb-4">
+                <span class="w-2 h-2 bg-red-600 rounded-full animate-ping"></span>
+                VERIFIED CREDENTIALS
+            </div>
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold brand-font mb-4" style="color: var(--text-main);">
+                CERTIFICATIONS &amp; <span class="glitch-text cursor-default">ACCREDITATIONS</span>
+            </h1>
+            <p class="text-theme-muted text-base md:text-lg max-w-2xl mx-auto roboto-font">
+                Validated coursework, specialized learning modules, and technical internship certifications.
+            </p>
+
+            <!-- CATEGORY FILTER BUTTONS -->
+            <div class="flex flex-wrap justify-center gap-2 md:gap-3 mt-8">
+                <button class="filter-btn active px-4 py-1.5 rounded-full text-xs brand-font border border-red-600 bg-red-600 text-white transition-all" data-category="all">ALL (14)</button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs brand-font border border-theme text-theme-muted hover:border-red-600 hover:text-white transition-all" data-category="python">PYTHON</button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs brand-font border border-theme text-theme-muted hover:border-red-600 hover:text-white transition-all" data-category="ai">AI &amp; CLOUD</button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs brand-font border border-theme text-theme-muted hover:border-red-600 hover:text-white transition-all" data-category="software">SOFTWARE &amp; WEB</button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs brand-font border border-theme text-theme-muted hover:border-red-600 hover:text-white transition-all" data-category="professional">PROFESSIONAL</button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs brand-font border border-theme text-theme-muted hover:border-red-600 hover:text-white transition-all" data-category="internship">INTERNSHIPS</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATES GRID -->
+    <section class="py-8 pb-32">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="cert-grid">
+
+                <!-- 1. Advanced Python Topics: File Operations in Python -->
+                <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="python" onclick="openCertModal(1)">
+                    <div class="cert-preview-frame">
+                        <div class="absolute top-3 left-3 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/60 px-2 py-0.5 rounded border border-red-800">
+                            CERTIFICATE PREVIEW
+                        </div>
+                        <i class="fa-brands fa-python text-5xl text-theme-muted mb-2 group-hover:scale-110 transition-transform duration-300"></i>
+                        <div class="text-center px-4">
+                            <p class="text-xs font-bold brand-font text-white">INFOSYS SPRINGBOARD</p>
+                            <p class="text-[10px] text-theme-muted roboto-font">Advanced Python Topics</p>
+                        </div>
+                        <div class="absolute bottom-2 right-2 text-[10px] text-theme-muted bg-black/60 px-2 py-0.5 rounded border border-theme">
+                            <i class="fa-solid fa-expand mr-1"></i> VIEW FULL
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold brand-font mb-1" style="color: var(--text-main);">Advanced Python Topics: File Operations in Python</h3>
+                            <p class="text-xs text-red-500 font-semibold brand-font mb-3">ISSUED BY: Infosys Springboard</p>
+                            <p class="text-theme-muted text-xs md:text-sm roboto-font leading-relaxed">
+                                Covers Python file operations and practical techniques for working with files in Python applications.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-theme flex justify-between items-center text-xs brand-font text-theme-muted">
+                            <span><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> VERIFIED</span>
+                            <span class="text-red-600 group-hover:text-white transition-colors">INSPECT <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. AI for Beginners -->
+                <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="ai" onclick="openCertModal(2)">
+                    <div class="cert-preview-frame">
+                        <div class="absolute top-3 left-3 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/60 px-2 py-0.5 rounded border border-red-800">
+                            CERTIFICATE PREVIEW
+                        </div>
+                        <i class="fa-solid fa-brain text-5xl text-theme-muted mb-2 group-hover:scale-110 transition-transform duration-300"></i>
+                        <div class="text-center px-4">
+                            <p class="text-xs font-bold brand-font text-white">HP LIFE</p>
+                            <p class="text-[10px] text-theme-muted roboto-font">Artificial Intelligence Foundations</p>
+                        </div>
+                        <div class="absolute bottom-2 right-2 text-[10px] text-theme-muted bg-black/60 px-2 py-0.5 rounded border border-theme">
+                            <i class="fa-solid fa-expand mr-1"></i> VIEW FULL
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold brand-font mb-1" style="color: var(--text-main);">AI for Beginners</h3>
+                            <p class="text-xs text-red-500 font-semibold brand-font mb-3">ISSUED BY: HP LIFE</p>
+                            <p class="text-theme-muted text-xs md:text-sm roboto-font leading-relaxed">
+                                Introduces fundamental AI concepts, real-world applications, business use cases and ethical considerations in AI.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-theme flex justify-between items-center text-xs brand-font text-theme-muted">
+                            <span><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> VERIFIED</span>
+                            <span class="text-red-600 group-hover:text-white transition-colors">INSPECT <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Basics of Python -->
+                <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="python" onclick="openCertModal(3)">
+                    <div class="cert-preview-frame">
+                        <div class="absolute top-3 left-3 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/60 px-2 py-0.5 rounded border border-red-800">
+                            CERTIFICATE PREVIEW
+                        </div>
+                        <i class="fa-brands fa-python text-5xl text-theme-muted mb-2 group-hover:scale-110 transition-transform duration-300"></i>
+                        <div class="text-center px-4">
+                            <p class="text-xs font-bold brand-font text-white">INFOSYS SPRINGBOARD</p>
+                            <p class="text-[10px] text-theme-muted roboto-font">Programming Fundamentals</p>
+                        </div>
+                        <div class="absolute bottom-2 right-2 text-[10px] text-theme-muted bg-black/60 px-2 py-0.5 rounded border border-theme">
+                            <i class="fa-solid fa-expand mr-1"></i> VIEW FULL
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold brand-font mb-1" style="color: var(--text-main);">Basics of Python</h3>
+                            <p class="text-xs text-red-500 font-semibold brand-font mb-3">ISSUED BY: Infosys Springboard</p>
+                            <p class="text-theme-muted text-xs md:text-sm roboto-font leading-relaxed">
+                                Covers Python syntax, fundamentals and basic programming concepts.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-theme flex justify-between items-center text-xs brand-font text-theme-muted">
+                            <span><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> VERIFIED</span>
+                            <span class="text-red-600 group-hover:text-white transition-colors">INSPECT <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Employability Skills – JobReady -->
+                <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="professional" onclick="openCertModal(4)">
+                    <div class="cert-preview-frame">
+                        <div class="absolute top-3 left-3 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/60 px-2 py-0.5 rounded border border-red-800">
+                            CERTIFICATE PREVIEW
+                        </div>
+                        <i class="fa-solid fa-briefcase text-5xl text-theme-muted mb-2 group-hover:scale-110 transition-transform duration-300"></i>
+                        <div class="text-center px-4">
+                            <p class="text-xs font-bold brand-font text-white">WADHWANI FOUNDATION</p>
+                            <p class="text-[10px] text-theme-muted roboto-font">JobReady Professional Program</p>
+                        </div>
+                        <div class="absolute bottom-2 right-2 text-[10px] text-theme-muted bg-black/60 px-2 py-0.5 rounded border border-theme">
+                            <i class="fa-solid fa-expand mr-1"></i> VIEW FULL
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold brand-font mb-1" style="color: var(--text-main);">Employability Skills – JobReady</h3>
+                            <p class="text-xs text-red-500 font-semibold brand-font mb-3">ISSUED BY: Wadhwani Foundation</p>
+                            <p class="text-theme-muted text-xs md:text-sm roboto-font leading-relaxed">
+                                Develops workplace and employability skills for professional readiness, communication and career preparation.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-theme flex justify-between items-center text-xs brand-font text-theme-muted">
+                            <span><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> VERIFIED</span>
+                            <span class="text-red-600 group-hover:text-white transition-colors">INSPECT <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Innovating with Google Cloud AI -->
+                <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="ai" onclick="openCertModal(5)">
+                    <div class="cert-preview-frame">
+                        <div class="absolute top-3 left-3 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/60 px-2 py-0.5 rounded border border-red-800">
+                            CERTIFICATE PREVIEW
+                        </div>
+                        <i class="fa-brands fa-google text-5xl text-theme-muted mb-2 group-hover:scale-110 transition-transform duration-300"></i>
+                        <div class="text-center px-4">
+                            <p class="text-xs font-bold brand-font text-white">GOOGLE CLOUD / SIMPLILEARN</p>
+                            <p class="text-[10px] text-theme-muted roboto-font">Cloud AI Innovation</p>
+                        </div>
+                        <div class="absolute bottom-2 right-2 text-[10px] text-theme-muted bg-black/60 px-2 py-0.5 rounded border border-theme">
+                            <i class="fa-solid fa-expand mr-1"></i> VIEW FULL
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold brand-font mb-1" style="color: var(--text-main);">Innovating with Google Cloud AI</h3>
+                            <p class="text-xs text-red-500 font-semibold brand-font mb-3">ISSUED BY: Google Cloud / Simplilearn / SkillUp</p>
+                            <p class="text-theme-muted text-xs md:text-sm roboto-font leading-relaxed">
+                                Introduces Google Cloud AI concepts and their applications in modern technology and innovation.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-theme flex justify-between items-center text-xs brand-font text-theme-muted">
+                            <span><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> VERIFIED</span>
+                            <span class="text-red-600 group-hover:text-white transition-colors">INSPECT <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Introduction to Python -->
+                <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="python" onclick="openCertModal(6)">
+                    <div class="cert-preview-frame">
+                        <div class="absolute top-3 left-3 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/60 px-2 py-0.5 rounded border border-red-800">
+                            CERTIFICATE PREVIEW
+                        </div>
+                        <i class="fa-brands fa-python text-5xl text-theme-muted mb-2 group-hover:scale-110 transition-transform duration-300"></i>
+                        <div class="text-center px-4">
+                            <p class="text-xs font-bold brand-font text-white">INFOSYS SPRINGBOARD</p>
+                            <p class="text-[10px] text-theme-muted roboto-font">Core Concepts</p>
+                        </div>
+                        <div class="absolute bottom-2 right-2 text-[10px] text-theme-muted bg-black/60 px-2 py-0.5 rounded border border-theme">
+                            <i class="fa-solid fa-expand mr-1"></i> VIEW FULL
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold brand-font mb-1" style="color: var(--text-main);">Introduction to Python</h3>
+                            <p class="text-xs text-red-500 font-semibold brand-font mb-3">ISSUED BY: Infosys Springboard</p>
+                            <p class="text-theme-muted text-xs md:text-sm roboto-font leading-relaxed">
+                                Introduces Python programming fundamentals and core concepts for beginners.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-theme flex justify-between items-center text-xs brand-font text-theme-muted">
+                            <span><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> VERIFIED</span>
+                            <span class="text-red-600 group-hover:text-white transition-colors">INSPECT <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. MS Office -->
+                <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="professional" onclick="openCertModal(7)">
+                    <div class="cert-preview-frame">
+                        <div class="absolute top-3 left-3 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/60 px-2 py-0.5 rounded border border-red-800">
+                            CERTIFICATE PREVIEW
+                        </div>
+                        <i class="fa-brands fa-microsoft text-5xl text-theme-muted mb-2 group-hover:scale-110 transition-transform duration-300"></i>
+                        <div class="text-center px-4">
+                            <p class="text-xs font-bold brand-font text-white">INFOSYS SPRINGBOARD</p>
+                            <p class="text-[10px] text-theme-muted roboto-font">Productivity Suite</p>
+                        </div>
+                        <div class="absolute bottom-2 right-2 text-[10px] text-theme-muted bg-black/60 px-2 py-0.5 rounded border border-theme">
+                            <i class="fa-solid fa-expand mr-1"></i> VIEW FULL
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold brand-font mb-1" style="color: var(--text-main);">MS Office</h3>
+                            <p class="text-xs text-red-500 font-semibold brand-font mb-3">ISSUED BY: Infosys Springboard</p>
+                            <p class="text-theme-muted text-xs md:text-sm roboto-font leading-relaxed">
+                                Covers foundational Microsoft Office and workplace productivity skills.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-theme flex justify-between items-center text-xs brand-font text-theme-muted">
+                            <span><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> VERIFIED</span>
+                            <span class="text-red-600 group-hover:text-white transition-colors">INSPECT <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. Python Foundation Certification -->
+                <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="python" onclick="openCertModal(8)">
+                    <div class="cert-preview-frame">
+                        <div class="absolute top-3 left-3 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/60 px-2 py-0.5 rounded border border-red-800">
+                            CERTIFICATE PREVIEW
+                        </div>
+                        <i class="fa-brands fa-python text-5xl text-theme-muted mb-2 group-hover:scale-110 transition-transform duration-300"></i>
+                        <div class="text-center px-4">
+                            <p class="text-xs font-bold brand-font text-white">INFOSYS SPRINGBOARD</p>
+                            <p class="text-[10px] text-theme-muted roboto-font">Foundation Certification</p>
+                        </div>
+                        <div class="absolute bottom-2 right-2 text-[10px] text-theme-muted bg-black/60 px-2 py-0.5 rounded border border-theme">
+                            <i class="fa-solid fa-expand mr-1"></i> VIEW FULL
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold brand-font mb-1" style="color: var(--text-main);">Python Foundation Certification</h3>
+                            <p class="text-xs text-red-500 font-semibold brand-font mb-3">ISSUED BY: Infosys Springboard</p>
+                            <p class="text-theme-muted text-xs md:text-sm roboto-font leading-relaxed">
+                                Demonstrates foundational knowledge of Python programming and core programming concepts.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-theme flex justify-between items-center text-xs brand-font text-theme-muted">
+                            <span><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> VERIFIED</span>
+                            <span class="text-red-600 group-hover:text-white transition-colors">INSPECT <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. Resume Writing and Job Interviewing -->
+                <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="professional" onclick="openCertModal(9)">
+                    <div class="cert-preview-frame">
+                        <div class="absolute top-3 left-3 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/60 px-2 py-0.5 rounded border border-red-800">
+                            CERTIFICATE PREVIEW
+                        </div>
+                        <i class="fa-solid fa-file-signature text-5xl text-theme-muted mb-2 group-hover:scale-110 transition-transform duration-300"></i>
+                        <div class="text-center px-4">
+                            <p class="text-xs font-bold brand-font text-white">HP LIFE</p>
+                            <p class="text-[10px] text-theme-muted roboto-font">Career Development</p>
+                        </div>
+                        <div class="absolute bottom-2 right-2 text-[10px] text-theme-muted bg-black/60 px-2 py-0.5 rounded border border-theme">
+                            <i class="fa-solid fa-expand mr-1"></i> VIEW FULL
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold brand-font mb-1" style="color: var(--text-main);">Resume Writing and Job Interviewing</h3>
+                            <p class="text-xs text-red-500 font-semibold brand-font mb-3">ISSUED BY: HP LIFE</p>
+                            <p class="text-theme-muted text-xs md:text-sm roboto-font leading-relaxed">
+                                Covers resume preparation, interview preparation and professional job-search skills.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-theme flex justify-between items-center text-xs brand-font text-theme-muted">
+                            <span><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> VERIFIED</span>
+                            <span class="text-red-600 group-hover:text-white transition-colors">INSPECT <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10. Software Engineering and Agile Software Development -->
+                <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="software" onclick="openCertModal(10)">
+                    <div class="cert-preview-frame">
+                        <div class="absolute top-3 left-3 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/60 px-2 py-0.5 rounded border border-red-800">
+                            CERTIFICATE PREVIEW
+                        </div>
+                        <i class="fa-solid fa-diagram-project text-5xl text-theme-muted mb-2 group-hover:scale-110 transition-transform duration-300"></i>
+                        <div class="text-center px-4">
+                            <p class="text-xs font-bold brand-font text-white">INFOSYS SPRINGBOARD</p>
+                            <p class="text-[10px] text-theme-muted roboto-font">Agile &amp; SDLC Practices</p>
+                        </div>
+                        <div class="absolute bottom-2 right-2 text-[10px] text-theme-muted bg-black/60 px-2 py-0.5 rounded border border-theme">
+                            <i class="fa-solid fa-expand mr-1"></i> VIEW FULL
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold brand-font mb-1" style="color: var(--text-main);">Software Engineering and Agile Software Development</h3>
+                            <p class="text-xs text-red-500 font-semibold brand-font mb-3">ISSUED BY: Infosys Springboard</p>
+                            <p class="text-theme-muted text-xs md:text-sm roboto-font leading-relaxed">
+                                Introduces software engineering practices and Agile development concepts.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-theme flex justify-between items-center text-xs brand-font text-theme-muted">
+                            <span><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> VERIFIED</span>
+                            <span class="text-red-600 group-hover:text-white transition-colors">INSPECT <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 11. Turn Ideas Into Prototypes With Vibe Coding -->
+                <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="ai" onclick="openCertModal(11)">
+                    <div class="cert-preview-frame">
+                        <div class="absolute top-3 left-3 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/60 px-2 py-0.5 rounded border border-red-800">
+                            CERTIFICATE PREVIEW
+                        </div>
+                        <i class="fa-solid fa-wand-magic-sparkles text-5xl text-theme-muted mb-2 group-hover:scale-110 transition-transform duration-300"></i>
+                        <div class="text-center px-4">
+                            <p class="text-xs font-bold brand-font text-white">IBM SKILLSBUILD</p>
+                            <p class="text-[10px] text-theme-muted roboto-font">AI Prototyping</p>
+                        </div>
+                        <div class="absolute bottom-2 right-2 text-[10px] text-theme-muted bg-black/60 px-2 py-0.5 rounded border border-theme">
+                            <i class="fa-solid fa-expand mr-1"></i> VIEW FULL
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold brand-font mb-1" style="color: var(--text-main);">Turn Ideas Into Prototypes With Vibe Coding</h3>
+                            <p class="text-xs text-red-500 font-semibold brand-font mb-3">ISSUED BY: IBM SkillsBuild</p>
+                            <p class="text-theme-muted text-xs md:text-sm roboto-font leading-relaxed">
+                                Introduces AI-assisted coding approaches for turning ideas into working software prototypes.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-theme flex justify-between items-center text-xs brand-font text-theme-muted">
+                            <span><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> VERIFIED</span>
+                            <span class="text-red-600 group-hover:text-white transition-colors">INSPECT <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 12. Web Design Enhancements -->
+                <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="software" onclick="openCertModal(12)">
+                    <div class="cert-preview-frame">
+                        <div class="absolute top-3 left-3 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/60 px-2 py-0.5 rounded border border-red-800">
+                            CERTIFICATE PREVIEW
+                        </div>
+                        <i class="fa-solid fa-palette text-5xl text-theme-muted mb-2 group-hover:scale-110 transition-transform duration-300"></i>
+                        <div class="text-center px-4">
+                            <p class="text-xs font-bold brand-font text-white">INFOSYS SPRINGBOARD</p>
+                            <p class="text-[10px] text-theme-muted roboto-font">UI/UX Architecture</p>
+                        </div>
+                        <div class="absolute bottom-2 right-2 text-[10px] text-theme-muted bg-black/60 px-2 py-0.5 rounded border border-theme">
+                            <i class="fa-solid fa-expand mr-1"></i> VIEW FULL
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold brand-font mb-1" style="color: var(--text-main);">Web Design Enhancements</h3>
+                            <p class="text-xs text-red-500 font-semibold brand-font mb-3">ISSUED BY: Infosys Springboard</p>
+                            <p class="text-theme-muted text-xs md:text-sm roboto-font leading-relaxed">
+                                Covers techniques for improving web design, presentation and user experience.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-theme flex justify-between items-center text-xs brand-font text-theme-muted">
+                            <span><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> VERIFIED</span>
+                            <span class="text-red-600 group-hover:text-white transition-colors">INSPECT <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 13. Java Internship -->
+                <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="internship" onclick="openCertModal(13)">
+                    <div class="cert-preview-frame">
+                        <div class="absolute top-3 left-3 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/60 px-2 py-0.5 rounded border border-red-800">
+                            CERTIFICATE PREVIEW
+                        </div>
+                        <i class="fa-brands fa-java text-5xl text-theme-muted mb-2 group-hover:scale-110 transition-transform duration-300"></i>
+                        <div class="text-center px-4">
+                            <p class="text-xs font-bold brand-font text-white">INTERNPE</p>
+                            <p class="text-[10px] text-theme-muted roboto-font">Java Programming Intern</p>
+                        </div>
+                        <div class="absolute bottom-2 right-2 text-[10px] text-theme-muted bg-black/60 px-2 py-0.5 rounded border border-theme">
+                            <i class="fa-solid fa-expand mr-1"></i> VIEW FULL
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold brand-font mb-1" style="color: var(--text-main);">Java Internship</h3>
+                            <p class="text-xs text-red-500 font-semibold brand-font mb-1">ISSUED BY: InternPe</p>
+                            <p class="text-[11px] text-theme-muted font-mono mb-3">DATE: 22/06/2026 – 05/08/2026</p>
+                            <p class="text-theme-muted text-xs md:text-sm roboto-font leading-relaxed">
+                                Internship experience focused on Java programming and practical software development.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-theme flex justify-between items-center text-xs brand-font text-theme-muted">
+                            <span><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> CID: IPI#83440</span>
+                            <span class="text-red-600 group-hover:text-white transition-colors">INSPECT <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 14. Python Internship -->
+                <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="internship" onclick="openCertModal(14)">
+                    <div class="cert-preview-frame">
+                        <div class="absolute top-3 left-3 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/60 px-2 py-0.5 rounded border border-red-800">
+                            CERTIFICATE PREVIEW
+                        </div>
+                        <i class="fa-brands fa-python text-5xl text-theme-muted mb-2 group-hover:scale-110 transition-transform duration-300"></i>
+                        <div class="text-center px-4">
+                            <p class="text-xs font-bold brand-font text-white">INTERNPE</p>
+                            <p class="text-[10px] text-theme-muted roboto-font">Python Development Intern</p>
+                        </div>
+                        <div class="absolute bottom-2 right-2 text-[10px] text-theme-muted bg-black/60 px-2 py-0.5 rounded border border-theme">
+                            <i class="fa-solid fa-expand mr-1"></i> VIEW FULL
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold brand-font mb-1" style="color: var(--text-main);">Python Internship</h3>
+                            <p class="text-xs text-red-500 font-semibold brand-font mb-3">ISSUED BY: InternPe</p>
+                            <p class="text-theme-muted text-xs md:text-sm roboto-font leading-relaxed">
+                                Internship experience focused on Python programming and practical Python development.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-theme flex justify-between items-center text-xs brand-font text-theme-muted">
+                            <span><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> VERIFIED</span>
+                            <span class="text-red-600 group-hover:text-white transition-colors">INSPECT <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FULL SIZE MODAL LIGHTBOX -->
+    <div id="cert-modal" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-theme-secondary border border-theme rounded-2xl max-w-2xl w-full p-6 md:p-8 relative max-h-[90vh] overflow-y-auto" style="background-color: var(--bg-secondary);">
+            <button onclick="closeCertModal()" class="absolute top-4 right-4 text-theme-muted hover:text-white text-2xl" aria-label="Close Modal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="flex items-center gap-3 mb-4">
+                <span class="w-2.5 h-2.5 bg-red-600 rounded-full animate-pulse"></span>
+                <span id="modal-issuer-badge" class="text-xs font-bold brand-font text-red-500 tracking-wider">ISSUING AUTHORITY</span>
+            </div>
+            
+            <div class="border border-theme rounded-xl p-6 mb-6 bg-theme-tertiary text-center relative overflow-hidden" style="background-color: var(--bg-tertiary);">
+                <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(var(--text-muted) 1px, transparent 1px); background-size: 8px 8px;"></div>
+                <div id="modal-icon-container" class="text-5xl text-theme-muted mb-3">
+                    <i class="fa-solid fa-award"></i>
+                </div>
+                <h2 id="modal-cert-title" class="text-xl md:text-2xl font-bold brand-font mb-2 text-white">Certificate Title</h2>
+                <p id="modal-cert-issued" class="text-sm font-semibold brand-font text-red-500">Issued by: Organization</p>
+                <p id="modal-cert-date" class="text-xs text-theme-muted font-mono mt-1"></p>
+                <div class="mt-4 pt-3 border-t border-theme inline-block">
+                    <span class="text-[10px] brand-font tracking-widest text-theme-muted px-3 py-1 rounded-full border border-theme bg-black/40">AUTHENTICATED CREDENTIAL RECORD</span>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <h4 class="text-xs font-bold brand-font text-theme-muted tracking-wider mb-1">PROGRAM SCOPE &amp; DESCRIPTION</h4>
+                    <p id="modal-cert-desc" class="text-sm roboto-font text-theme-muted leading-relaxed"></p>
+                </div>
+                <div class="pt-4 border-t border-theme flex flex-wrap justify-between items-center gap-4">
+                    <div class="text-xs text-theme-muted brand-font">
+                        <i class="fa-solid fa-lock text-green-500 mr-1"></i> VERIFIED BY SIVA KUMAR R
+                    </div>
+                    <button onclick="closeCertModal()" class="px-5 py-2 rounded-full border border-theme text-xs brand-font hover:border-red-600 hover:text-white transition-all">
+                        CLOSE VIEWER
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-black pt-16 pb-12 overflow-hidden border-t border-theme" style="background-color: var(--bg-secondary);">
+        <div class="container mx-auto px-4 text-center max-w-4xl">
+            <div class="mb-6 text-5xl md:text-6xl font-bold brand-font text-theme-muted hover:text-red-600 transition-colors cursor-default tracking-widest">
+                S<span class="text-red-600">.</span>K
+            </div>
+            <p class="text-theme-muted text-lg md:text-xl font-light mb-8 italic roboto-font">
+                "Living, learning, &amp; leveling up one day at a time."
+            </p>
+
+            <div class="flex flex-wrap justify-center items-center gap-6 md:gap-8 mb-10">
+                <a href="https://github.com/Siva-kumar-r16" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/siva-kumar-r-a90a482b1" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="LinkedIn">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="https://www.instagram.com/sir_sivakumar?igsh=cng0Mnd1b2ZxczFp" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://leetcode.com/u/cskskjaddu/" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="LeetCode">
+                    <i class="fa-solid fa-code"></i>
+                </a>
+                <a href="https://www.hackerrank.com/profile/ksuja20" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="HackerRank">
+                    <i class="fa-brands fa-hackerrank"></i>
+                </a>
+                <a href="mailto:sirsivakumar@outlook.com" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="Email">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+            </div>
+
+            <div class="text-theme-muted text-sm space-y-2">
+                <p class="brand-font tracking-wider">Handcrafted by Siva Kumar <i class="fa-regular fa-copyright ml-1"></i> 2025</p>
+                <p class="mt-2 text-xs roboto-font opacity-60">Made with Nothing OS vibes.</p>
+                <div>
+                    <a href="https://github.com/Siva-kumar-r16/Portfolio" target="_blank" rel="noopener noreferrer" class="inline-block mt-3 text-xs brand-font border border-theme px-4 py-2 rounded-full hover:border-red-600 hover:text-white transition-all">
+                        <i class="fa-brands fa-github mr-1"></i> VIEW PORTFOLIO SOURCE
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Certificate dataset for modal viewer
+        const certData = {
+            1: {
+                title: "Advanced Python Topics: File Operations in Python",
+                issuedBy: "Infosys Springboard",
+                date: "",
+                desc: "Covers Python file operations and practical techniques for working with files in Python applications.",
+                icon: "fa-brands fa-python"
+            },
+            2: {
+                title: "AI for Beginners",
+                issuedBy: "HP LIFE",
+                date: "",
+                desc: "Introduces fundamental AI concepts, real-world applications, business use cases and ethical considerations in AI.",
+                icon: "fa-solid fa-brain"
+            },
+            3: {
+                title: "Basics of Python",
+                issuedBy: "Infosys Springboard",
+                date: "",
+                desc: "Covers Python syntax, fundamentals and basic programming concepts.",
+                icon: "fa-brands fa-python"
+            },
+            4: {
+                title: "Employability Skills – JobReady",
+                issuedBy: "Wadhwani Foundation",
+                date: "",
+                desc: "Develops workplace and employability skills for professional readiness, communication and career preparation.",
+                icon: "fa-solid fa-briefcase"
+            },
+            5: {
+                title: "Innovating with Google Cloud AI",
+                issuedBy: "Google Cloud / Simplilearn / SkillUp",
+                date: "",
+                desc: "Introduces Google Cloud AI concepts and their applications in modern technology and innovation.",
+                icon: "fa-brands fa-google"
+            },
+            6: {
+                title: "Introduction to Python",
+                issuedBy: "Infosys Springboard",
+                date: "",
+                desc: "Introduces Python programming fundamentals and core concepts for beginners.",
+                icon: "fa-brands fa-python"
+            },
+            7: {
+                title: "MS Office",
+                issuedBy: "Infosys Springboard",
+                date: "",
+                desc: "Covers foundational Microsoft Office and workplace productivity skills.",
+                icon: "fa-brands fa-microsoft"
+            },
+            8: {
+                title: "Python Foundation Certification",
+                issuedBy: "Infosys Springboard",
+                date: "",
+                desc: "Demonstrates foundational knowledge of Python programming and core programming concepts.",
+                icon: "fa-brands fa-python"
+            },
+            9: {
+                title: "Resume Writing and Job Interviewing",
+                issuedBy: "HP LIFE",
+                date: "",
+                desc: "Covers resume preparation, interview preparation and professional job-search skills.",
+                icon: "fa-solid fa-file-signature"
+            },
+            10: {
+                title: "Software Engineering and Agile Software Development",
+                issuedBy: "Infosys Springboard",
+                date: "",
+                desc: "Introduces software engineering practices and Agile development concepts.",
+                icon: "fa-solid fa-diagram-project"
+            },
+            11: {
+                title: "Turn Ideas Into Prototypes With Vibe Coding",
+                issuedBy: "IBM SkillsBuild",
+                date: "",
+                desc: "Introduces AI-assisted coding approaches for turning ideas into working software prototypes.",
+                icon: "fa-solid fa-wand-magic-sparkles"
+            },
+            12: {
+                title: "Web Design Enhancements",
+                issuedBy: "Infosys Springboard",
+                date: "",
+                desc: "Covers techniques for improving web design, presentation and user experience.",
+                icon: "fa-solid fa-palette"
+            },
+            13: {
+                title: "Java Internship",
+                issuedBy: "InternPe",
+                date: "22/06/2026 – 05/08/2026 (CID: IPI#83440)",
+                desc: "Internship experience focused on Java programming and practical software development.",
+                icon: "fa-brands fa-java"
+            },
+            14: {
+                title: "Python Internship",
+                issuedBy: "InternPe",
+                date: "",
+                desc: "Internship experience focused on Python programming and practical Python development.",
+                icon: "fa-brands fa-python"
+            }
+        };
+
+        function openCertModal(id) {
+            const data = certData[id];
+            if (!data) return;
+            document.getElementById('modal-cert-title').textContent = data.title;
+            document.getElementById('modal-cert-issued').textContent = 'Issued by: ' + data.issuedBy;
+            document.getElementById('modal-issuer-badge').textContent = data.issuedBy.toUpperCase();
+            document.getElementById('modal-cert-date').textContent = data.date ? 'Duration/Date: ' + data.date : '';
+            document.getElementById('modal-cert-desc').textContent = data.desc;
+            document.getElementById('modal-icon-container').innerHTML = `<i class="${data.icon}"></i>`;
+            document.getElementById('cert-modal').classList.remove('hidden');
+        }
+
+        function closeCertModal() {
+            document.getElementById('cert-modal').classList.add('hidden');
+        }
+
+        // Close on backdrop click or Escape
+        document.getElementById('cert-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'cert-modal') closeCertModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeCertModal();
+        });
+
+        // Filtering logic
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const certCards = document.querySelectorAll('.cert-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-red-600', 'text-white', 'border-red-600');
+                    b.classList.add('text-theme-muted', 'border-theme');
+                });
+                btn.classList.remove('text-theme-muted', 'border-theme');
+                btn.classList.add('bg-red-600', 'text-white', 'border-red-600');
+
+                const cat = btn.getAttribute('data-category');
+                certCards.forEach(card => {
+                    if (cat === 'all' || card.getAttribute('data-category') === cat) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Resume & Curriculum Vitae | Siva Kumar R</title>
+    <meta name="description" content="Official Resume of Siva Kumar R - Founder & CTO of Sparklance Solutions, Frontend Engineer & App Developer.">
+    <meta property="og:title" content="Resume | Siva Kumar R Portfolio">
+    <meta property="og:description" content="View education, experience, technical skills, production projects, and verified credentials.">
+    <meta property="og:image" content="images/avatar.png">
+    <meta property="og:type" content="website">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Inter:wght@300;400;600;700&family=Roboto:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            nav, footer, #cursor-dot, #cursor-outline, #glyph-canvas, .no-print {
+                display: none !important;
+            }
+            .resume-sheet {
+                border: none !important;
+                box-shadow: none !important;
+                background: white !important;
+                color: black !important;
+                padding: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            .resume-sheet * {
+                color: black !important;
+                border-color: #ccc !important;
+            }
+            .resume-header-name {
+                color: black !important;
+            }
+            .resume-accent {
+                color: #D71921 !important;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
+
+    <canvas id="glyph-canvas"></canvas>
+
+    <!-- NAVIGATION HEADER -->
+    <nav class="w-full py-5 px-4 md:px-8 flex flex-col md:flex-row justify-between items-center border-b border-theme bg-opacity-95 backdrop-blur-sm sticky top-0 z-50 transition-colors duration-300" style="background-color: var(--bg-primary);">
+        <div class="flex items-center justify-between w-full md:w-auto mb-3 md:mb-0">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-xl md:text-2xl font-bold brand-font tracking-wider" style="color: var(--text-main);">
+                    SIVA KUMAR<span class="text-red-600 animate-pulse">.</span>R
+                </a>
+                <div class="flex items-center gap-2 text-[10px] md:text-xs brand-font text-theme-muted border-l border-theme pl-3 tracking-widest">
+                    <span class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
+                    <span id="system-time">07:14:50 PM</span>
+                </div>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden text-theme-muted hover:text-white text-xl p-1 focus:outline-none" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="nav-menu" class="hidden md:flex flex-col md:flex-row items-center gap-5 lg:gap-7 w-full md:w-auto mt-3 md:mt-0 pt-3 md:pt-0 border-t md:border-t-0 border-theme">
+            <ul class="flex flex-wrap md:flex-nowrap items-center justify-center gap-4 md:gap-5 lg:gap-6 text-xs lg:text-sm brand-font tracking-wider" style="color: var(--text-main);">
+                <li><a href="index.html#about" class="nav-link hover:text-red-600 transition-colors">ABOUT</a></li>
+                <li><a href="index.html#skills" class="nav-link hover:text-red-600 transition-colors">SKILLS</a></li>
+                <li><a href="projects.html" class="nav-link hover:text-red-600 transition-colors">PROJECTS</a></li>
+                <li><a href="certifications.html" class="nav-link hover:text-red-600 transition-colors">CERTIFICATIONS</a></li>
+                <li><a href="resume.html" class="nav-link text-red-600 font-bold transition-colors">RESUME</a></li>
+                <li><a href="entertainment.html" class="nav-link hover:text-red-600 transition-colors">ENTERTAINMENT</a></li>
+                <li><a href="#contact" class="nav-link hover:text-red-600 transition-colors">CONTACT</a></li>
+            </ul>
+
+            <div class="flex items-center gap-2 border-t md:border-t-0 md:border-l border-theme pt-3 md:pt-0 md:pl-5 mt-2 md:mt-0">
+                <i class="fa-solid fa-moon text-xs text-theme-muted"></i>
+                <div class="toggle-switch" id="theme-toggle" role="button" aria-label="Toggle theme" tabindex="0"></div>
+                <i class="fa-solid fa-sun text-xs text-theme-muted"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ACTION / DOWNLOAD BAR -->
+    <section class="pt-12 pb-6 text-center reveal no-print">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme bg-theme-secondary text-xs brand-font text-theme-muted mb-4">
+                <span class="w-2 h-2 bg-red-600 rounded-full animate-ping"></span>
+                PROFESSIONAL DOSSIER
+            </div>
+            <h1 class="text-3xl md:text-5xl font-bold brand-font mb-4" style="color: var(--text-main);">
+                CURRICULUM <span class="glitch-text cursor-default">VITAE</span>
+            </h1>
+            <p class="text-theme-muted text-sm md:text-base max-w-2xl mx-auto roboto-font mb-6">
+                Verified academic profile, entrepreneurial leadership, software architecture projects, and skill matrix.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button onclick="window.print()" class="inline-flex items-center gap-2 bg-red-600 text-white px-6 py-2.5 rounded-full hover:bg-white hover:text-black transition-all brand-font text-xs md:text-sm font-bold shadow-lg">
+                    <i class="fa-solid fa-print"></i> DOWNLOAD / PRINT RESUME
+                </button>
+                <a href="https://github.com/Siva-kumar-r16" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 border border-theme bg-theme-secondary text-theme-muted px-6 py-2.5 rounded-full hover:border-red-600 hover:text-white transition-all brand-font text-xs md:text-sm">
+                    <i class="fa-brands fa-github"></i> GITHUB PROFILE
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESUME MAIN CONTAINER -->
+    <section class="py-8 pb-32">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="resume-sheet bg-theme-secondary border border-theme rounded-2xl p-6 md:p-12 shadow-2xl relative reveal" style="background-color: var(--bg-secondary);">
+                
+                <!-- RESUME HEADER -->
+                <div class="border-b border-theme pb-8 mb-8 text-center md:text-left flex flex-col md:flex-row justify-between items-start gap-6">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold brand-font tracking-wider mb-2 resume-header-name" style="color: var(--text-main);">
+                            SIVA KUMAR R
+                        </h2>
+                        <p class="text-xs md:text-sm brand-font text-red-500 font-bold tracking-widest mb-3">
+                            FOUNDER &amp; CTO | FRONTEND ENGINEER &amp; APP DEVELOPER
+                        </p>
+                        <p class="text-xs text-theme-muted roboto-font">
+                            <i class="fa-solid fa-location-dot text-red-600 mr-1"></i> Chennai, Tamil Nadu, India &nbsp;|&nbsp; 
+                            <i class="fa-solid fa-phone text-red-600 mr-1"></i> +91 93605 34078 &nbsp;|&nbsp; 
+                            <i class="fa-solid fa-envelope text-red-600 mr-1"></i> sirsivakumar@outlook.com
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap md:flex-col gap-2 text-xs font-mono text-theme-muted self-center md:self-end">
+                        <a href="https://www.linkedin.com/in/siva-kumar-r-a90a482b1" target="_blank" rel="noopener noreferrer" class="hover:text-red-500 transition-colors flex items-center gap-1.5">
+                            <i class="fa-brands fa-linkedin text-red-600"></i> in/siva-kumar-r
+                        </a>
+                        <a href="https://github.com/Siva-kumar-r16" target="_blank" rel="noopener noreferrer" class="hover:text-red-500 transition-colors flex items-center gap-1.5">
+                            <i class="fa-brands fa-github text-red-600"></i> gh/Siva-kumar-r16
+                        </a>
+                        <a href="https://leetcode.com/u/cskskjaddu/" target="_blank" rel="noopener noreferrer" class="hover:text-red-500 transition-colors flex items-center gap-1.5">
+                            <i class="fa-solid fa-code text-red-600"></i> lc/cskskjaddu
+                        </a>
+                        <a href="https://www.hackerrank.com/profile/ksuja20" target="_blank" rel="noopener noreferrer" class="hover:text-red-500 transition-colors flex items-center gap-1.5">
+                            <i class="fa-brands fa-hackerrank text-red-600"></i> hr/ksuja20
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PROFESSIONAL SUMMARY -->
+                <div class="mb-8">
+                    <h3 class="text-sm font-bold brand-font tracking-widest text-red-500 mb-3 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-red-600 rounded-full"></span> PROFESSIONAL SUMMARY
+                    </h3>
+                    <p class="text-xs md:text-sm text-theme-muted leading-relaxed roboto-font">
+                        Third-year Computer Science Engineering student and Founder &amp; CTO of Sparklance Solutions, building and deploying production client websites end-to-end — PHP backends, payment integration, live hosting. Independently shipped three additional full applications across Python, Java, Android, and web, including a desktop BI tool turning 16,000+ sales records into predictive insights and a live cross-platform game. Seeking a software development internship to bring that same ownership from idea to live deployment to a real engineering team.
+                    </p>
+                </div>
+
+                <!-- EDUCATION -->
+                <div class="mb-8">
+                    <h3 class="text-sm font-bold brand-font tracking-widest text-red-500 mb-4 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-red-600 rounded-full"></span> EDUCATION
+                    </h3>
+                    <div class="border-l-2 border-theme pl-4 ml-1">
+                        <div class="flex flex-col md:flex-row justify-between mb-1">
+                            <h4 class="text-xs md:text-sm font-bold brand-font" style="color: var(--text-main);">
+                                B.E. Computer Science and Engineering
+                            </h4>
+                            <span class="text-xs text-theme-muted font-mono">2024 – 2028 (Expected)</span>
+                        </div>
+                        <p class="text-xs text-theme-muted roboto-font">
+                            Panimalar Engineering College, Chennai, Tamil Nadu
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ENTREPRENEURIAL EXPERIENCE -->
+                <div class="mb-8">
+                    <h3 class="text-sm font-bold brand-font tracking-widest text-red-500 mb-4 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-red-600 rounded-full"></span> ENTREPRENEURIAL &amp; PROFESSIONAL EXPERIENCE
+                    </h3>
+                    <div class="space-y-6">
+                        
+                        <!-- Sparklance Solutions -->
+                        <div class="border-l-2 border-theme pl-4 ml-1">
+                            <div class="flex flex-col md:flex-row justify-between mb-1">
+                                <h4 class="text-xs md:text-sm font-bold brand-font" style="color: var(--text-main);">
+                                    Founder &amp; CTO &nbsp;|&nbsp; <span class="text-red-500">Sparklance Solutions</span>
+                                </h4>
+                                <span class="text-xs text-theme-muted font-mono">2025 – Present</span>
+                            </div>
+                            <p class="text-xs text-theme-muted roboto-font mb-2">Freelance Web Studio &amp; Digital Solutions Venture</p>
+                            <ul class="list-disc list-inside text-xs md:text-sm text-theme-muted space-y-1.5 roboto-font">
+                                <li>Founded and lead a software development venture delivering full-stack client websites, handling everything from client requirements to live deployment.</li>
+                                <li>Personally designed, built, and deployed a production client website (<a href="https://dhvikabylr.com/" target="_blank" class="text-red-500 hover:underline">dhvikabylr.com</a>) end-to-end: MilesWeb server hosting setup, custom PHP backend, and integrated Razorpay payment gateway for secure customer checkout.</li>
+                                <li>Engineered agency portal with Nothing OS design principles on Netlify (<a href="https://sparklance-solutions.netlify.app/" target="_blank" class="text-red-500 hover:underline">sparklance-solutions.netlify.app</a>).</li>
+                            </ul>
+                        </div>
+
+                        <!-- InternPe Java Internship -->
+                        <div class="border-l-2 border-theme pl-4 ml-1">
+                            <div class="flex flex-col md:flex-row justify-between mb-1">
+                                <h4 class="text-xs md:text-sm font-bold brand-font" style="color: var(--text-main);">
+                                    Java Programming Intern &nbsp;|&nbsp; <span class="text-red-500">InternPe</span>
+                                </h4>
+                                <span class="text-xs text-theme-muted font-mono">22/06/2026 – 05/08/2026</span>
+                            </div>
+                            <p class="text-xs text-theme-muted roboto-font mb-2">Credential ID: IPI#83440 (ISO 9001:2015 / MSME Verified)</p>
+                            <ul class="list-disc list-inside text-xs md:text-sm text-theme-muted space-y-1.5 roboto-font">
+                                <li>Engineered Java object-oriented applications with robust exception handling and database connection pooling.</li>
+                                <li>Developed clean Swing desktop user interfaces and performed structured JDBC data transaction testing.</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- TECHNICAL SKILLS -->
+                <div class="mb-8">
+                    <h3 class="text-sm font-bold brand-font tracking-widest text-red-500 mb-4 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-red-600 rounded-full"></span> TECHNICAL SKILLS
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm roboto-font">
+                        <div class="p-3 bg-theme-tertiary rounded-lg border border-theme" style="background-color: var(--bg-tertiary);">
+                            <span class="font-bold brand-font text-white block mb-1">PROGRAMMING LANGUAGES:</span>
+                            <span class="text-theme-muted">Python, Java (Core Syntax &amp; OOP), C, JavaScript, PHP</span>
+                        </div>
+                        <div class="p-3 bg-theme-tertiary rounded-lg border border-theme" style="background-color: var(--bg-tertiary);">
+                            <span class="font-bold brand-font text-white block mb-1">GUI &amp; MOBILE DEV:</span>
+                            <span class="text-theme-muted">Tkinter, Java Swing, Android Studio (Native Android)</span>
+                        </div>
+                        <div class="p-3 bg-theme-tertiary rounded-lg border border-theme" style="background-color: var(--bg-tertiary);">
+                            <span class="font-bold brand-font text-white block mb-1">WEB &amp; CLOUD INFRASTRUCTURE:</span>
+                            <span class="text-theme-muted">HTML5, CSS3, Tailwind CSS, Razorpay API, MilesWeb, Netlify, Git, GitHub</span>
+                        </div>
+                        <div class="p-3 bg-theme-tertiary rounded-lg border border-theme" style="background-color: var(--bg-tertiary);">
+                            <span class="font-bold brand-font text-white block mb-1">DATA ANALYTICS &amp; ML:</span>
+                            <span class="text-theme-muted">Scikit-Learn (Linear Regression), Pandas, Matplotlib, Seaborn, GeoPandas</span>
+                        </div>
+                        <div class="p-3 bg-theme-tertiary rounded-lg border border-theme md:col-span-2" style="background-color: var(--bg-tertiary);">
+                            <span class="font-bold brand-font text-white block mb-1">SOFTWARE PRACTICES:</span>
+                            <span class="text-theme-muted">Input Validation, Exception Handling, Database Connection Pooling, RDBMS Connectivity (MySQL/JDBC)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KEY PROJECTS -->
+                <div class="mb-8">
+                    <h3 class="text-sm font-bold brand-font tracking-widest text-red-500 mb-4 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-red-600 rounded-full"></span> SELECTED ENGINEERING PROJECTS
+                    </h3>
+                    <div class="space-y-5 text-xs md:text-sm roboto-font">
+                        
+                        <!-- Project 1 -->
+                        <div class="border-l-2 border-theme pl-4 ml-1">
+                            <div class="flex flex-col md:flex-row justify-between mb-1">
+                                <h4 class="font-bold brand-font" style="color: var(--text-main);">
+                                    Video Game Sales Analytics — Desktop BI Application
+                                </h4>
+                                <span class="text-xs text-theme-muted font-mono">Python, Scikit-Learn, Matplotlib</span>
+                            </div>
+                            <ul class="list-disc list-inside text-theme-muted space-y-1">
+                                <li>Engineered desktop business intelligence application processing 16,000+ sales records to extract actionable market insights.</li>
+                                <li>Implemented Linear Regression model to forecast top-performing game genres and publishers with high precision.</li>
+                                <li>Constructed interactive Tkinter dashboard featuring GeoPandas geospatial heatmap toggles and statistical distributions.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Project 2 -->
+                        <div class="border-l-2 border-theme pl-4 ml-1">
+                            <div class="flex flex-col md:flex-row justify-between mb-1">
+                                <h4 class="font-bold brand-font" style="color: var(--text-main);">
+                                    Restaurant Management System — Java Desktop Application
+                                </h4>
+                                <span class="text-xs text-theme-muted font-mono">Java Swing, MySQL, JDBC</span>
+                            </div>
+                            <ul class="list-disc list-inside text-theme-muted space-y-1">
+                                <li>Architected dual-interface (customer-facing &amp; staff-facing) system managing complete order-to-payment cycle.</li>
+                                <li>Configured database connection pooling for low-latency concurrent queries and structured exception handling.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Project 3 -->
+                        <div class="border-l-2 border-theme pl-4 ml-1">
+                            <div class="flex flex-col md:flex-row justify-between mb-1">
+                                <h4 class="font-bold brand-font" style="color: var(--text-main);">
+                                    Word Building Game — Multi-Platform Vocabulary Game
+                                </h4>
+                                <span class="text-xs text-theme-muted font-mono">Android Studio, Python, Firebase, HTML5</span>
+                            </div>
+                            <ul class="list-disc list-inside text-theme-muted space-y-1">
+                                <li>Created cross-platform vocabulary puzzle game with real-time dictionary validation and live score synchronization via Firebase.</li>
+                                <li>Unified browser and Android APK distribution with intelligent mobile client redirection on Netlify.</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- CERTIFICATIONS & CREDENTIALS -->
+                <div class="mb-8">
+                    <h3 class="text-sm font-bold brand-font tracking-widest text-red-500 mb-4 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-red-600 rounded-full"></span> KEY CERTIFICATIONS
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs roboto-font text-theme-muted">
+                        <div>• <strong>Python Foundation Certification</strong> — Infosys Springboard</div>
+                        <div>• <strong>Software Engineering &amp; Agile SDLC</strong> — Infosys Springboard</div>
+                        <div>• <strong>Innovating with Google Cloud AI</strong> — Simplilearn / Google Cloud</div>
+                        <div>• <strong>AI for Beginners</strong> — HP LIFE</div>
+                        <div>• <strong>Java Internship Certification (IPI#83440)</strong> — InternPe</div>
+                        <div>• <strong>Turn Ideas Into Prototypes (Vibe Coding)</strong> — IBM SkillsBuild</div>
+                        <div>• <strong>Employability Skills (JobReady)</strong> — Wadhwani Foundation</div>
+                        <div>• <strong>Advanced Python Topics: File Operations</strong> — Infosys Springboard</div>
+                    </div>
+                </div>
+
+                <!-- LANGUAGES & ADDITIONAL -->
+                <div class="border-t border-theme pt-6">
+                    <h3 class="text-sm font-bold brand-font tracking-widest text-red-500 mb-2 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-red-600 rounded-full"></span> LANGUAGES &amp; INTERESTS
+                    </h3>
+                    <p class="text-xs md:text-sm text-theme-muted roboto-font">
+                        <strong>Spoken Languages:</strong> English, Tamil, Malayalam (Native) &nbsp;|&nbsp; 
+                        <strong>Interests:</strong> Clean Architecture, Competitive Coding, UI/UX Interaction Systems, Algorithm Optimization
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-black pt-16 pb-12 overflow-hidden border-t border-theme" style="background-color: var(--bg-secondary);">
+        <div class="container mx-auto px-4 text-center max-w-4xl">
+            <div class="mb-6 text-5xl md:text-6xl font-bold brand-font text-theme-muted hover:text-red-600 transition-colors cursor-default tracking-widest">
+                S<span class="text-red-600">.</span>K
+            </div>
+            <p class="text-theme-muted text-lg md:text-xl font-light mb-8 italic roboto-font">
+                "Living, learning, &amp; leveling up one day at a time."
+            </p>
+
+            <div class="flex flex-wrap justify-center items-center gap-6 md:gap-8 mb-10">
+                <a href="https://github.com/Siva-kumar-r16" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/siva-kumar-r-a90a482b1" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="LinkedIn">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="https://www.instagram.com/sir_sivakumar?igsh=cng0Mnd1b2ZxczFp" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://leetcode.com/u/cskskjaddu/" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="LeetCode">
+                    <i class="fa-solid fa-code"></i>
+                </a>
+                <a href="https://www.hackerrank.com/profile/ksuja20" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="HackerRank">
+                    <i class="fa-brands fa-hackerrank"></i>
+                </a>
+                <a href="mailto:sirsivakumar@outlook.com" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="Email">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+            </div>
+
+            <div class="text-theme-muted text-sm space-y-2">
+                <p class="brand-font tracking-wider">Handcrafted by Siva Kumar <i class="fa-regular fa-copyright ml-1"></i> 2025</p>
+                <p class="mt-2 text-xs roboto-font opacity-60">Made with Nothing OS vibes.</p>
+                <div>
+                    <a href="https://github.com/Siva-kumar-r16/Portfolio" target="_blank" rel="noopener noreferrer" class="inline-block mt-3 text-xs brand-font border border-theme px-4 py-2 rounded-full hover:border-red-600 hover:text-white transition-all">
+                        <i class="fa-brands fa-github mr-1"></i> VIEW PORTFOLIO SOURCE
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+:root {
+    --bg-primary: #050505;
+    --bg-secondary: #0a0a0a;
+    --bg-tertiary: #141414;
+    --text-main: #ffffff;
+    --text-muted: #a3a3a3; 
+    --border-color: #262626;
+    --accent-red: #D71921;
+    --dot-color: #262626;
+    --card-hover: rgba(255, 255, 255, 0.03);
+    --glitch-shadow: cyan;
+}
+
+html.light-mode {
+    --bg-primary: #f5f5f5;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #e5e5e5;
+    --text-main: #171717;
+    --text-muted: #525252;
+    --border-color: #d4d4d4;
+    --accent-red: #D71921;
+    --dot-color: #d1d1d1;
+    --card-hover: rgba(0, 0, 0, 0.03);
+    --glitch-shadow: #ff00ff;
+}
+
+@font-face {
+    font-family: 'Sis';
+    src: url('style/Sis.woff2') format('woff2'),
+         url('style/Sis.woff') format('woff'),
+         url('style/Sis.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: auto; 
+    overflow-x: hidden;
+}
+
+body.mouse-active {
+    cursor: none;
+}
+
+h1, h2, h3, h4, h5, h6, .brand-font, .ndot-font {
+    font-family: 'Sis', 'DotGothic16', sans-serif !important;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.roboto-font {
+    font-family: 'Roboto', sans-serif;
+}
+
+#cursor-dot, #cursor-outline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+    display: none;
+}
+
+body.mouse-active #cursor-dot,
+body.mouse-active #cursor-outline {
+    display: block;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    #cursor-dot, #cursor-outline {
+        display: none !important;
+    }
+    body.mouse-active {
+        cursor: auto !important;
+    }
+}
+
+#cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-red);
+}
+
+#cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 1px dotted var(--text-main);
+    transition: width 0.2s, height 0.2s, border-color 0.3s;
+}
+
+::selection {
+    background: var(--accent-red);
+    color: #fff;
+}
+
+.border-theme { border-color: var(--border-color); }
+.bg-theme-secondary { background-color: var(--bg-secondary); }
+.bg-theme-tertiary { background-color: var(--bg-tertiary); }
+.text-theme-muted { color: var(--text-muted); }
+
+#glyph-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.toggle-switch {
+    width: 50px;
+    height: 26px;
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.toggle-switch::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    background-color: var(--text-main);
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+html.light-mode .toggle-switch::after {
+    transform: translateX(24px);
+    background-color: var(--accent-red);
+}
+
+.glitch-text:hover {
+    animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+    color: var(--accent-red);
+    text-shadow: 2px 0 var(--glitch-shadow), -2px 0 var(--accent-red);
+}
+
+@keyframes glitch {
+    0% { transform: translate(0) }
+    20% { transform: translate(-2px, 2px) }
+    40% { transform: translate(-2px, -2px) }
+    60% { transform: translate(2px, 2px) }
+    80% { transform: translate(2px, -2px) }
+    100% { transform: translate(0) }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+.float-anim {
+    animation: float 6s ease-in-out infinite;
+}
+.float-anim:nth-child(even) {
+    animation-delay: 1s;
+}
+.float-anim:nth-child(3n) {
+    animation-delay: 2s;
+}
+
+.hover-card {
+    transition: all 0.3s ease, opacity 0.3s ease; 
+    border: 1px solid var(--border-color);
+}
+.hover-card:hover {
+    transform: scale(1.03) translateY(-5px);
+    border-color: var(--text-muted);
+    background-color: var(--card-hover);
+}
+
+.card-dimmed {
+    opacity: 0.3;
+    filter: grayscale(100%);
+}
+
+.avatar-container {
+    position: relative;
+    display: inline-block;
+}
+.avatar-frame {
+    border: 1px dashed var(--border-color);
+    transition: all 0.5s ease;
+}
+.avatar-container:hover .avatar-frame {
+    border-color: var(--accent-red);
+    border-style: solid;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tech-marquee {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+.tech-track {
+    display: flex;
+    width: max-content;
+    animation: tech-scroll 40s linear infinite;
+}
+.tech-item {
+    font-size: 1.75rem;
+    margin: 0 2rem;
+    color: var(--text-muted);
+    opacity: 0.6;
+    transition: all 0.3s;
+}
+.tech-item:hover {
+    color: var(--text-main);
+    opacity: 1;
+    transform: scale(1.1);
+}
+@keyframes tech-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Certificate and Media styling */
+.cert-card {
+    transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-secondary);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.cert-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: var(--text-muted);
+    background-color: var(--card-hover);
+}
+
+.cert-preview-frame {
+    width: 100%;
+    height: 220px;
+    background: radial-gradient(circle at center, rgba(215, 25, 33, 0.08) 0%, rgba(20, 20, 20, 0.8) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+    padding: 1rem;
+}
+html.light-mode .cert-preview-frame {
+    background: radial-gradient(circle at center, rgba(215, 25, 33, 0.05) 0%, rgba(240, 240, 240, 0.9) 100%);
+}
+
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+}

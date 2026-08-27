@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Projects & Engineering Works | Siva Kumar R</title>
+    <meta name="description" content="Explore software engineering, web development, data science, and mobile app projects by Siva Kumar R.">
+    <meta property="og:title" content="Projects | Siva Kumar R Portfolio">
+    <meta property="og:description" content="Full-stack web, Python analytics, Java architectures, and cross-platform apps.">
+    <meta property="og:image" content="images/avatar.png">
+    <meta property="og:type" content="website">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Inter:wght@300;400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="antialiased">
+
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
+
+    <canvas id="glyph-canvas"></canvas>
+
+    <!-- NAVIGATION HEADER -->
+    <nav class="w-full py-5 px-4 md:px-8 flex flex-col md:flex-row justify-between items-center border-b border-theme bg-opacity-95 backdrop-blur-sm sticky top-0 z-50 transition-colors duration-300" style="background-color: var(--bg-primary);">
+        <div class="flex items-center justify-between w-full md:w-auto mb-3 md:mb-0">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-xl md:text-2xl font-bold brand-font tracking-wider" style="color: var(--text-main);">
+                    SIVA KUMAR<span class="text-red-600 animate-pulse">.</span>R
+                </a>
+                <div class="flex items-center gap-2 text-[10px] md:text-xs brand-font text-theme-muted border-l border-theme pl-3 tracking-widest">
+                    <span class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
+                    <span id="system-time">07:14:50 PM</span>
+                </div>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden text-theme-muted hover:text-white text-xl p-1 focus:outline-none" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="nav-menu" class="hidden md:flex flex-col md:flex-row items-center gap-5 lg:gap-7 w-full md:w-auto mt-3 md:mt-0 pt-3 md:pt-0 border-t md:border-t-0 border-theme">
+            <ul class="flex flex-wrap md:flex-nowrap items-center justify-center gap-4 md:gap-5 lg:gap-6 text-xs lg:text-sm brand-font tracking-wider" style="color: var(--text-main);">
+                <li><a href="index.html#about" class="nav-link hover:text-red-600 transition-colors">ABOUT</a></li>
+                <li><a href="index.html#skills" class="nav-link hover:text-red-600 transition-colors">SKILLS</a></li>
+                <li><a href="projects.html" class="nav-link text-red-600 font-bold transition-colors">PROJECTS</a></li>
+                <li><a href="certifications.html" class="nav-link hover:text-red-600 transition-colors">CERTIFICATIONS</a></li>
+                <li><a href="resume.html" class="nav-link hover:text-red-600 transition-colors">RESUME</a></li>
+                <li><a href="entertainment.html" class="nav-link hover:text-red-600 transition-colors">ENTERTAINMENT</a></li>
+                <li><a href="#contact" class="nav-link hover:text-red-600 transition-colors">CONTACT</a></li>
+            </ul>
+
+            <div class="flex items-center gap-2 border-t md:border-t-0 md:border-l border-theme pt-3 md:pt-0 md:pl-5 mt-2 md:mt-0">
+                <i class="fa-solid fa-moon text-xs text-theme-muted"></i>
+                <div class="toggle-switch" id="theme-toggle" role="button" aria-label="Toggle theme" tabindex="0"></div>
+                <i class="fa-solid fa-sun text-xs text-theme-muted"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PAGE TITLE SECTION -->
+    <section class="pt-16 pb-12 text-center reveal">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme bg-theme-secondary text-xs brand-font text-theme-muted mb-4">
+                <span class="w-2 h-2 bg-red-600 rounded-full animate-ping"></span>
+                ENGINEERING ARCHIVE
+            </div>
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold brand-font mb-4" style="color: var(--text-main);">
+                PROJECTS &amp; <span class="glitch-text cursor-default">DEPLOYMENTS</span>
+            </h1>
+            <p class="text-theme-muted text-base md:text-lg max-w-2xl mx-auto roboto-font">
+                From full-stack production client deployments to predictive data models and cross-platform interactive games.
+            </p>
+        </div>
+    </section>
+
+    <!-- PROJECTS CONTAINER -->
+    <section class="py-8 pb-32">
+        <div class="container mx-auto px-4 max-w-7xl">
+
+            <!-- PRIMARY 3 PROJECTS (ALWAYS VISIBLE INITIALLY) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12" id="featured-projects">
+                
+                <!-- 1. Word Building Game -->
+                <div class="bg-theme-secondary border border-theme rounded-xl overflow-hidden hover-card group flex flex-col float-anim project-card reveal" 
+                     style="background-color: var(--bg-secondary);" 
+                     data-tech="python android">
+                    <div class="h-48 bg-neutral-900 border-b border-theme relative overflow-hidden group-hover:border-red-600 transition-colors">
+                        <div class="absolute inset-0 flex items-center justify-center text-theme-muted">
+                             <i class="fa-solid fa-gamepad text-4xl"></i>
+                        </div>
+                        <img src="images/project-word-game.png" width="400" height="300" onerror="this.style.opacity='0'" alt="Word Building Game" class="w-full h-full object-cover relative z-10 group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[10px] tracking-widest brand-font bg-red-600/20 text-red-500 px-2 py-0.5 rounded border border-red-800">CROSS-PLATFORM</span>
+                            <span class="text-xs text-theme-muted roboto-font">2025 – 2026</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 brand-font" style="color: var(--text-main);">Word Building Ecosystem</h3>
+                        <p class="text-theme-muted text-sm mb-4 roboto-font flex-1">
+                            Multiplayer vocabulary puzzle game developed with Python (Tkinter base), extended to native Android and Web apps with Firebase Realtime Database score synchronization.
+                        </p>
+                        <div class="flex justify-between items-center mt-auto pt-3 border-t border-theme">
+                            <div class="flex gap-3 text-lg">
+                                <i class="fa-brands fa-python text-theme-muted hover:text-white transition-colors" title="Python"></i>
+                                <i class="fa-brands fa-android text-theme-muted hover:text-white transition-colors" title="Android Studio"></i>
+                                <i class="fa-brands fa-html5 text-theme-muted hover:text-white transition-colors" title="HTML5 / JS"></i>
+                                <i class="fa-solid fa-fire text-theme-muted hover:text-white transition-colors" title="Firebase"></i>
+                            </div>
+                            <div class="flex gap-3">
+                                <a href="https://github.com/Siva-kumar-r16/word-building" target="_blank" rel="noopener noreferrer" class="text-xs brand-font text-theme-muted hover:text-white transition-colors">CODE <i class="fa-brands fa-github"></i></a>
+                                <a href="https://word-building.netlify.app/" target="_blank" rel="noopener noreferrer" class="text-red-600 font-bold text-xs hover:text-white transition-colors brand-font">PLAY <i class="fa-solid fa-play ml-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Video Game Sales Analytics -->
+                <div class="bg-theme-secondary border border-theme rounded-xl overflow-hidden hover-card group flex flex-col float-anim project-card reveal" 
+                     style="background-color: var(--bg-secondary);" 
+                     data-tech="python">
+                    <div class="h-48 bg-neutral-900 border-b border-theme relative overflow-hidden group-hover:border-red-600 transition-colors">
+                        <div class="absolute inset-0 flex items-center justify-center text-theme-muted">
+                             <i class="fa-solid fa-chart-line text-4xl"></i>
+                        </div>
+                        <img src="images/video-game-sales-analytics.png" width="400" height="300" onerror="this.style.opacity='0'" alt="Video Game Sales Analytics" class="w-full h-full object-cover relative z-10 group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[10px] tracking-widest brand-font bg-blue-600/20 text-blue-400 px-2 py-0.5 rounded border border-blue-800">DATA SCIENCE &amp; BI</span>
+                            <span class="text-xs text-theme-muted roboto-font">2026</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 brand-font" style="color: var(--text-main);">Video Game Sales Analytics</h3>
+                        <p class="text-theme-muted text-sm mb-4 roboto-font flex-1">
+                            Desktop Business Intelligence tool processing 16,000+ historical records. Features Linear Regression trend forecasting, GeoPandas spatial heatmaps, and Seaborn data visualizations.
+                        </p>
+                        <div class="flex justify-between items-center mt-auto pt-3 border-t border-theme">
+                            <div class="flex gap-3 text-lg">
+                                <i class="fa-brands fa-python text-theme-muted hover:text-white transition-colors" title="Python"></i>
+                                <i class="fa-solid fa-database text-theme-muted hover:text-white transition-colors" title="Pandas"></i>
+                                <i class="fa-solid fa-chart-line text-theme-muted hover:text-white transition-colors" title="Matplotlib"></i>
+                                <i class="fa-solid fa-brain text-theme-muted hover:text-white transition-colors" title="Scikit-Learn"></i>
+                            </div>
+                            <a href="https://github.com/Siva-kumar-r16/video-game-sales-analytics" target="_blank" rel="noopener noreferrer" class="text-red-600 font-bold text-xs hover:text-white transition-colors brand-font">VIEW CODE <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Restaurant Management System -->
+                <div class="bg-theme-secondary border border-theme rounded-xl overflow-hidden hover-card group flex flex-col float-anim project-card reveal" 
+                     style="background-color: var(--bg-secondary);" 
+                     data-tech="java">
+                    <div class="h-48 bg-neutral-900 border-b border-theme relative overflow-hidden group-hover:border-red-600 transition-colors">
+                        <div class="absolute inset-0 flex items-center justify-center text-theme-muted">
+                             <i class="fa-solid fa-utensils text-4xl"></i>
+                        </div>
+                        <img src="images/project-restaurant.jpg" width="400" height="300" onerror="this.style.opacity='0'" alt="Restaurant System" class="w-full h-full object-cover relative z-10 group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[10px] tracking-widest brand-font bg-yellow-600/20 text-yellow-500 px-2 py-0.5 rounded border border-yellow-800">JAVA DESKTOP</span>
+                            <span class="text-xs text-theme-muted roboto-font">2026</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 brand-font" style="color: var(--text-main);">Restaurant Manager</h3>
+                        <p class="text-theme-muted text-sm mb-4 roboto-font flex-1">
+                            Enterprise-ready dual interface (customer and staff) application with database connection pooling, robust input validation, and secure transactional order workflows.
+                        </p>
+                        <div class="flex justify-between items-center mt-auto pt-3 border-t border-theme">
+                            <div class="flex gap-3 text-lg">
+                                <i class="fa-brands fa-java text-theme-muted hover:text-white transition-colors" title="Java OOP"></i>
+                                <i class="fa-solid fa-database text-theme-muted hover:text-white transition-colors" title="MySQL / JDBC"></i>
+                                <i class="fa-solid fa-desktop text-theme-muted hover:text-white transition-colors" title="Java Swing"></i>
+                                <i class="fa-solid fa-shield-halved text-theme-muted hover:text-white transition-colors" title="Exception Handling"></i>
+                            </div>
+                            <a href="https://www.linkedin.com/posts/siva-kumar-r-a90a482b1_problemsolving-javadeveloper-softwareengineer-activity-7383065631878934528-fHjO" target="_blank" rel="noopener noreferrer" class="text-red-600 font-bold text-xs hover:text-white transition-colors brand-font">VIEW DEMO <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TOGGLE BUTTON (EXPLORE ALL PROJECTS) -->
+            <div class="text-center my-8">
+                <button id="toggle-all-projects-btn" class="inline-flex items-center gap-3 bg-red-600 text-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition-all brand-font group shadow-[4px_4px_0px_0px_rgba(255,255,255,0.1)] hover:shadow-none font-bold text-sm tracking-wider cursor-pointer">
+                    <span id="btn-text">EXPLORE ALL PROJECTS ↓</span>
+                </button>
+            </div>
+
+            <!-- REMAINING PROJECTS (REVEALED ON SAME PAGE ON CLICK) -->
+            <div id="remaining-projects" class="hidden transition-all duration-500 ease-in-out">
+                <div class="border-t border-theme pt-12 mb-8 text-center">
+                    <h3 class="text-xl md:text-2xl font-bold brand-font mb-2" style="color: var(--text-main);">ADDITIONAL REPOSITORY WORKS</h3>
+                    <p class="text-xs md:text-sm text-theme-muted brand-font tracking-widest">/// CLIENT COMMISSIONS, RESEARCH &amp; INTERFACE SYSTEMS</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- 4. DHVIKA BY LR Production E-Commerce -->
+                    <div class="bg-theme-secondary border border-theme rounded-xl overflow-hidden hover-card group flex flex-col float-anim project-card" 
+                         style="background-color: var(--bg-secondary);" 
+                         data-tech="web">
+                        <div class="h-48 bg-neutral-900 border-b border-theme relative overflow-hidden group-hover:border-red-600 transition-colors flex items-center justify-center">
+                            <i class="fa-solid fa-bag-shopping text-5xl text-theme-muted"></i>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-[10px] tracking-widest brand-font bg-green-600/20 text-green-400 px-2 py-0.5 rounded border border-green-800">PRODUCTION DEPLOYED</span>
+                                <span class="text-xs text-theme-muted roboto-font">Jan 2026</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 brand-font" style="color: var(--text-main);">DHVIKA BY LR — E-Commerce</h3>
+                            <p class="text-theme-muted text-sm mb-4 roboto-font flex-1">
+                                End-to-end production fashion store with custom PHP backend, Razorpay payment gateway, inventory management, and MilesWeb cloud hosting.
+                            </p>
+                            <div class="flex justify-between items-center mt-auto pt-3 border-t border-theme">
+                                <div class="flex gap-3 text-lg">
+                                    <i class="fa-brands fa-php text-theme-muted hover:text-white transition-colors" title="PHP"></i>
+                                    <i class="fa-brands fa-js text-theme-muted hover:text-white transition-colors" title="JavaScript"></i>
+                                    <i class="fa-solid fa-credit-card text-theme-muted hover:text-white transition-colors" title="Razorpay"></i>
+                                    <i class="fa-solid fa-server text-theme-muted hover:text-white transition-colors" title="MilesWeb"></i>
+                                </div>
+                                <a href="https://dhvikabylr.com/" target="_blank" rel="noopener noreferrer" class="text-red-600 font-bold text-xs hover:text-white transition-colors brand-font">VISIT SITE <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Adaptive Bidirectional Crowd Risk Fusion (ABCRF) -->
+                    <div class="bg-theme-secondary border border-theme rounded-xl overflow-hidden hover-card group flex flex-col float-anim project-card" 
+                         style="background-color: var(--bg-secondary);" 
+                         data-tech="python">
+                        <div class="h-48 bg-neutral-900 border-b border-theme relative overflow-hidden group-hover:border-red-600 transition-colors flex items-center justify-center">
+                            <i class="fa-solid fa-users-viewfinder text-5xl text-theme-muted"></i>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-[10px] tracking-widest brand-font bg-purple-600/20 text-purple-400 px-2 py-0.5 rounded border border-purple-800">RESEARCH &amp; AI</span>
+                                <span class="text-xs text-theme-muted roboto-font">Aug 2026</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 brand-font" style="color: var(--text-main);">Crowd Risk Fusion (ABCRF)</h3>
+                            <p class="text-theme-muted text-sm mb-4 roboto-font flex-1">
+                                Spatiotemporal ConvLSTM deep learning framework integrating Boltzmann Crowd Entropy, YOLO, and ByteTrack for predictive stampede danger detection.
+                            </p>
+                            <div class="flex justify-between items-center mt-auto pt-3 border-t border-theme">
+                                <div class="flex gap-3 text-lg">
+                                    <i class="fa-brands fa-python text-theme-muted hover:text-white transition-colors" title="Python"></i>
+                                    <i class="fa-solid fa-brain text-theme-muted hover:text-white transition-colors" title="Deep Learning"></i>
+                                    <i class="fa-solid fa-camera text-theme-muted hover:text-white transition-colors" title="Computer Vision"></i>
+                                </div>
+                                <span class="text-xs brand-font text-theme-muted">PANIMALAR CSE J1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Netflix UI Clone -->
+                    <div class="bg-theme-secondary border border-theme rounded-xl overflow-hidden hover-card group flex flex-col float-anim project-card" 
+                         style="background-color: var(--bg-secondary);" 
+                         data-tech="web">
+                        <div class="h-48 bg-neutral-900 border-b border-theme relative overflow-hidden group-hover:border-red-600 transition-colors flex items-center justify-center">
+                            <i class="fa-solid fa-tv text-5xl text-theme-muted"></i>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-[10px] tracking-widest brand-font bg-red-600/20 text-red-400 px-2 py-0.5 rounded border border-red-800">FRONTEND UI</span>
+                                <span class="text-xs text-theme-muted roboto-font">2025</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 brand-font" style="color: var(--text-main);">Netflix UI Clone</h3>
+                            <p class="text-theme-muted text-sm mb-4 roboto-font flex-1">
+                                Pixel-perfect frontend recreation using pure HTML5 &amp; CSS3, featuring responsive layouts, custom interactive banners, and smooth animations.
+                            </p>
+                            <div class="flex justify-between items-center mt-auto pt-3 border-t border-theme">
+                                <div class="flex gap-3 text-lg">
+                                    <i class="fa-brands fa-html5 text-theme-muted hover:text-white transition-colors" title="HTML5"></i>
+                                    <i class="fa-brands fa-css3-alt text-theme-muted hover:text-white transition-colors" title="CSS3"></i>
+                                    <i class="fa-brands fa-js text-theme-muted hover:text-white transition-colors" title="JavaScript"></i>
+                                </div>
+                                <a href="https://github.com/Siva-kumar-r16/netflix-clone" target="_blank" rel="noopener noreferrer" class="text-red-600 font-bold text-xs hover:text-white transition-colors brand-font">CODE <i class="fa-brands fa-github ml-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 7. Sparklance Solutions Agency Website -->
+                    <div class="bg-theme-secondary border border-theme rounded-xl overflow-hidden hover-card group flex flex-col float-anim project-card" 
+                         style="background-color: var(--bg-secondary);" 
+                         data-tech="web">
+                        <div class="h-48 bg-neutral-900 border-b border-theme relative overflow-hidden group-hover:border-red-600 transition-colors flex items-center justify-center">
+                            <i class="fa-solid fa-globe text-5xl text-theme-muted"></i>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-[10px] tracking-widest brand-font bg-orange-600/20 text-orange-400 px-2 py-0.5 rounded border border-orange-800">AGENCY WEB</span>
+                                <span class="text-xs text-theme-muted roboto-font">2026</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 brand-font" style="color: var(--text-main);">Sparklance Solutions Web Portal</h3>
+                            <p class="text-theme-muted text-sm mb-4 roboto-font flex-1">
+                                Official company landing hub highlighting freelance software engineering, client case studies, and modern web architectures.
+                            </p>
+                            <div class="flex justify-between items-center mt-auto pt-3 border-t border-theme">
+                                <div class="flex gap-3 text-lg">
+                                    <i class="fa-brands fa-html5 text-theme-muted hover:text-white transition-colors" title="HTML5"></i>
+                                    <i class="fa-brands fa-css3-alt text-theme-muted hover:text-white transition-colors" title="CSS3"></i>
+                                    <i class="fa-solid fa-cloud text-theme-muted hover:text-white transition-colors" title="Netlify"></i>
+                                </div>
+                                <a href="https://sparklance-solutions.netlify.app/" target="_blank" rel="noopener noreferrer" class="text-red-600 font-bold text-xs hover:text-white transition-colors brand-font">VISIT <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 8. Developer Portfolio (Nothing OS Theme) -->
+                    <div class="bg-theme-secondary border border-theme rounded-xl overflow-hidden hover-card group flex flex-col float-anim project-card" 
+                         style="background-color: var(--bg-secondary);" 
+                         data-tech="web">
+                        <div class="h-48 bg-neutral-900 border-b border-theme relative overflow-hidden group-hover:border-red-600 transition-colors flex items-center justify-center">
+                            <i class="fa-solid fa-terminal text-5xl text-theme-muted"></i>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-[10px] tracking-widest brand-font bg-red-600/20 text-red-400 px-2 py-0.5 rounded border border-red-800">OPEN SOURCE</span>
+                                <span class="text-xs text-theme-muted roboto-font">2025</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 brand-font" style="color: var(--text-main);">Nothing OS Portfolio Theme</h3>
+                            <p class="text-theme-muted text-sm mb-4 roboto-font flex-1">
+                                Minimalist, high-performance portfolio template with interactive 2D canvas particle grid, custom dot font styling, and theme state persistence.
+                            </p>
+                            <div class="flex justify-between items-center mt-auto pt-3 border-t border-theme">
+                                <div class="flex gap-3 text-lg">
+                                    <i class="fa-brands fa-html5 text-theme-muted hover:text-white transition-colors" title="HTML5"></i>
+                                    <i class="fa-brands fa-js text-theme-muted hover:text-white transition-colors" title="JavaScript"></i>
+                                    <i class="fa-solid fa-palette text-theme-muted hover:text-white transition-colors" title="Tailwind"></i>
+                                </div>
+                                <a href="https://github.com/Siva-kumar-r16/Portfolio" target="_blank" rel="noopener noreferrer" class="text-red-600 font-bold text-xs hover:text-white transition-colors brand-font">SOURCE <i class="fa-brands fa-github ml-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-black pt-16 pb-12 overflow-hidden border-t border-theme" style="background-color: var(--bg-secondary);">
+        <div class="container mx-auto px-4 text-center max-w-4xl">
+            <div class="mb-6 text-5xl md:text-6xl font-bold brand-font text-theme-muted hover:text-red-600 transition-colors cursor-default tracking-widest">
+                S<span class="text-red-600">.</span>K
+            </div>
+            <p class="text-theme-muted text-lg md:text-xl font-light mb-8 italic roboto-font">
+                "Living, learning, &amp; leveling up one day at a time."
+            </p>
+
+            <div class="flex flex-wrap justify-center items-center gap-6 md:gap-8 mb-10">
+                <a href="https://github.com/Siva-kumar-r16" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/siva-kumar-r-a90a482b1" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="LinkedIn">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="https://www.instagram.com/sir_sivakumar?igsh=cng0Mnd1b2ZxczFp" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://leetcode.com/u/cskskjaddu/" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="LeetCode">
+                    <i class="fa-solid fa-code"></i>
+                </a>
+                <a href="https://www.hackerrank.com/profile/ksuja20" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="HackerRank">
+                    <i class="fa-brands fa-hackerrank"></i>
+                </a>
+                <a href="mailto:sirsivakumar@outlook.com" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="Email">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+            </div>
+
+            <div class="text-theme-muted text-sm space-y-2">
+                <p class="brand-font tracking-wider">Handcrafted by Siva Kumar <i class="fa-regular fa-copyright ml-1"></i> 2025</p>
+                <p class="mt-2 text-xs roboto-font opacity-60">Made with Nothing OS vibes.</p>
+                <div>
+                    <a href="https://github.com/Siva-kumar-r16/Portfolio" target="_blank" rel="noopener noreferrer" class="inline-block mt-3 text-xs brand-font border border-theme px-4 py-2 rounded-full hover:border-red-600 hover:text-white transition-all">
+                        <i class="fa-brands fa-github mr-1"></i> VIEW PORTFOLIO SOURCE
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Interactive Toggle for Explore All Projects on the same page
+        const toggleBtn = document.getElementById('toggle-all-projects-btn');
+        const remainingSection = document.getElementById('remaining-projects');
+        const btnText = document.getElementById('btn-text');
+
+        if (toggleBtn && remainingSection) {
+            toggleBtn.addEventListener('click', () => {
+                const isHidden = remainingSection.classList.contains('hidden');
+                if (isHidden) {
+                    remainingSection.classList.remove('hidden');
+                    btnText.textContent = 'COLLAPSE PROJECTS ↑';
+                    remainingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                    remainingSection.classList.add('hidden');
+                    btnText.textContent = 'EXPLORE ALL PROJECTS ↓';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

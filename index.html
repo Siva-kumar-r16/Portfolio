@@ -13,288 +13,8 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Inter:wght@300;400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --bg-primary: #050505;
-            --bg-secondary: #0a0a0a;
-            --bg-tertiary: #141414;
-            --text-main: #ffffff;
-            --text-muted: #a3a3a3; 
-            --border-color: #262626;
-            --accent-red: #D71921;
-            --dot-color: #262626;
-            --card-hover: rgba(255, 255, 255, 0.03);
-            --glitch-shadow: cyan;
-        }
-
-        html.light-mode {
-            --bg-primary: #f5f5f5;
-            --bg-secondary: #ffffff;
-            --bg-tertiary: #e5e5e5;
-            --text-main: #171717;
-            --text-muted: #525252;
-            --border-color: #d4d4d4;
-            --accent-red: #D71921;
-            --dot-color: #d1d1d1;
-            --card-hover: rgba(0, 0, 0, 0.03);
-            --glitch-shadow: #ff00ff;
-        }
-
-        @font-face {
-            font-family: 'Sis';
-            src: url('style/Sis.woff2') format('woff2'),
-                 url('style/Sis.woff') format('woff'),
-                 url('style/Sis.otf') format('opentype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        body {
-            background-color: var(--bg-primary);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            cursor: auto; 
-            overflow-x: hidden;
-        }
-
-        body.mouse-active {
-            cursor: none;
-        }
-
-        h1, h2, h3, h4, h5, h6, .brand-font, .ndot-font {
-            font-family: 'Sis', 'DotGothic16', sans-serif !important;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        .roboto-font {
-            font-family: 'Roboto', sans-serif;
-        }
-
-        #cursor-dot, #cursor-outline {
-            position: fixed;
-            top: 0;
-            left: 0;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            z-index: 9999;
-            pointer-events: none;
-            display: none;
-        }
-
-        body.mouse-active #cursor-dot,
-        body.mouse-active #cursor-outline {
-            display: block;
-        }
-
-        @media (hover: none) and (pointer: coarse) {
-            #cursor-dot, #cursor-outline {
-                display: none !important;
-            }
-            body.mouse-active {
-                cursor: auto !important;
-            }
-        }
-
-        #cursor-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent-red);
-        }
-        #cursor-outline {
-            width: 40px;
-            height: 40px;
-            border: 1px dotted var(--text-main);
-            transition: width 0.2s, height 0.2s, border-color 0.3s;
-        }
-
-        ::selection {
-            background: var(--accent-red);
-            color: #fff;
-        }
-
-        .border-theme { border-color: var(--border-color); }
-        .bg-theme-secondary { background-color: var(--bg-secondary); }
-        .text-theme-muted { color: var(--text-muted); }
-
-        #glyph-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.3;
-            pointer-events: none;
-        }
-
-        .toggle-switch {
-            width: 50px;
-            height: 26px;
-            background-color: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .toggle-switch::after {
-            content: '';
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 18px;
-            height: 18px;
-            background-color: var(--text-main);
-            border-radius: 50%;
-            transition: transform 0.3s;
-        }
-        html.light-mode .toggle-switch::after {
-            transform: translateX(24px);
-            background-color: var(--accent-red);
-        }
-
-        .glitch-text:hover {
-            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
-            color: var(--accent-red);
-            text-shadow: 2px 0 var(--glitch-shadow), -2px 0 var(--accent-red);
-        }
-        @keyframes glitch {
-            0% { transform: translate(0) }
-            20% { transform: translate(-2px, 2px) }
-            40% { transform: translate(-2px, -2px) }
-            60% { transform: translate(2px, 2px) }
-            80% { transform: translate(2px, -2px) }
-            100% { transform: translate(0) }
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        .float-anim {
-            animation: float 6s ease-in-out infinite;
-        }
-        .float-anim:nth-child(even) {
-            animation-delay: 1s;
-        }
-        .float-anim:nth-child(3n) {
-            animation-delay: 2s;
-        }
-
-        .hover-card {
-            transition: all 0.3s ease, opacity 0.3s ease; 
-            border: 1px solid var(--border-color);
-        }
-        .hover-card:hover {
-            transform: scale(1.05) translateY(-5px);
-            border-color: var(--text-muted);
-            background-color: var(--card-hover);
-        }
-
-        .card-dimmed {
-            opacity: 0.3;
-            filter: grayscale(100%);
-        }
-
-        .avatar-container {
-            position: relative;
-            display: inline-block;
-        }
-        .avatar-frame {
-            border: 1px dashed var(--border-color);
-            transition: all 0.5s ease;
-        }
-        .avatar-container:hover .avatar-frame {
-            border-color: var(--accent-red);
-            border-style: solid;
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .tech-marquee {
-            overflow: hidden;
-            position: relative;
-            width: 100%;
-        }
-        .tech-track {
-            display: flex;
-            width: max-content;
-            animation: tech-scroll 40s linear infinite;
-        }
-        .tech-item {
-            font-size: 1.75rem;
-            margin: 0 2rem;
-            color: var(--text-muted);
-            opacity: 0.6;
-            transition: all 0.3s;
-        }
-        .tech-item:hover {
-            color: var(--text-main);
-            opacity: 1;
-            transform: scale(1.1);
-        }
-        @keyframes tech-scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* FAVORITES SECTION SPECIFIC STYLES */
-        .favorite-card {
-            transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
-            border: 1px solid var(--border-color);
-            background-color: var(--bg-secondary);
-            border-radius: 0.75rem;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-        }
-        .favorite-card:hover {
-            transform: translateY(-6px) scale(1.03);
-            border-color: var(--text-muted);
-            background-color: var(--card-hover);
-        }
-        .image-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-            background-color: rgba(0, 0, 0, 0.2);
-            border-bottom: 1px solid var(--border-color);
-            position: relative;
-            transition: border-color 0.3s ease;
-            height: 282px; /* Ensure uniform height across grid */
-        }
-        html.light-mode .image-container {
-            background-color: rgba(0, 0, 0, 0.05);
-        }
-        .favorite-card:hover .image-container {
-            border-color: var(--accent-red);
-        }
-        .image-container img {
-            max-height: 250px;
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            border-radius: 0.5rem;
-            position: relative;
-            z-index: 10;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Inter:wght@300;400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="antialiased">
 
@@ -303,45 +23,52 @@
 
     <canvas id="glyph-canvas"></canvas>
 
-    <nav class="w-full py-6 px-4 md:px-8 flex flex-col md:flex-row justify-between items-center border-b border-theme bg-opacity-95 backdrop-blur-sm sticky top-0 z-50 transition-colors duration-300" style="background-color: var(--bg-primary);">
-        <div class="flex items-center justify-between w-full md:w-auto mb-4 md:mb-0">
+    <!-- NAVIGATION HEADER -->
+    <nav class="w-full py-5 px-4 md:px-8 flex flex-col md:flex-row justify-between items-center border-b border-theme bg-opacity-95 backdrop-blur-sm sticky top-0 z-50 transition-colors duration-300" style="background-color: var(--bg-primary);">
+        <div class="flex items-center justify-between w-full md:w-auto mb-3 md:mb-0">
             <div class="flex items-center gap-4">
-                <div class="text-2xl font-bold brand-font" style="color: var(--text-main);">
+                <a href="index.html" class="text-xl md:text-2xl font-bold brand-font tracking-wider" style="color: var(--text-main);">
                     SIVA KUMAR<span class="text-red-600 animate-pulse">.</span>R
-                </div>
-                <div class="flex items-center gap-2 text-[10px] md:text-xs brand-font text-theme-muted border-l border-theme pl-4 tracking-wider">
+                </a>
+                <div class="flex items-center gap-2 text-[10px] md:text-xs brand-font text-theme-muted border-l border-theme pl-3 tracking-widest">
                     <span class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
-                    <span id="system-time">LOADING...</span>
+                    <span id="system-time">07:14:50 PM</span>
                 </div>
             </div>
+            <button id="mobile-menu-btn" class="md:hidden text-theme-muted hover:text-white text-xl p-1 focus:outline-none" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
         </div>
 
-        <div class="flex items-center gap-6 md:gap-8">
-            <ul class="flex items-center gap-6 text-sm brand-font" style="color: var(--text-main);">
-                <li><a href="#about" class="nav-link hover:text-red-600 transition-colors" data-target="about">ABOUT</a></li>
-                <li><a href="#skills" class="nav-link hover:text-red-600 transition-colors" data-target="skills">SKILLS</a></li>
-                <li><a href="#projects" class="nav-link hover:text-red-600 transition-colors" data-target="projects">PROJECTS</a></li>
-                <li><a href="#favorites" class="nav-link hover:text-red-600 transition-colors" data-target="favorites">FAVS</a></li>
-                <li><a href="#contact" class="nav-link hover:text-red-600 transition-colors" data-target="contact">CONTACT</a></li>
+        <div id="nav-menu" class="hidden md:flex flex-col md:flex-row items-center gap-5 lg:gap-7 w-full md:w-auto mt-3 md:mt-0 pt-3 md:pt-0 border-t md:border-t-0 border-theme">
+            <ul class="flex flex-wrap md:flex-nowrap items-center justify-center gap-4 md:gap-5 lg:gap-6 text-xs lg:text-sm brand-font tracking-wider" style="color: var(--text-main);">
+                <li><a href="#about" class="nav-link hover:text-red-600 transition-colors">ABOUT</a></li>
+                <li><a href="#skills" class="nav-link hover:text-red-600 transition-colors">SKILLS</a></li>
+                <li><a href="projects.html" class="nav-link hover:text-red-600 transition-colors">PROJECTS</a></li>
+                <li><a href="certifications.html" class="nav-link hover:text-red-600 transition-colors">CERTIFICATIONS</a></li>
+                <li><a href="resume.html" class="nav-link hover:text-red-600 transition-colors">RESUME</a></li>
+                <li><a href="entertainment.html" class="nav-link hover:text-red-600 transition-colors">ENTERTAINMENT</a></li>
+                <li><a href="#contact" class="nav-link hover:text-red-600 transition-colors">CONTACT</a></li>
             </ul>
 
-            <div class="flex items-center gap-2 border-l border-theme pl-6">
+            <div class="flex items-center gap-2 border-t md:border-t-0 md:border-l border-theme pt-3 md:pt-0 md:pl-5 mt-2 md:mt-0">
                 <i class="fa-solid fa-moon text-xs text-theme-muted"></i>
-                <div class="toggle-switch" id="theme-toggle"></div>
+                <div class="toggle-switch" id="theme-toggle" role="button" aria-label="Toggle theme" tabindex="0"></div>
                 <i class="fa-solid fa-sun text-xs text-theme-muted"></i>
             </div>
         </div>
     </nav>
 
-    <section class="relative pt-20 pb-40 md:pt-32 md:pb-52 overflow-hidden text-center reveal">
+    <!-- HERO SECTION -->
+    <section class="relative pt-20 pb-36 md:pt-28 md:pb-48 overflow-hidden text-center reveal">
         <div class="container mx-auto px-4 z-10 relative">
-            <h2 class="text-xl md:text-2xl text-theme-muted mb-4 font-bold brand-font">Software Engineer Portfolio</h2>
+            <h2 class="text-xl md:text-2xl text-theme-muted mb-4 font-bold brand-font">SOFTWARE ENGINEER PORTFOLIO</h2>
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight" style="color: var(--text-main);">
                 FRONTEND ENGINEER & <br> <span class="glitch-text cursor-default">APP DEVELOPER</span>
             </h1>
             
             <p class="text-lg md:text-xl text-theme-muted max-w-2xl mx-auto mb-12 roboto-font">
-                Bridging the gap between functional logic and engaging design. I build scalable applications with a focus on seamless user experiences, clean architecture, and data-driven solutions.
+                I build practical software and web applications across Python, Java, Android, databases, analytics and modern web technologies.
             </p>
 
             <div id="model-3d-viewer" class="avatar-container mb-10 group">
@@ -359,16 +86,18 @@
         </div>
     </section>
 
-    <section id="about" class="bg-theme-secondary pt-16 pb-32 text-center border-y border-theme reveal" style="background-color: var(--bg-secondary);">
+    <!-- ABOUT SECTION -->
+    <section id="about" class="bg-theme-secondary pt-16 pb-28 text-center border-y border-theme reveal" style="background-color: var(--bg-secondary);">
         <div class="container mx-auto px-4 max-w-3xl">
             <h3 class="text-2xl md:text-3xl font-bold mb-6 brand-font" style="color: var(--text-main);">Hi, I'm Siva.</h3>
             <p class="text-theme-muted leading-relaxed text-lg roboto-font">
-                I am a detail-oriented developer passionate about building cross-platform applications and logic-driven interfaces. My background covers the full development lifecycle—from backend logic in <strong>Java & Python</strong> to interactive frontends using <strong>HTML5 & Tailwind</strong>. Currently deepening my expertise in Data Structures, Algorithms, and Clean Code architecture.
+                Third-year Computer Science Engineering student and Founder &amp; CTO of Sparklance Solutions, building and deploying practical applications across Python, Java, Android, web technologies, databases and analytics.
             </p>
         </div>
     </section>
 
-    <section class="pt-20 pb-48 md:pb-64 border-b border-theme relative overflow-hidden reveal" style="background-color: var(--bg-primary);">
+    <!-- SPARKLANCE SECTION -->
+    <section class="pt-20 pb-44 md:pb-56 border-b border-theme relative overflow-hidden reveal" style="background-color: var(--bg-primary);">
         <div class="absolute top-10 right-0 text-9xl font-bold opacity-5 brand-font select-none pointer-events-none" style="color: var(--text-muted);">
             BUILD
         </div>
@@ -381,15 +110,15 @@
                         <p class="text-red-600 font-bold tracking-widest text-sm brand-font">CURRENT VENTURE</p>
                     </div>
                     <h2 class="text-4xl md:text-5xl font-bold mb-4 brand-font" style="color: var(--text-main);">
-                        FOUNDER OF<br>
+                        FOUNDER &amp; CTO<br>
                         <span class="text-theme-muted hover:text-white transition-colors duration-300">SPARKLANCE SOLUTIONS</span>
                     </h2>
                     <p class="text-theme-muted text-lg mb-8 roboto-font">
                         Leading innovative digital solutions. Building the future, one pixel at a time.
                     </p>
-                    <a href="https://sparklance-solutions.netlify.app/" target="_blank" class="inline-flex items-center gap-3 bg-red-600 text-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition-all brand-font group shadow-[4px_4px_0px_0px_rgba(255,255,255,0.1)] hover:shadow-none">
+                    <a href="https://sparklance-solutions.netlify.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-red-600 text-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition-all brand-font group shadow-[4px_4px_0px_0px_rgba(255,255,255,0.1)] hover:shadow-none">
                         VISIT WEBSITE
-                         <i class="fa-solid fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300"></i>
+                        <i class="fa-solid fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300"></i>
                     </a>
                 </div>
 
@@ -405,6 +134,7 @@
         </div>
     </section>
 
+    <!-- SKILLS SECTION -->
     <section id="skills" class="container mx-auto px-4 pb-20 -mt-20 relative z-20 reveal">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             
@@ -415,7 +145,7 @@
                     <i class="fa-brands fa-python"></i>
                 </div>
                 <h3 class="text-lg font-bold brand-font mb-2" style="color: var(--text-main);">Python Logic</h3>
-                <p class="text-xs text-theme-muted mb-4 roboto-font">Data Analytics & Automation</p>
+                <p class="text-xs text-theme-muted mb-4 roboto-font">Data Analytics &amp; Automation</p>
                 <div class="w-full bg-neutral-800 h-1 rounded-full overflow-hidden">
                     <div class="bg-neutral-500 h-full w-[85%]"></div>
                 </div>
@@ -454,7 +184,7 @@
                     <i class="fa-brands fa-java"></i>
                 </div>
                 <h3 class="text-lg font-bold brand-font mb-2" style="color: var(--text-main);">System Design</h3>
-                <p class="text-xs text-theme-muted mb-4 roboto-font">Java OOP & SQL Systems</p>
+                <p class="text-xs text-theme-muted mb-4 roboto-font">Java OOP &amp; SQL Systems</p>
                 <div class="w-full bg-neutral-800 h-1 rounded-full overflow-hidden">
                     <div class="bg-neutral-500 h-full w-[80%]"></div>
                 </div>
@@ -463,6 +193,7 @@
         </div>
     </section>
 
+    <!-- MARQUEE SECTION -->
     <section class="py-12 border-y border-theme bg-theme-secondary overflow-hidden" style="background-color: var(--bg-secondary);">
         <div class="tech-marquee">
             <div class="tech-track brand-font" id="tech-track">
@@ -480,6 +211,7 @@
         </div>
     </section>
 
+    <!-- SELECTED PROJECTS SECTION (EXACTLY 3 ON INDEX) -->
     <section id="projects" class="py-20 md:py-32 reveal">
         <div class="container mx-auto px-4">
             <div class="flex items-end justify-between mb-16 border-b border-theme pb-4">
@@ -492,8 +224,10 @@
                 </div>
             </div>
 
+            <!-- Exactly 3 Main Projects -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="project-grid">
                 
+                <!-- 1. Word Building Game -->
                 <div class="bg-theme-secondary border border-theme rounded-xl overflow-hidden hover-card group flex flex-col float-anim project-card" 
                      style="background-color: var(--bg-secondary);" 
                      data-tech="python android">
@@ -516,11 +250,12 @@
                                 <i class="fa-solid fa-fire text-theme-muted hover:text-white transition-colors" title="Firebase"></i>
                                 <i class="fa-solid fa-database text-theme-muted hover:text-white transition-colors" title="Realtime DB"></i>
                             </div>
-                            <a href="https://word-building.netlify.app/" target="_blank" class="text-red-600 font-bold text-sm hover:text-white transition-colors brand-font">PLAY <i class="fa-solid fa-play ml-1"></i></a>
+                            <a href="https://word-building.netlify.app/" target="_blank" rel="noopener noreferrer" class="text-red-600 font-bold text-sm hover:text-white transition-colors brand-font">PLAY <i class="fa-solid fa-play ml-1"></i></a>
                         </div>
                     </div>
                 </div>
 
+                <!-- 2. Video Game Sales Analytics -->
                 <div class="bg-theme-secondary border border-theme rounded-xl overflow-hidden hover-card group flex flex-col float-anim project-card" 
                      style="background-color: var(--bg-secondary);" 
                      data-tech="python">
@@ -533,7 +268,7 @@
                     <div class="p-6 flex-1 flex flex-col">
                         <h3 class="text-xl font-bold mb-2 brand-font" style="color: var(--text-main);">Video Game Analytics</h3>
                         <p class="text-theme-muted text-sm mb-4 roboto-font flex-1">
-                            Data visualization dashboard utilizing Pandas, Matplotlib, and Scikit-learn for sales trend prediction and analysis.
+                            Data visualization dashboard utilizing Pandas, Matplotlib, and Scikit-learn for sales trend prediction and analysis on 16,000+ records.
                         </p>
                         <div class="flex justify-between items-center mt-auto">
                             <div class="flex gap-4 text-lg">
@@ -543,11 +278,12 @@
                                 <i class="fa-solid fa-chart-pie text-theme-muted hover:text-white transition-colors" title="Seaborn"></i>
                                 <i class="fa-solid fa-brain text-theme-muted hover:text-white transition-colors" title="Machine Learning"></i>
                             </div>
-                            <a href="https://github.com/Siva-kumar-r16/video-game-sales-analytics" target="_blank" class="text-red-600 font-bold text-sm hover:text-white transition-colors brand-font">VIEW <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                            <a href="https://github.com/Siva-kumar-r16/video-game-sales-analytics" target="_blank" rel="noopener noreferrer" class="text-red-600 font-bold text-sm hover:text-white transition-colors brand-font">VIEW <i class="fa-solid fa-arrow-right ml-1"></i></a>
                         </div>
                     </div>
                 </div>
 
+                <!-- 3. Restaurant Management System -->
                 <div class="bg-theme-secondary border border-theme rounded-xl overflow-hidden hover-card group flex flex-col float-anim project-card" 
                      style="background-color: var(--bg-secondary);" 
                      data-tech="java">
@@ -560,7 +296,7 @@
                     <div class="p-6 flex-1 flex flex-col">
                         <h3 class="text-xl font-bold mb-2 brand-font" style="color: var(--text-main);">Restaurant Manager</h3>
                         <p class="text-theme-muted text-sm mb-4 roboto-font flex-1">
-                            Robust management system built with Java Swing & MySQL (JDBC), demonstrating secure RDBMS and OOP principles.
+                            Robust management system built with Java Swing &amp; MySQL (JDBC), demonstrating secure RDBMS and OOP principles.
                         </p>
                         <div class="flex justify-between items-center mt-auto">
                             <div class="flex gap-4 text-lg">
@@ -570,558 +306,65 @@
                                 <i class="fa-solid fa-lock text-theme-muted hover:text-white transition-colors" title="Authentication"></i>
                                 <i class="fa-solid fa-users text-theme-muted hover:text-white transition-colors" title="Management"></i>
                             </div>
-                            <a href="https://www.linkedin.com/posts/siva-kumar-r-a90a482b1_problemsolving-javadeveloper-softwareengineer-activity-7383065631878934528-fHjO" target="_blank" class="text-red-600 font-bold text-sm hover:text-white transition-colors brand-font">VIEW <i class="fa-solid fa-arrow-right ml-1"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-theme-secondary border border-theme rounded-xl overflow-hidden hover-card group flex flex-col float-anim project-card" 
-                     style="background-color: var(--bg-secondary);" 
-                     data-tech="web">
-                    <div class="h-48 bg-neutral-900 border-b border-theme relative overflow-hidden group-hover:border-red-600 transition-colors">
-                        <div class="absolute inset-0 flex items-center justify-center text-theme-muted">
-                             <i class="fa-solid fa-tv text-4xl"></i>
-                        </div>
-                        <img src="images/project-netflix.jpg" width="400" height="300" onerror="this.style.opacity='0'" alt="Netflix Clone" class="w-full h-full object-cover relative z-10 group-hover:scale-110 transition-transform duration-700">
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col">
-                        <h3 class="text-xl font-bold mb-2 brand-font" style="color: var(--text-main);">Netflix UI Clone</h3>
-                        <p class="text-theme-muted text-sm mb-4 roboto-font flex-1">
-                            Pixel-perfect frontend replication using pure HTML5 & CSS3, featuring responsive layouts and custom animations.
-                        </p>
-                        <div class="flex justify-between items-center mt-auto">
-                            <div class="flex gap-4 text-lg">
-                                <i class="fa-brands fa-html5 text-theme-muted hover:text-white transition-colors" title="HTML5"></i>
-                                <i class="fa-brands fa-css3-alt text-theme-muted hover:text-white transition-colors" title="CSS3"></i>
-                                <i class="fa-brands fa-js text-theme-muted hover:text-white transition-colors" title="JavaScript"></i>
-                                <i class="fa-solid fa-mobile-screen text-theme-muted hover:text-white transition-colors" title="Responsive Design"></i>
-                                <i class="fa-solid fa-play text-theme-muted hover:text-white transition-colors" title="UI Animation"></i>
-                            </div>
-                            <a href="https://github.com/Siva-kumar-r16/netflix-clone" target="_blank" class="text-red-600 font-bold text-sm hover:text-white transition-colors brand-font">CODE <i class="fa-brands fa-github ml-1"></i></a>
+                            <a href="https://www.linkedin.com/posts/siva-kumar-r-a90a482b1_problemsolving-javadeveloper-softwareengineer-activity-7383065631878934528-fHjO" target="_blank" rel="noopener noreferrer" class="text-red-600 font-bold text-sm hover:text-white transition-colors brand-font">VIEW <i class="fa-solid fa-arrow-right ml-1"></i></a>
                         </div>
                     </div>
                 </div>
 
             </div>
+
+            <!-- LINK TO ALL PROJECTS -->
             <div class="mt-16 text-center">
-                <a href="https://github.com/Siva-kumar-r16" target="_blank" class="inline-block border border-theme text-theme-muted px-8 py-3 rounded-full font-bold hover:bg-white hover:text-black hover:border-white transition-all brand-font">
-                    <i class="fa-brands fa-github mr-2"></i> REPOSITORY ARCHIVE
+                <a href="projects.html" class="inline-flex items-center gap-3 bg-red-600 text-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition-all brand-font group shadow-[4px_4px_0px_0px_rgba(255,255,255,0.1)] hover:shadow-none font-bold">
+                    EXPLORE ALL PROJECTS →
                 </a>
             </div>
         </div>
     </section>
 
-    <section id="favorites" class="py-20 md:py-32 reveal bg-theme-secondary border-t border-theme">
-        <div class="container mx-auto px-4">
-            <div class="flex items-end justify-between mb-16 border-b border-theme pb-4">
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-bold brand-font" style="color: var(--text-main);">Favorites</h2>
-                    <p class="text-theme-muted mt-2 brand-font">/// MOVIES & SERIES</p>
-                </div>
-                <div class="hidden md:block text-4xl text-theme-muted opacity-20">
-                    <i class="fa-solid fa-film"></i>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="favorites-grid">
-            </div>
-        </div>
-    </section>
-
-    <footer id="contact" class="bg-black pt-16 pb-8 overflow-hidden border-t border-theme" style="background-color: var(--bg-secondary);">
-        <div class="container mx-auto px-4 text-center">
-            <div class="mb-8 text-6xl font-bold brand-font text-theme-muted hover:text-red-600 transition-colors cursor-default tracking-widest">
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-black pt-16 pb-12 overflow-hidden border-t border-theme" style="background-color: var(--bg-secondary);">
+        <div class="container mx-auto px-4 text-center max-w-4xl">
+            <div class="mb-6 text-5xl md:text-6xl font-bold brand-font text-theme-muted hover:text-red-600 transition-colors cursor-default tracking-widest">
                 S<span class="text-red-600">.</span>K
             </div>
-            <p class="text-theme-muted text-xl font-light mb-8 italic roboto-font">
-                "Living, learning, & leveling up one day at a time."
+            <p class="text-theme-muted text-lg md:text-xl font-light mb-8 italic roboto-font">
+                "Living, learning, &amp; leveling up one day at a time."
             </p>
 
-            <div class="flex justify-center gap-6 mb-12">
-                <a href="https://github.com/Siva-kumar-r16" class="social-icon text-theme-muted hover:text-white text-2xl transition-colors"><i class="fa-brands fa-github"></i></a>
-                <a href="https://www.instagram.com/sir_sivakumar?igsh=cng0Mnd1b2ZxczFp" class="social-icon text-theme-muted hover:text-white text-2xl transition-colors"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/in/siva-kumar-r-a90a482b1" class="social-icon text-theme-muted hover:text-white text-2xl transition-colors"><i class="fa-brands fa-linkedin"></i></a>
-                <a href="mailto:sirsivakumar@outlook.com" class="social-icon text-theme-muted hover:text-white text-2xl transition-colors"><i class="fa-solid fa-envelope"></i></a>
+            <div class="flex flex-wrap justify-center items-center gap-6 md:gap-8 mb-10">
+                <a href="https://github.com/Siva-kumar-r16" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/siva-kumar-r-a90a482b1" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="LinkedIn">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="https://www.instagram.com/sir_sivakumar?igsh=cng0Mnd1b2ZxczFp" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://leetcode.com/u/cskskjaddu/" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="LeetCode">
+                    <i class="fa-solid fa-code"></i>
+                </a>
+                <a href="https://www.hackerrank.com/profile/ksuja20" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="HackerRank">
+                    <i class="fa-brands fa-hackerrank"></i>
+                </a>
+                <a href="mailto:sirsivakumar@outlook.com" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="Email">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
             </div>
 
-            <div class="text-theme-muted text-sm">
-                <p>Handcrafted by Siva Kumar <i class="fa-regular fa-copyright ml-1"></i> 2025</p>
-                <p class="mt-2 text-xs roboto-font opacity-50">Made with Nothing OS vibes.</p>
-                <a href="https://github.com/Siva-kumar-r16/Portfolio" target="_blank" class="block mt-4 text-xs hover:text-white transition-colors">
-                View Portfolio Template 
-                </a>
+            <div class="text-theme-muted text-sm space-y-2">
+                <p class="brand-font tracking-wider">Handcrafted by Siva Kumar <i class="fa-regular fa-copyright ml-1"></i> 2025</p>
+                <p class="mt-2 text-xs roboto-font opacity-60">Made with Nothing OS vibes.</p>
+                <div>
+                    <a href="https://github.com/Siva-kumar-r16/Portfolio" target="_blank" rel="noopener noreferrer" class="inline-block mt-3 text-xs brand-font border border-theme px-4 py-2 rounded-full hover:border-red-600 hover:text-white transition-all">
+                        <i class="fa-brands fa-github mr-1"></i> VIEW PORTFOLIO SOURCE
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script>
-        // --- 1. LIGHT/DARK MODE LOGIC ---
-        const toggleSwitch = document.getElementById('theme-toggle');
-        const htmlElement = document.documentElement;
-
-        if (localStorage.getItem('theme') === 'light') {
-            htmlElement.classList.add('light-mode');
-        } else {
-            localStorage.setItem('theme', 'dark');
-            htmlElement.classList.remove('light-mode');
-        }
-
-        toggleSwitch.addEventListener('click', () => {
-            htmlElement.classList.toggle('light-mode');
-            if (htmlElement.classList.contains('light-mode')) {
-                localStorage.setItem('theme', 'light');
-            } else {
-                localStorage.setItem('theme', 'dark');
-            }
-        });
-
-        // --- 2. INTERACTIVE GLYPH CANVAS (Optimized) ---
-        const canvas = document.getElementById('glyph-canvas');
-        const ctx = canvas.getContext('2d');
-        
-        let width, height;
-        let mouseX = -1000, mouseY = -1000;
-        let lastDraw = 0;
-        
-        const isLowEnd = window.navigator.hardwareConcurrency <= 4 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        const fpsInterval = isLowEnd ? 1000 / 30 : 1000 / 60;
-
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
-
-        document.addEventListener('mousemove', (e) => {
-            if (!document.body.classList.contains('mouse-active')) {
-                document.body.classList.add('mouse-active');
-            }
-
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            
-            const cursorDot = document.getElementById('cursor-dot');
-            const cursorOutline = document.getElementById('cursor-outline');
-            
-            if(cursorDot && cursorOutline) {
-                cursorDot.style.left = mouseX + 'px';
-                cursorDot.style.top = mouseY + 'px';
-                
-                setTimeout(() => {
-                    cursorOutline.style.left = mouseX + 'px';
-                    cursorOutline.style.top = mouseY + 'px';
-                }, 50);
-            }
-        });
-
-        document.querySelectorAll('a, button, .toggle-switch').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                const outline = document.getElementById('cursor-outline');
-                if(outline) {
-                    outline.style.width = '60px';
-                    outline.style.height = '60px';
-                    outline.style.borderColor = 'var(--accent-red)';
-                }
-            });
-            el.addEventListener('mouseleave', () => {
-                const outline = document.getElementById('cursor-outline');
-                if(outline) {
-                    outline.style.width = '40px';
-                    outline.style.height = '40px';
-                    outline.style.borderColor = 'var(--text-main)';
-                }
-            });
-        });
-
-        function draw(timestamp) {
-            requestAnimationFrame(draw);
-            const elapsed = timestamp - lastDraw;
-            if (elapsed < fpsInterval) return;
-            lastDraw = timestamp - (elapsed % fpsInterval);
-            ctx.clearRect(0, 0, width, height);
-            
-            const dotSize = 2;
-            const spacing = window.innerWidth < 768 ? 50 : 30;
-            const rows = Math.ceil(height / spacing);
-            const cols = Math.ceil(width / spacing);
-            
-            const style = getComputedStyle(document.body);
-            const dotColor = style.getPropertyValue('--dot-color').trim();
-            const accent = style.getPropertyValue('--accent-red').trim();
-            ctx.fillStyle = dotColor;
-
-            const hasMouse = mouseX > 0 && mouseY > 0;
-
-            for (let i = 0; i < cols; i++) {
-                for (let j = 0; j < rows; j++) {
-                    const x = i * spacing;
-                    const y = j * spacing;
-                    
-                    if (hasMouse) {
-                        const dx = x - mouseX;
-                        const dy = y - mouseY;
-                        if (Math.abs(dx) < 150 && Math.abs(dy) < 150) {
-                            const distance = Math.sqrt(dx * dx + dy * dy);
-                            const maxDist = 150;
-                            if (distance < maxDist) {
-                                const scale = 1 + (maxDist - distance) / 20;
-                                const alpha = 1 - (distance / maxDist);
-                                ctx.beginPath();
-                                ctx.arc(x, y, dotSize * scale, 0, Math.PI * 2);
-                                ctx.fillStyle = accent;
-                                ctx.globalAlpha = alpha;
-                                ctx.fill();
-                                ctx.globalAlpha = 1;
-                                continue;
-                            }
-                        }
-                    }
-                    ctx.beginPath();
-                    ctx.arc(x, y, dotSize, 0, Math.PI * 2);
-                    ctx.fillStyle = dotColor;
-                    ctx.fill();
-                }
-            }
-        }
-        requestAnimationFrame(draw);
-
-        // --- 3. SYSTEM CLOCK (LOC + IST) ---
-        function updateTime() {
-            const now = new Date();
-            
-            const locTime = now.toLocaleTimeString('en-US', {
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: true
-            });
-
-            const istTime = now.toLocaleTimeString('en-US', {
-                timeZone: 'Asia/Kolkata',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: true
-            });
-
-            const displayString = `LOC ${locTime}<br>IST ${istTime} (MY LOCAL TIME)`;
-            
-            document.getElementById('system-time').innerHTML = displayString;
-        }
-        setInterval(updateTime, 1000);
-        updateTime();
-
-        // --- 4. SCROLL REVEAL & NAV HIGHLIGHT ---
-        const observerOptions = {
-            threshold: 0.3,
-            rootMargin: "0px"
-        };
-
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    
-                    const id = entry.target.getAttribute('id');
-                    if (id) {
-                        document.querySelectorAll('.nav-link').forEach(link => {
-                            link.classList.remove('text-red-600');
-                            if(link.getAttribute('data-target') === id) {
-                                link.classList.add('text-red-600');
-                            }
-                        });
-                    }
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal, section[id]').forEach(el => sectionObserver.observe(el));
-
-        // --- MARQUEE CLONING ---
-        const techTrack = document.getElementById('tech-track');
-        const techSource = document.getElementById('tech-source');
-        for(let i=0; i<3; i++) {
-            techTrack.appendChild(techSource.cloneNode(true));
-        }
-
-        // --- TECH INTERACTIVITY ---
-        const skillWidgets = document.querySelectorAll('.skill-widget');
-        const projectCards = document.querySelectorAll('.project-card');
-
-        skillWidgets.forEach(widget => {
-            widget.addEventListener('mouseenter', () => {
-                const tech = widget.getAttribute('data-tech');
-                
-                projectCards.forEach(card => {
-                    const cardTech = card.getAttribute('data-tech') || "";
-                    if (cardTech.includes(tech)) {
-                        card.classList.remove('card-dimmed');
-                        card.style.transform = 'translateY(-5px)';
-                        card.style.borderColor = 'var(--text-muted)';
-                    } else {
-                        card.classList.add('card-dimmed');
-                        card.style.transform = 'translateY(0)';
-                        card.style.borderColor = 'var(--border-color)';
-                    }
-                });
-            });
-
-            widget.addEventListener('mouseleave', () => {
-                projectCards.forEach(card => {
-                    card.classList.remove('card-dimmed');
-                    card.style.transform = '';
-                    card.style.borderColor = '';
-                });
-            });
-        });
-
-        // === FAVORITES RENDER LOGIC START ===
-        const favorites = [
-            {
-                title: "Manichithrathazhu",
-                type: "Movie",
-                image: "https://c.saavncdn.com/867/Manichitrathazhu-Malayalam-1993-20250402200537-500x500.jpg",
-                link: "https://www.imdb.com/title/tt0214915/"
-            },
-            {
-                title: "Rocketry: The Nambi Effect",
-                type: "Movie",
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5sAx2It7GtKVauDlgoQAjFqAln1HFbALNkg&s",
-                link: "https://www.imdb.com/title/tt9263550/"
-            },
-            {
-                title: "Drishyam",
-                type: "Movie",
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7qIaSR-cA-tjiVrFjMouWA2E28umfAcU5Uw&s",
-                link: "https://www.imdb.com/title/tt3417422/"
-            },
-            {
-                title: "Drishyam 2",
-                type: "Movie",
-                image: "https://jiotvimages.cdn.jio.com/imagespublic/metadata/297b7c9d19cb9ec65989bc33444633d1.jpg",
-                link: "https://www.imdb.com/title/tt12361178/"
-            },
-            {
-                title: "Drishyam 3",
-                type: "Movie",
-                image: "data:image/jpeg;base64,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",
-                link: "https://www.imdb.com/title/tt14113634/"
-            },
-            {
-                title: "Maharaja (Tamil)",
-                type: "Movie",
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP4aWFAArN7W6FNSqZAsTNXmGGmjRZTLpLUQ&s",
-                link: "https://www.imdb.com/title/tt26548265/"
-            },
-            {
-                title: "Young Sheldon",
-                type: "Series",
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQul-gBYv3KQZdMz_CVWydNbh8MsnebnCNzOQ&s",
-                link: "https://www.imdb.com/title/tt6226232/"
-            },
-            {
-                title: "The Big Bang Theory",
-                type: "Series",
-                image: "https://m.media-amazon.com/images/S/pv-target-images/4b63ef0284ce2942556d96bd39cef16f93384e974dabe61ff5e6b0ae1d794194.jpg",
-                link: "https://www.imdb.com/title/tt0898266/"
-            },
-            {
-                title: "Loki",
-                type: "Series",
-                image: "https://upload.wikimedia.org/wikipedia/en/4/4e/Loki_%28TV_series%29_logo.png",
-                link: "https://www.imdb.com/title/tt9140554/"
-            }
-        ];
-
-        const favoritesGrid = document.getElementById('favorites-grid');
-        if (favoritesGrid) {
-            favoritesGrid.innerHTML = favorites.map(item => {
-                const isSeries = item.type === 'Series';
-                const badgeClass = isSeries 
-                    ? 'bg-red-600/80 text-white border-red-800' 
-                    : 'bg-black/80 text-white border-theme';
-
-                return `
-                    <div onclick="window.open('${item.link}', '_blank')" class="favorite-card float-anim group">
-                        <div class="image-container">
-                            <div class="absolute top-2 right-2 ${badgeClass} text-[10px] font-bold px-2 py-1 rounded border z-20 tracking-widest brand-font uppercase">${item.type}</div>
-                            <i class="fa-solid fa-image text-3xl text-theme-muted absolute z-0"></i>
-                            <img src="${item.image}" onerror="this.src='https://placehold.co/400x600/121212/D71921?text=${encodeURIComponent(item.title)}'" alt="${item.title}">
-                        </div>
-                        <div class="p-4 flex-1 flex flex-col items-center justify-center text-center">
-                            <h3 class="text-md font-bold brand-font" style="color: var(--text-main);">${item.title}</h3>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-        // === FAVORITES RENDER LOGIC END ===
-
-        // === MATCH AVATAR LOGIC START ===
-        (async function updateAvatarFromMatch() {
-            const DEFAULT_AVATAR = 'images/avatar.png';
-            const avatarContainer = document.getElementById('model-3d-viewer');
-            const avatarImg = avatarContainer.querySelector('img');
-            if (!avatarImg || !avatarContainer) return;
-
-            // 1. Create matching tooltip component
-            const tooltip = document.createElement('div');
-            tooltip.className = 'absolute -top-12 left-1/2 transform -translate-x-1/2 bg-black/90 text-white text-xs px-3 py-1.5 rounded border border-theme opacity-0 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50 brand-font shadow-lg';
-            avatarContainer.appendChild(tooltip);
-
-            // 2. Add Hover events for Tooltip
-            avatarContainer.addEventListener('mouseenter', () => {
-                if(tooltip.innerText !== '') tooltip.style.opacity = '1';
-            });
-            avatarContainer.addEventListener('mouseleave', () => {
-                tooltip.style.opacity = '0';
-            });
-
-            // Helpers for dates
-            function getTodayIST() {
-                return new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
-            }
-
-            // Return difference in days
-            function getDaysDiff(matchDateStr, todayStr) {
-                const matchD = new Date(matchDateStr + "T00:00:00");
-                const todayD = new Date(todayStr + "T00:00:00");
-                const diffTime = todayD - matchD;
-                return Math.floor(diffTime / (1000 * 60 * 60 * 24));
-            }
-
-            // Clean team name for tooltip ONLY
-            function getShortName(team) {
-                const map = {
-                    "Chennai Super Kings": "CSK",
-                    "Mumbai Indians": "MI",
-                    "Sunrisers Hyderabad": "SRH",
-                    "Gujarat Titans": "GT",
-                    "Delhi Capitals": "DC",
-                    "Lucknow Super Giants": "LSG",
-                    "Royal Challengers Bengaluru": "RCB",
-                    "Kolkata Knight Riders": "KKR",
-                    "Punjab Kings": "PBKS",
-                    "Rajasthan Royals": "RR",
-                    "India": "IND",
-                    "India Women": "INDW",
-                    "Australia": "AUS",
-                    "Australia Women": "AUSW",
-                    "England": "ENG",
-                    "England Women": "ENGW",
-                    "Pakistan": "PAK",
-                    "Pakistan Women": "PAKW",
-                    "South Africa": "RSA",
-                    "New Zealand": "NZ",
-                    "Sri Lanka": "SL",
-                    "Bangladesh": "BAN",
-                    "Afghanistan": "AFG",
-                    "Ireland": "IRE",
-                    "Netherlands": "NED",
-                    "Netherlands Women": "NEDW"
-                };
-                return map[team] || team;
-            }
-
-            // Get match duration based on custom property or predefined rules
-            function getDuration(match) {
-                if (match.duration !== undefined) return match.duration;
-                const t = match.type;
-                if (t === 'Test') return 5;
-                if (t === 'FC' || t === 'Youth FC') return 4;
-                return 1; // Default for ODI, T20I, IPL, List A, T20, Women's T20, Youth ODI, Youth T20
-            }
-
-            try {
-                let matches = [];
-                try {
-                    const res = await fetch('matches.json');
-                    if(res.ok) {
-                        matches = await res.json();
-                    } else {
-                        throw new Error('Local fetch failed');
-                    }
-                } catch(e) {
-                    // Fallback to local array in case the user opens the file via file:// protocol
-                    matches = [
-                        {"date": "2026-04-18", "team1": "Sunrisers Hyderabad", "team2": "Chennai Super Kings", "type": "IPL", "category": "league"},
-                        {"date": "2026-04-23", "team1": "Mumbai Indians", "team2": "Chennai Super Kings", "type": "IPL", "category": "league"},
-                        {"date": "2026-06-06", "team1": "India", "team2": "Afghanistan", "type": "Test", "category": "men"},
-                        {"date": "2026-06-14", "team1": "India", "team2": "Afghanistan", "type": "ODI", "category": "men"},
-                        {"date": "2027-06-14", "team1": "India Women", "team2": "Pakistan Women", "type": "T20I", "category": "women"}
-                    ];
-                }
-
-                const todayIST = getTodayIST();
-                let priority = 0; // 0=None, 1=India, 2=CSK
-                let activeAvatar = DEFAULT_AVATAR;
-                let activeTooltip = "";
-                let activeSearchQuery = "";
-
-                for (const match of matches) {
-                    const diff = getDaysDiff(match.date, todayIST);
-                    const duration = getDuration(match);
-                    let isActive = false;
-                    let matchLabel = "";
-
-                    // Calculate active match based on duration handling
-                    if (diff >= 0 && diff < duration) {
-                        isActive = true;
-                        if (duration > 1) {
-                            matchLabel = `${match.type} Day ${diff + 1}`;
-                        } else {
-                            matchLabel = match.type === "IPL" ? "Live Today" : match.type;
-                        }
-                    }
-
-                    if (isActive) {
-                        const t1 = match.team1.toLowerCase();
-                        const t2 = match.team2.toLowerCase();
-                        const isCSK = t1.includes('chennai super kings') || t2.includes('chennai super kings');
-                        const isIndia = t1.includes('india') || t2.includes('india');
-
-                        let currentPriority = 0;
-                        if (isCSK) currentPriority = 2;
-                        else if (isIndia) currentPriority = 1;
-
-                        if (currentPriority > priority) {
-                            priority = currentPriority;
-                            
-                            const shortT1 = getShortName(match.team1);
-                            const shortT2 = getShortName(match.team2);
-                            
-                            activeTooltip = `${shortT1} vs ${shortT2} - ${matchLabel}`;
-                            activeSearchQuery = `${match.team1} vs ${match.team2} live score`;
-
-                            if (isCSK) activeAvatar = 'images/csk_avatar.png';
-                            else activeAvatar = 'images/india_avatar.png';
-                        }
-                    }
-                }
-
-                // Apply determined states
-                avatarImg.src = activeAvatar;
-                
-                if (priority > 0) {
-                    tooltip.innerText = activeTooltip;
-                    avatarContainer.classList.add('cursor-pointer');
-                    
-                    // Specific Google search logic
-                    avatarContainer.addEventListener('click', () => {
-                        window.open(`https://www.google.com/search?q=${encodeURIComponent(activeSearchQuery)}`, '_blank');
-                    });
-                } else {
-                    tooltip.innerText = '';
-                }
-
-            } catch (err) {
-                console.error('Error applying avatar logic:', err);
-                avatarImg.src = DEFAULT_AVATAR;
-            }
-        })();
-        // === MATCH AVATAR LOGIC END ===
-
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>
