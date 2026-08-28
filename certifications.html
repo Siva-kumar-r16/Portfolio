@@ -59,19 +59,34 @@
             justify-content: center;
             overflow: hidden;
         }
-        
-        /* Object fit classes based on image aspect ratio */
-        .object-cover-landscape {
+
+        /* THUMBNAIL FILL SYSTEM ---------------------------------------
+           thumb-bg : blurred, cropped cover layer that always fills the
+                      whole frame (no empty letterbox space, regardless
+                      of source aspect ratio).
+           thumb-fg : the real certificate image, fully visible with
+                      object-fit: contain, layered on top of the blur.
+           This auto-adapts to landscape AND portrait images with the
+           same markup — no per-image classing needed anymore.
+        ----------------------------------------------------------------*/
+        .cert-preview-frame img.thumb-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            width: 100%;
-            height: 100%;
+            filter: blur(20px) brightness(0.4);
+            transform: scale(1.15);
+            z-index: 0;
+            pointer-events: none;
         }
-        
-        .object-contain-portrait {
-            object-fit: contain;
+        .cert-preview-frame img.thumb-fg {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
-            padding: 0.5rem 0; /* Add a bit of padding top/bottom */
+            object-fit: contain;
+            z-index: 1;
         }
 
         /* Glitch Effect */
@@ -192,7 +207,7 @@
                 <!-- 1. Advanced Python Topics -->
                 <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="python" onclick="openCertModal(1)">
                     <div class="cert-preview-frame">
-                        <img src="images/certifications/Advanced Python Topic File Operations in Python.webp" alt="Preview" loading="lazy" class="absolute inset-0 opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 z-0 object-cover-landscape">
+                        <img src="images/certifications/Advanced Python Topic File Operations in Python.webp" alt="Preview" loading="lazy" class="thumb-fg opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
                         <div class="absolute top-3 left-3 z-10 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/80 px-2 py-0.5 rounded border border-red-800 backdrop-blur-sm">CERTIFICATE PREVIEW</div>
                         <div class="z-10 text-center px-4 group-hover:opacity-0 transition-opacity duration-300">
                             <i class="fa-brands fa-python text-5xl text-theme-muted mb-2 drop-shadow-lg"></i>
@@ -219,7 +234,7 @@
                 <!-- 2. AI for Beginners -->
                 <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="ai" onclick="openCertModal(2)">
                     <div class="cert-preview-frame">
-                        <img src="images/certifications/AI for Beginners.webp" alt="Preview" loading="lazy" class="absolute inset-0 opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 z-0 object-cover-landscape">
+                        <img src="images/certifications/AI for Beginners.webp" alt="Preview" loading="lazy" class="thumb-fg opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
                         <div class="absolute top-3 left-3 z-10 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/80 px-2 py-0.5 rounded border border-red-800 backdrop-blur-sm">CERTIFICATE PREVIEW</div>
                         <div class="z-10 text-center px-4 group-hover:opacity-0 transition-opacity duration-300">
                             <i class="fa-solid fa-brain text-5xl text-theme-muted mb-2 drop-shadow-lg"></i>
@@ -246,7 +261,7 @@
                 <!-- 3. Basics of Python -->
                 <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="python" onclick="openCertModal(3)">
                     <div class="cert-preview-frame">
-                        <img src="images/certifications/Basic of Python.webp" alt="Preview" loading="lazy" class="absolute inset-0 opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 z-0 object-cover-landscape">
+                        <img src="images/certifications/Basic of Python.webp" alt="Preview" loading="lazy" class="thumb-fg opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
                         <div class="absolute top-3 left-3 z-10 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/80 px-2 py-0.5 rounded border border-red-800 backdrop-blur-sm">CERTIFICATE PREVIEW</div>
                         <div class="z-10 text-center px-4 group-hover:opacity-0 transition-opacity duration-300">
                             <i class="fa-brands fa-python text-5xl text-theme-muted mb-2 drop-shadow-lg"></i>
@@ -273,7 +288,7 @@
                 <!-- 4. Employability Skills – JobReady -->
                 <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="professional" onclick="openCertModal(4)">
                     <div class="cert-preview-frame">
-                        <img src="images/certifications/Employability Skills JobReady.webp" alt="Preview" loading="lazy" class="absolute inset-0 opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 z-0 object-cover-landscape">
+                        <img src="images/certifications/Employability Skills JobReady.webp" alt="Preview" loading="lazy" class="thumb-fg opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
                         <div class="absolute top-3 left-3 z-10 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/80 px-2 py-0.5 rounded border border-red-800 backdrop-blur-sm">CERTIFICATE PREVIEW</div>
                         <div class="z-10 text-center px-4 group-hover:opacity-0 transition-opacity duration-300">
                             <i class="fa-solid fa-briefcase text-5xl text-theme-muted mb-2 drop-shadow-lg"></i>
@@ -300,7 +315,7 @@
                 <!-- 5. Innovating with Google Cloud AI -->
                 <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="ai" onclick="openCertModal(5)">
                     <div class="cert-preview-frame">
-                        <img src="images/certifications/Innovating with Google cloud ai.webp" alt="Preview" loading="lazy" class="absolute inset-0 opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 z-0 object-cover-landscape">
+                        <img src="images/certifications/Innovating with Google cloud ai.webp" alt="Preview" loading="lazy" class="thumb-fg opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
                         <div class="absolute top-3 left-3 z-10 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/80 px-2 py-0.5 rounded border border-red-800 backdrop-blur-sm">CERTIFICATE PREVIEW</div>
                         <div class="z-10 text-center px-4 group-hover:opacity-0 transition-opacity duration-300">
                             <i class="fa-brands fa-google text-5xl text-theme-muted mb-2 drop-shadow-lg"></i>
@@ -327,7 +342,7 @@
                 <!-- 6. Introduction to Python -->
                 <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="python" onclick="openCertModal(6)">
                     <div class="cert-preview-frame">
-                        <img src="images/certifications/Introduction of python.webp" alt="Preview" loading="lazy" class="absolute inset-0 opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 z-0 object-cover-landscape">
+                        <img src="images/certifications/Introduction of python.webp" alt="Preview" loading="lazy" class="thumb-fg opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
                         <div class="absolute top-3 left-3 z-10 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/80 px-2 py-0.5 rounded border border-red-800 backdrop-blur-sm">CERTIFICATE PREVIEW</div>
                         <div class="z-10 text-center px-4 group-hover:opacity-0 transition-opacity duration-300">
                             <i class="fa-brands fa-python text-5xl text-theme-muted mb-2 drop-shadow-lg"></i>
@@ -354,7 +369,7 @@
                 <!-- 7. MS Office -->
                 <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="professional" onclick="openCertModal(7)">
                     <div class="cert-preview-frame">
-                        <img src="images/certifications/ms.webp" alt="Preview" loading="lazy" class="absolute inset-0 opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 z-0 object-cover-landscape">
+                        <img src="images/certifications/ms.webp" alt="Preview" loading="lazy" class="thumb-fg opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
                         <div class="absolute top-3 left-3 z-10 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/80 px-2 py-0.5 rounded border border-red-800 backdrop-blur-sm">CERTIFICATE PREVIEW</div>
                         <div class="z-10 text-center px-4 group-hover:opacity-0 transition-opacity duration-300">
                             <i class="fa-brands fa-microsoft text-5xl text-theme-muted mb-2 drop-shadow-lg"></i>
@@ -381,7 +396,7 @@
                 <!-- 8. Python Foundation Certification -->
                 <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="python" onclick="openCertModal(8)">
                     <div class="cert-preview-frame">
-                        <img src="images/certifications/Python Foundation Certification.webp" alt="Preview" loading="lazy" class="absolute inset-0 opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 z-0 object-cover-landscape">
+                        <img src="images/certifications/Python Foundation Certification.webp" alt="Preview" loading="lazy" class="thumb-fg opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
                         <div class="absolute top-3 left-3 z-10 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/80 px-2 py-0.5 rounded border border-red-800 backdrop-blur-sm">CERTIFICATE PREVIEW</div>
                         <div class="z-10 text-center px-4 group-hover:opacity-0 transition-opacity duration-300">
                             <i class="fa-brands fa-python text-5xl text-theme-muted mb-2 drop-shadow-lg"></i>
@@ -408,7 +423,7 @@
                 <!-- 9. Resume Writing and Job Interviewing -->
                 <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="professional" onclick="openCertModal(9)">
                     <div class="cert-preview-frame">
-                        <img src="images/certifications/Resume Writing and Job Interviewing.webp" alt="Preview" loading="lazy" class="absolute inset-0 opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 z-0 object-cover-landscape">
+                        <img src="images/certifications/Resume Writing and Job Interviewing.webp" alt="Preview" loading="lazy" class="thumb-fg opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
                         <div class="absolute top-3 left-3 z-10 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/80 px-2 py-0.5 rounded border border-red-800 backdrop-blur-sm">CERTIFICATE PREVIEW</div>
                         <div class="z-10 text-center px-4 group-hover:opacity-0 transition-opacity duration-300">
                             <i class="fa-solid fa-file-signature text-5xl text-theme-muted mb-2 drop-shadow-lg"></i>
@@ -435,7 +450,7 @@
                 <!-- 10. Software Engineering and Agile Software Development -->
                 <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="software" onclick="openCertModal(10)">
                     <div class="cert-preview-frame">
-                        <img src="images/certifications/Software Engineering and agile software development.webp" alt="Preview" loading="lazy" class="absolute inset-0 opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 z-0 object-cover-landscape">
+                        <img src="images/certifications/Software Engineering and agile software development.webp" alt="Preview" loading="lazy" class="thumb-fg opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
                         <div class="absolute top-3 left-3 z-10 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/80 px-2 py-0.5 rounded border border-red-800 backdrop-blur-sm">CERTIFICATE PREVIEW</div>
                         <div class="z-10 text-center px-4 group-hover:opacity-0 transition-opacity duration-300">
                             <i class="fa-solid fa-diagram-project text-5xl text-theme-muted mb-2 drop-shadow-lg"></i>
@@ -462,7 +477,7 @@
                 <!-- 11. Turn Ideas Into Prototypes With Vibe Coding -->
                 <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="ai" onclick="openCertModal(11)">
                     <div class="cert-preview-frame">
-                        <img src="images/certifications/Turn Ideas Into Prototypes With Vibe Coding.webp" alt="Preview" loading="lazy" class="absolute inset-0 opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 z-0 object-cover-landscape">
+                        <img src="images/certifications/Turn Ideas Into Prototypes With Vibe Coding.webp" alt="Preview" loading="lazy" class="thumb-fg opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
                         <div class="absolute top-3 left-3 z-10 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/80 px-2 py-0.5 rounded border border-red-800 backdrop-blur-sm">CERTIFICATE PREVIEW</div>
                         <div class="z-10 text-center px-4 group-hover:opacity-0 transition-opacity duration-300">
                             <i class="fa-solid fa-wand-magic-sparkles text-5xl text-theme-muted mb-2 drop-shadow-lg"></i>
@@ -489,7 +504,7 @@
                 <!-- 12. Web Design Enhancements -->
                 <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="software" onclick="openCertModal(12)">
                     <div class="cert-preview-frame">
-                        <img src="images/certifications/Web Design Enhancement.webp" alt="Preview" loading="lazy" class="absolute inset-0 opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 z-0 object-cover-landscape">
+                        <img src="images/certifications/Web Design Enhancement.webp" alt="Preview" loading="lazy" class="thumb-fg opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
                         <div class="absolute top-3 left-3 z-10 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/80 px-2 py-0.5 rounded border border-red-800 backdrop-blur-sm">CERTIFICATE PREVIEW</div>
                         <div class="z-10 text-center px-4 group-hover:opacity-0 transition-opacity duration-300">
                             <i class="fa-solid fa-palette text-5xl text-theme-muted mb-2 drop-shadow-lg"></i>
@@ -513,10 +528,10 @@
                     </div>
                 </div>
 
-                <!-- 13. Java Internship (Portrait specific fix) -->
+                <!-- 13. Java Internship -->
                 <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="internship" onclick="openCertModal(13)">
-                    <div class="cert-preview-frame bg-[#0a0a0a]">
-                        <img src="images/certifications/Java Internship.webp" alt="Preview" loading="lazy" class="absolute inset-0 opacity-30 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 z-0 object-contain-portrait">
+                    <div class="cert-preview-frame">
+                        <img src="images/certifications/Java Internship.webp" alt="Preview" loading="lazy" class="thumb-fg opacity-30 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500">
                         <div class="absolute top-3 left-3 z-10 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/80 px-2 py-0.5 rounded border border-red-800 backdrop-blur-sm">CERTIFICATE PREVIEW</div>
                         <div class="z-10 text-center px-4 group-hover:opacity-0 transition-opacity duration-300">
                             <i class="fa-brands fa-java text-5xl text-theme-muted mb-2 drop-shadow-lg"></i>
@@ -541,10 +556,10 @@
                     </div>
                 </div>
 
-                <!-- 14. Python Internship (Portrait specific fix) -->
+                <!-- 14. Python Internship -->
                 <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="internship" onclick="openCertModal(14)">
-                    <div class="cert-preview-frame bg-[#0a0a0a]">
-                        <img src="images/certifications/Python Internship.webp" alt="Preview" loading="lazy" class="absolute inset-0 opacity-30 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 z-0 object-contain-portrait">
+                    <div class="cert-preview-frame">
+                        <img src="images/certifications/Python Internship.webp" alt="Preview" loading="lazy" class="thumb-fg opacity-30 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500">
                         <div class="absolute top-3 left-3 z-10 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/80 px-2 py-0.5 rounded border border-red-800 backdrop-blur-sm">CERTIFICATE PREVIEW</div>
                         <div class="z-10 text-center px-4 group-hover:opacity-0 transition-opacity duration-300">
                             <i class="fa-brands fa-python text-5xl text-theme-muted mb-2 drop-shadow-lg"></i>
@@ -755,6 +770,20 @@
                     }
                 });
             });
+        });
+
+        // --- Thumbnail blurred-fill backdrop ---------------------------
+        // Every .thumb-fg image gets a blurred, cover-fit copy of itself
+        // placed behind it, so the frame is always fully filled while the
+        // real certificate image stays 100% visible on top (no cropping),
+        // whether the source is landscape or portrait.
+        document.querySelectorAll('.cert-preview-frame img.thumb-fg').forEach(img => {
+            const bg = document.createElement('img');
+            bg.src = img.getAttribute('src');
+            bg.alt = '';
+            bg.className = 'thumb-bg';
+            bg.setAttribute('aria-hidden', 'true');
+            img.parentNode.insertBefore(bg, img);
         });
     </script>
 </body>
