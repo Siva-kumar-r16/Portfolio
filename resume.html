@@ -17,6 +17,51 @@
     <link rel="stylesheet" href="css/style.css">
 
     <style>
+        /* Custom styles for elite resume look */
+        .timeline-container {
+            position: relative;
+            padding-left: 1.5rem;
+            border-left: 1px solid var(--border-color);
+        }
+        .timeline-dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: var(--bg-secondary);
+            border: 2px solid var(--accent-red);
+            border-radius: 50%;
+            left: -6.5px;
+            top: 6px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 0 rgba(215, 25, 33, 0);
+        }
+        .group:hover .timeline-dot {
+            background-color: var(--accent-red);
+            box-shadow: 0 0 12px rgba(215, 25, 33, 0.6);
+            transform: scale(1.2);
+        }
+        .skill-pill {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.65rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-muted);
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+        }
+        .skill-pill:hover {
+            color: white;
+            border-color: var(--accent-red);
+            background-color: rgba(215, 25, 33, 0.1);
+            transform: translateY(-2px);
+        }
+        .resume-sheet {
+            background-image: radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
         @media print {
             body {
                 background: white !important;
@@ -33,17 +78,18 @@
                 padding: 0 !important;
                 width: 100% !important;
                 max-width: 100% !important;
+                background-image: none !important;
             }
             .resume-sheet * {
                 color: black !important;
                 border-color: #ccc !important;
             }
-            .resume-header-name {
-                color: black !important;
-            }
-            .resume-accent {
-                color: #D71921 !important;
-            }
+            .resume-header-name { color: black !important; }
+            .resume-accent { color: #D71921 !important; }
+            .timeline-dot { border-color: black !important; }
+            .group:hover .timeline-dot { background-color: black !important; box-shadow: none !important; }
+            .skill-pill { border-color: #666 !important; color: #333 !important; background: transparent !important; }
+            .text-red-500, .text-red-600 { color: #D71921 !important; }
         }
     </style>
 </head>
@@ -93,21 +139,21 @@
     <!-- ACTION / DOWNLOAD BAR -->
     <section class="pt-12 pb-6 text-center reveal no-print">
         <div class="container mx-auto px-4 max-w-4xl">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme bg-theme-secondary text-xs brand-font text-theme-muted mb-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme bg-theme-secondary text-xs brand-font text-theme-muted mb-4 shadow-lg shadow-black/20">
                 <span class="w-2 h-2 bg-red-600 rounded-full animate-ping"></span>
                 PROFESSIONAL DOSSIER
             </div>
-            <h1 class="text-3xl md:text-5xl font-bold brand-font mb-4" style="color: var(--text-main);">
-                CURRICULUM <span class="glitch-text cursor-default">VITAE</span>
+            <h1 class="text-3xl md:text-5xl font-bold brand-font mb-4 tracking-tight" style="color: var(--text-main);">
+                CURRICULUM <span class="text-red-600">VITAE</span>
             </h1>
             <p class="text-theme-muted text-sm md:text-base max-w-2xl mx-auto roboto-font mb-6">
                 Verified academic profile, entrepreneurial leadership, software architecture projects, and skill matrix.
             </p>
             <div class="flex flex-wrap justify-center gap-4">
-                <button onclick="window.print()" class="inline-flex items-center gap-2 bg-red-600 text-white px-6 py-2.5 rounded-full hover:bg-white hover:text-black transition-all brand-font text-xs md:text-sm font-bold shadow-lg">
+                <button onclick="window.print()" class="inline-flex items-center gap-2 bg-red-600 text-white px-6 py-2.5 rounded-full hover:bg-white hover:text-black transition-all brand-font text-xs md:text-sm font-bold shadow-lg hover:shadow-red-600/20">
                     <i class="fa-solid fa-print"></i> DOWNLOAD / PRINT RESUME
                 </button>
-                <a href="https://github.com/Siva-kumar-r16" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 border border-theme bg-theme-secondary text-theme-muted px-6 py-2.5 rounded-full hover:border-red-600 hover:text-white transition-all brand-font text-xs md:text-sm">
+                <a href="https://github.com/Siva-kumar-r16" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 border border-theme bg-theme-secondary text-theme-muted px-6 py-2.5 rounded-full hover:border-red-600 hover:text-white transition-all brand-font text-xs md:text-sm shadow-lg shadow-black/20">
                     <i class="fa-brands fa-github"></i> GITHUB PROFILE
                 </a>
             </div>
@@ -117,103 +163,113 @@
     <!-- RESUME MAIN CONTAINER -->
     <section class="py-8 pb-32">
         <div class="container mx-auto px-4 max-w-4xl">
-            <div class="resume-sheet bg-theme-secondary border border-theme rounded-2xl p-6 md:p-12 shadow-2xl relative reveal" style="background-color: var(--bg-secondary);">
+            <div class="resume-sheet border border-theme rounded-2xl p-6 md:p-12 shadow-2xl relative reveal overflow-hidden group/sheet" style="background-color: var(--bg-secondary);">
                 
+                <!-- Glowing accent line at the top -->
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-600 to-transparent opacity-50 group-hover/sheet:opacity-100 transition-opacity duration-700"></div>
+
                 <!-- RESUME HEADER -->
-                <div class="border-b border-theme pb-8 mb-8 text-center md:text-left flex flex-col md:flex-row justify-between items-start gap-6">
+                <div class="border-b border-theme pb-8 mb-8 flex flex-col md:flex-row justify-between items-start gap-6 relative">
                     <div>
-                        <h2 class="text-3xl md:text-4xl font-bold brand-font tracking-wider mb-2 resume-header-name" style="color: var(--text-main);">
-                            SIVA KUMAR R
+                        <h2 class="text-4xl md:text-5xl font-bold brand-font tracking-wider mb-2 resume-header-name" style="color: var(--text-main);">
+                            SIVA KUMAR<span class="text-red-600">.</span>R
                         </h2>
-                        <p class="text-xs md:text-sm brand-font text-red-500 font-bold tracking-widest mb-3">
-                            FOUNDER &amp; CTO | FRONTEND ENGINEER &amp; APP DEVELOPER
-                        </p>
-                        <p class="text-xs text-theme-muted roboto-font">
-                            <i class="fa-solid fa-location-dot text-red-600 mr-1"></i> Chennai, Tamil Nadu, India &nbsp;|&nbsp; 
-                            <i class="fa-solid fa-phone text-red-600 mr-1"></i> +91 93605 34078 &nbsp;|&nbsp; 
-                            <i class="fa-solid fa-envelope text-red-600 mr-1"></i> sirsivakumar@outlook.com
+                        <div class="inline-block bg-red-600/10 border border-red-800/50 rounded px-3 py-1 mb-4">
+                            <p class="text-xs md:text-sm brand-font text-red-500 font-bold tracking-widest">
+                                FOUNDER &amp; CTO | FRONTEND ENGINEER
+                            </p>
+                        </div>
+                        <p class="text-xs text-theme-muted roboto-font flex flex-wrap gap-x-4 gap-y-2">
+                            <span class="flex items-center"><i class="fa-solid fa-location-dot text-red-600 mr-1.5"></i> Chennai, Tamil Nadu, India</span>
+                            <span class="hidden md:inline text-theme border-l border-theme"></span>
+                            <a href="mailto:sirsivakumar@outlook.com" class="flex items-center hover:text-white transition-colors"><i class="fa-solid fa-envelope text-red-600 mr-1.5"></i> sirsivakumar@outlook.com</a>
                         </p>
                     </div>
 
-                    <div class="flex flex-wrap md:flex-col gap-2 text-xs font-mono text-theme-muted self-center md:self-end">
-                        <a href="https://www.linkedin.com/in/siva-kumar-r-a90a482b1" target="_blank" rel="noopener noreferrer" class="hover:text-red-500 transition-colors flex items-center gap-1.5">
-                            <i class="fa-brands fa-linkedin text-red-600"></i> in/siva-kumar-r
+                    <div class="flex flex-wrap md:flex-col gap-3 text-[11px] md:text-xs font-mono text-theme-muted self-center md:self-end bg-black/40 p-4 rounded-xl border border-theme">
+                        <a href="https://www.linkedin.com/in/siva-kumar-r-a90a482b1" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2 group">
+                            <i class="fa-brands fa-linkedin text-red-600 group-hover:scale-110 transition-transform"></i> in/siva-kumar-r
                         </a>
-                        <a href="https://github.com/Siva-kumar-r16" target="_blank" rel="noopener noreferrer" class="hover:text-red-500 transition-colors flex items-center gap-1.5">
-                            <i class="fa-brands fa-github text-red-600"></i> gh/Siva-kumar-r16
+                        <a href="https://github.com/Siva-kumar-r16" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2 group">
+                            <i class="fa-brands fa-github text-red-600 group-hover:scale-110 transition-transform"></i> gh/Siva-kumar-r16
                         </a>
-                        <a href="https://leetcode.com/u/cskskjaddu/" target="_blank" rel="noopener noreferrer" class="hover:text-red-500 transition-colors flex items-center gap-1.5">
-                            <i class="fa-solid fa-code text-red-600"></i> lc/cskskjaddu
+                        <a href="https://leetcode.com/u/cskskjaddu/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2 group">
+                            <i class="fa-solid fa-code text-red-600 group-hover:scale-110 transition-transform"></i> lc/cskskjaddu
                         </a>
-                        <a href="https://www.hackerrank.com/profile/ksuja20" target="_blank" rel="noopener noreferrer" class="hover:text-red-500 transition-colors flex items-center gap-1.5">
-                            <i class="fa-brands fa-hackerrank text-red-600"></i> hr/ksuja20
+                        <a href="https://www.hackerrank.com/profile/ksuja20" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2 group">
+                            <i class="fa-brands fa-hackerrank text-red-600 group-hover:scale-110 transition-transform"></i> hr/ksuja20
                         </a>
                     </div>
                 </div>
 
                 <!-- PROFESSIONAL SUMMARY -->
-                <div class="mb-8">
-                    <h3 class="text-sm font-bold brand-font tracking-widest text-red-500 mb-3 flex items-center gap-2">
-                        <span class="w-1.5 h-1.5 bg-red-600 rounded-full"></span> PROFESSIONAL SUMMARY
+                <div class="mb-10">
+                    <h3 class="text-sm font-bold brand-font tracking-widest text-white mb-4 uppercase border-b border-theme pb-2 flex items-center gap-2">
+                        <span class="text-red-600 text-lg leading-none">/</span> Professional Summary
                     </h3>
-                    <p class="text-xs md:text-sm text-theme-muted leading-relaxed roboto-font">
+                    <p class="text-xs md:text-sm text-theme-muted leading-relaxed roboto-font p-4 bg-theme-tertiary rounded-xl border border-theme hover:border-red-600/30 transition-colors" style="background-color: var(--bg-tertiary);">
                         Third-year Computer Science Engineering student and Founder &amp; CTO of Sparklance Solutions, building and deploying production client websites end-to-end — PHP backends, payment integration, live hosting. Independently shipped three additional full applications across Python, Java, Android, and web, including a desktop BI tool turning 16,000+ sales records into predictive insights and a live cross-platform game. Seeking a software development internship to bring that same ownership from idea to live deployment to a real engineering team.
                     </p>
                 </div>
 
                 <!-- EDUCATION -->
-                <div class="mb-8">
-                    <h3 class="text-sm font-bold brand-font tracking-widest text-red-500 mb-4 flex items-center gap-2">
-                        <span class="w-1.5 h-1.5 bg-red-600 rounded-full"></span> EDUCATION
+                <div class="mb-10">
+                    <h3 class="text-sm font-bold brand-font tracking-widest text-white mb-5 uppercase border-b border-theme pb-2 flex items-center gap-2">
+                        <span class="text-red-600 text-lg leading-none">/</span> Education
                     </h3>
-                    <div class="border-l-2 border-theme pl-4 ml-1">
-                        <div class="flex flex-col md:flex-row justify-between mb-1">
-                            <h4 class="text-xs md:text-sm font-bold brand-font" style="color: var(--text-main);">
-                                B.E. Computer Science and Engineering
-                            </h4>
-                            <span class="text-xs text-theme-muted font-mono">2024 – 2028 (Expected)</span>
+                    <div class="timeline-container">
+                        <div class="relative group pb-2">
+                            <div class="timeline-dot"></div>
+                            <div class="flex flex-col md:flex-row justify-between mb-1">
+                                <h4 class="text-sm md:text-base font-bold brand-font group-hover:text-red-500 transition-colors" style="color: var(--text-main);">
+                                    B.E. Computer Science and Engineering
+                                </h4>
+                                <span class="text-xs text-red-500 font-mono bg-red-900/10 px-2 py-0.5 rounded border border-red-900/30 mt-1 md:mt-0 self-start">2024 – 2028 (Expected)</span>
+                            </div>
+                            <p class="text-xs text-theme-muted roboto-font">
+                                <i class="fa-solid fa-building-columns mr-1 opacity-50"></i> Panimalar Engineering College, Chennai, Tamil Nadu
+                            </p>
                         </div>
-                        <p class="text-xs text-theme-muted roboto-font">
-                            Panimalar Engineering College, Chennai, Tamil Nadu
-                        </p>
                     </div>
                 </div>
 
                 <!-- ENTREPRENEURIAL EXPERIENCE -->
-                <div class="mb-8">
-                    <h3 class="text-sm font-bold brand-font tracking-widest text-red-500 mb-4 flex items-center gap-2">
-                        <span class="w-1.5 h-1.5 bg-red-600 rounded-full"></span> ENTREPRENEURIAL &amp; PROFESSIONAL EXPERIENCE
+                <div class="mb-10">
+                    <h3 class="text-sm font-bold brand-font tracking-widest text-white mb-5 uppercase border-b border-theme pb-2 flex items-center gap-2">
+                        <span class="text-red-600 text-lg leading-none">/</span> Professional Experience
                     </h3>
-                    <div class="space-y-6">
+                    <div class="timeline-container space-y-8">
                         
                         <!-- Sparklance Solutions -->
-                        <div class="border-l-2 border-theme pl-4 ml-1">
+                        <div class="relative group">
+                            <div class="timeline-dot"></div>
                             <div class="flex flex-col md:flex-row justify-between mb-1">
-                                <h4 class="text-xs md:text-sm font-bold brand-font" style="color: var(--text-main);">
-                                    Founder &amp; CTO &nbsp;|&nbsp; <span class="text-red-500">Sparklance Solutions</span>
+                                <h4 class="text-sm md:text-base font-bold brand-font" style="color: var(--text-main);">
+                                    Founder &amp; CTO <span class="text-theme-muted font-normal mx-2">|</span> <span class="text-white group-hover:text-red-500 transition-colors">Sparklance Solutions</span>
                                 </h4>
-                                <span class="text-xs text-theme-muted font-mono">2025 – Present</span>
+                                <span class="text-xs text-red-500 font-mono bg-red-900/10 px-2 py-0.5 rounded border border-red-900/30 mt-1 md:mt-0 self-start">2025 – Present</span>
                             </div>
-                            <p class="text-xs text-theme-muted roboto-font mb-2">Freelance Web Studio &amp; Digital Solutions Venture</p>
-                            <ul class="list-disc list-inside text-xs md:text-sm text-theme-muted space-y-1.5 roboto-font">
-                                <li>Founded and lead a software development venture delivering full-stack client websites, handling everything from client requirements to live deployment.</li>
-                                <li>Personally designed, built, and deployed a production client website (<a href="https://dhvikabylr.com/" target="_blank" class="text-red-500 hover:underline">dhvikabylr.com</a>) end-to-end: MilesWeb server hosting setup, custom PHP backend, and integrated Razorpay payment gateway for secure customer checkout.</li>
-                                <li>Engineered agency portal with Nothing OS design principles on Netlify (<a href="https://sparklance-solutions.netlify.app/" target="_blank" class="text-red-500 hover:underline">sparklance-solutions.netlify.app</a>).</li>
+                            <p class="text-[11px] uppercase tracking-wider text-theme-muted font-mono mb-3">Freelance Web Studio &amp; Digital Solutions Venture</p>
+                            <ul class="list-none text-xs md:text-sm text-theme-muted space-y-2 roboto-font">
+                                <li class="flex items-start"><i class="fa-solid fa-angle-right text-red-600 mt-1 mr-2 text-[10px]"></i> Founded and lead a software development venture delivering full-stack client websites, handling everything from client requirements to live deployment.</li>
+                                <li class="flex items-start"><i class="fa-solid fa-angle-right text-red-600 mt-1 mr-2 text-[10px]"></i> Personally designed, built, and deployed a production client website (<a href="https://dhvikabylr.com/" target="_blank" class="text-white hover:text-red-500 underline decoration-red-500/30 underline-offset-2 transition-colors">dhvikabylr.com</a>) end-to-end: MilesWeb server hosting setup, custom PHP backend, and integrated Razorpay payment gateway for secure customer checkout.</li>
+                                <li class="flex items-start"><i class="fa-solid fa-angle-right text-red-600 mt-1 mr-2 text-[10px]"></i> Engineered agency portal with Nothing OS design principles on Netlify (<a href="https://sparklance-solutions.netlify.app/" target="_blank" class="text-white hover:text-red-500 underline decoration-red-500/30 underline-offset-2 transition-colors">sparklance-solutions.netlify.app</a>).</li>
                             </ul>
                         </div>
 
                         <!-- InternPe Java Internship -->
-                        <div class="border-l-2 border-theme pl-4 ml-1">
+                        <div class="relative group">
+                            <div class="timeline-dot"></div>
                             <div class="flex flex-col md:flex-row justify-between mb-1">
-                                <h4 class="text-xs md:text-sm font-bold brand-font" style="color: var(--text-main);">
-                                    Java Programming Intern &nbsp;|&nbsp; <span class="text-red-500">InternPe</span>
+                                <h4 class="text-sm md:text-base font-bold brand-font" style="color: var(--text-main);">
+                                    Java Programming Intern <span class="text-theme-muted font-normal mx-2">|</span> <span class="text-white group-hover:text-red-500 transition-colors">InternPe</span>
                                 </h4>
-                                <span class="text-xs text-theme-muted font-mono">22/06/2026 – 05/08/2026</span>
+                                <span class="text-xs text-theme-muted font-mono border border-theme bg-theme-tertiary px-2 py-0.5 rounded mt-1 md:mt-0 self-start">June 2026 – Aug 2026</span>
                             </div>
-                            <p class="text-xs text-theme-muted roboto-font mb-2">Credential ID: IPI#83440 (ISO 9001:2015 / MSME Verified)</p>
-                            <ul class="list-disc list-inside text-xs md:text-sm text-theme-muted space-y-1.5 roboto-font">
-                                <li>Engineered Java object-oriented applications with robust exception handling and database connection pooling.</li>
-                                <li>Developed clean Swing desktop user interfaces and performed structured JDBC data transaction testing.</li>
+                            <p class="text-[11px] text-theme-muted font-mono mb-3 bg-black/30 inline-block px-2 py-0.5 rounded border border-theme border-dashed">Credential ID: IPI#83440 (ISO 9001:2015 Verified)</p>
+                            <ul class="list-none text-xs md:text-sm text-theme-muted space-y-2 roboto-font">
+                                <li class="flex items-start"><i class="fa-solid fa-angle-right text-red-600 mt-1 mr-2 text-[10px]"></i> Engineered Java object-oriented applications with robust exception handling and database connection pooling.</li>
+                                <li class="flex items-start"><i class="fa-solid fa-angle-right text-red-600 mt-1 mr-2 text-[10px]"></i> Developed clean Swing desktop user interfaces and performed structured JDBC data transaction testing.</li>
                             </ul>
                         </div>
 
@@ -221,81 +277,120 @@
                 </div>
 
                 <!-- TECHNICAL SKILLS -->
-                <div class="mb-8">
-                    <h3 class="text-sm font-bold brand-font tracking-widest text-red-500 mb-4 flex items-center gap-2">
-                        <span class="w-1.5 h-1.5 bg-red-600 rounded-full"></span> TECHNICAL SKILLS
+                <div class="mb-10">
+                    <h3 class="text-sm font-bold brand-font tracking-widest text-white mb-5 uppercase border-b border-theme pb-2 flex items-center gap-2">
+                        <span class="text-red-600 text-lg leading-none">/</span> Technical Arsenal
                     </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm roboto-font">
-                        <div class="p-3 bg-theme-tertiary rounded-lg border border-theme" style="background-color: var(--bg-tertiary);">
-                            <span class="font-bold brand-font text-white block mb-1">PROGRAMMING LANGUAGES:</span>
-                            <span class="text-theme-muted">Python, Java (Core Syntax &amp; OOP), C, JavaScript, PHP</span>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm roboto-font">
+                        
+                        <div class="p-4 bg-theme-tertiary rounded-xl border border-theme hover:border-red-600/50 transition-colors group" style="background-color: var(--bg-tertiary);">
+                            <span class="font-bold brand-font text-white block mb-3 text-xs tracking-wider group-hover:text-red-400 transition-colors"><i class="fa-solid fa-code text-red-600 mr-2"></i>LANGUAGES</span>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-pill">Python</span>
+                                <span class="skill-pill">Java (OOP)</span>
+                                <span class="skill-pill">C</span>
+                                <span class="skill-pill">JavaScript</span>
+                                <span class="skill-pill">PHP</span>
+                            </div>
                         </div>
-                        <div class="p-3 bg-theme-tertiary rounded-lg border border-theme" style="background-color: var(--bg-tertiary);">
-                            <span class="font-bold brand-font text-white block mb-1">GUI &amp; MOBILE DEV:</span>
-                            <span class="text-theme-muted">Tkinter, Java Swing, Android Studio (Native Android)</span>
+
+                        <div class="p-4 bg-theme-tertiary rounded-xl border border-theme hover:border-red-600/50 transition-colors group" style="background-color: var(--bg-tertiary);">
+                            <span class="font-bold brand-font text-white block mb-3 text-xs tracking-wider group-hover:text-red-400 transition-colors"><i class="fa-solid fa-mobile-screen text-red-600 mr-2"></i>GUI &amp; MOBILE</span>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-pill">Tkinter</span>
+                                <span class="skill-pill">Java Swing</span>
+                                <span class="skill-pill">Android Studio</span>
+                                <span class="skill-pill">Native Android</span>
+                            </div>
                         </div>
-                        <div class="p-3 bg-theme-tertiary rounded-lg border border-theme" style="background-color: var(--bg-tertiary);">
-                            <span class="font-bold brand-font text-white block mb-1">WEB &amp; CLOUD INFRASTRUCTURE:</span>
-                            <span class="text-theme-muted">HTML5, CSS3, Tailwind CSS, Razorpay API, MilesWeb, Netlify, Git, GitHub</span>
+
+                        <div class="p-4 bg-theme-tertiary rounded-xl border border-theme hover:border-red-600/50 transition-colors group" style="background-color: var(--bg-tertiary);">
+                            <span class="font-bold brand-font text-white block mb-3 text-xs tracking-wider group-hover:text-red-400 transition-colors"><i class="fa-solid fa-server text-red-600 mr-2"></i>WEB &amp; CLOUD</span>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-pill">HTML5/CSS3</span>
+                                <span class="skill-pill">Tailwind CSS</span>
+                                <span class="skill-pill">Razorpay API</span>
+                                <span class="skill-pill">MilesWeb</span>
+                                <span class="skill-pill">Netlify</span>
+                                <span class="skill-pill">Git/GitHub</span>
+                            </div>
                         </div>
-                        <div class="p-3 bg-theme-tertiary rounded-lg border border-theme" style="background-color: var(--bg-tertiary);">
-                            <span class="font-bold brand-font text-white block mb-1">DATA ANALYTICS &amp; ML:</span>
-                            <span class="text-theme-muted">Scikit-Learn (Linear Regression), Pandas, Matplotlib, Seaborn, GeoPandas</span>
+
+                        <div class="p-4 bg-theme-tertiary rounded-xl border border-theme hover:border-red-600/50 transition-colors group" style="background-color: var(--bg-tertiary);">
+                            <span class="font-bold brand-font text-white block mb-3 text-xs tracking-wider group-hover:text-red-400 transition-colors"><i class="fa-solid fa-chart-pie text-red-600 mr-2"></i>DATA &amp; ML</span>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-pill">Scikit-Learn</span>
+                                <span class="skill-pill">Pandas</span>
+                                <span class="skill-pill">Matplotlib</span>
+                                <span class="skill-pill">Seaborn</span>
+                                <span class="skill-pill">GeoPandas</span>
+                            </div>
                         </div>
-                        <div class="p-3 bg-theme-tertiary rounded-lg border border-theme md:col-span-2" style="background-color: var(--bg-tertiary);">
-                            <span class="font-bold brand-font text-white block mb-1">SOFTWARE PRACTICES:</span>
-                            <span class="text-theme-muted">Input Validation, Exception Handling, Database Connection Pooling, RDBMS Connectivity (MySQL/JDBC)</span>
+
+                        <div class="p-4 bg-theme-tertiary rounded-xl border border-theme hover:border-red-600/50 transition-colors group md:col-span-2" style="background-color: var(--bg-tertiary);">
+                            <span class="font-bold brand-font text-white block mb-3 text-xs tracking-wider group-hover:text-red-400 transition-colors"><i class="fa-solid fa-layer-group text-red-600 mr-2"></i>SOFTWARE PRACTICES</span>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-pill">Exception Handling</span>
+                                <span class="skill-pill">Input Validation</span>
+                                <span class="skill-pill">Connection Pooling</span>
+                                <span class="skill-pill">RDBMS (MySQL)</span>
+                                <span class="skill-pill">JDBC</span>
+                                <span class="skill-pill">Agile SDLC</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- KEY PROJECTS -->
-                <div class="mb-8">
-                    <h3 class="text-sm font-bold brand-font tracking-widest text-red-500 mb-4 flex items-center gap-2">
-                        <span class="w-1.5 h-1.5 bg-red-600 rounded-full"></span> SELECTED ENGINEERING PROJECTS
+                <div class="mb-10">
+                    <h3 class="text-sm font-bold brand-font tracking-widest text-white mb-5 uppercase border-b border-theme pb-2 flex items-center gap-2">
+                        <span class="text-red-600 text-lg leading-none">/</span> Selected Deployments
                     </h3>
-                    <div class="space-y-5 text-xs md:text-sm roboto-font">
+                    <div class="timeline-container space-y-8">
                         
                         <!-- Project 1 -->
-                        <div class="border-l-2 border-theme pl-4 ml-1">
-                            <div class="flex flex-col md:flex-row justify-between mb-1">
-                                <h4 class="font-bold brand-font" style="color: var(--text-main);">
-                                    Video Game Sales Analytics — Desktop BI Application
+                        <div class="relative group">
+                            <div class="timeline-dot"></div>
+                            <div class="flex flex-col md:flex-row justify-between mb-2">
+                                <h4 class="text-sm md:text-base font-bold brand-font group-hover:text-red-500 transition-colors" style="color: var(--text-main);">
+                                    Video Game Sales Analytics <span class="text-theme-muted font-normal text-xs ml-2">— Desktop BI App</span>
                                 </h4>
-                                <span class="text-xs text-theme-muted font-mono">Python, Scikit-Learn, Matplotlib</span>
+                                <span class="text-[10px] text-theme-muted font-mono border border-theme rounded px-2 py-0.5 mt-1 md:mt-0 self-start bg-black/50">Python • Scikit-Learn • Pandas</span>
                             </div>
-                            <ul class="list-disc list-inside text-theme-muted space-y-1">
-                                <li>Engineered desktop business intelligence application processing 16,000+ sales records to extract actionable market insights.</li>
-                                <li>Implemented Linear Regression model to forecast top-performing game genres and publishers with high precision.</li>
-                                <li>Constructed interactive Tkinter dashboard featuring GeoPandas geospatial heatmap toggles and statistical distributions.</li>
+                            <ul class="list-none text-xs md:text-sm text-theme-muted space-y-2 roboto-font">
+                                <li class="flex items-start"><i class="fa-solid fa-angle-right text-red-600 mt-1 mr-2 text-[10px]"></i> Engineered desktop business intelligence application processing 16,000+ sales records to extract actionable market insights.</li>
+                                <li class="flex items-start"><i class="fa-solid fa-angle-right text-red-600 mt-1 mr-2 text-[10px]"></i> Implemented Linear Regression model to forecast top-performing game genres and publishers with high precision.</li>
+                                <li class="flex items-start"><i class="fa-solid fa-angle-right text-red-600 mt-1 mr-2 text-[10px]"></i> Constructed interactive Tkinter dashboard featuring GeoPandas geospatial heatmap toggles and statistical distributions.</li>
                             </ul>
                         </div>
 
                         <!-- Project 2 -->
-                        <div class="border-l-2 border-theme pl-4 ml-1">
-                            <div class="flex flex-col md:flex-row justify-between mb-1">
-                                <h4 class="font-bold brand-font" style="color: var(--text-main);">
-                                    Restaurant Management System — Java Desktop Application
+                        <div class="relative group">
+                            <div class="timeline-dot"></div>
+                            <div class="flex flex-col md:flex-row justify-between mb-2">
+                                <h4 class="text-sm md:text-base font-bold brand-font group-hover:text-red-500 transition-colors" style="color: var(--text-main);">
+                                    Restaurant Management System <span class="text-theme-muted font-normal text-xs ml-2">— Java Application</span>
                                 </h4>
-                                <span class="text-xs text-theme-muted font-mono">Java Swing, MySQL, JDBC</span>
+                                <span class="text-[10px] text-theme-muted font-mono border border-theme rounded px-2 py-0.5 mt-1 md:mt-0 self-start bg-black/50">Java Swing • MySQL • JDBC</span>
                             </div>
-                            <ul class="list-disc list-inside text-theme-muted space-y-1">
-                                <li>Architected dual-interface (customer-facing &amp; staff-facing) system managing complete order-to-payment cycle.</li>
-                                <li>Configured database connection pooling for low-latency concurrent queries and structured exception handling.</li>
+                            <ul class="list-none text-xs md:text-sm text-theme-muted space-y-2 roboto-font">
+                                <li class="flex items-start"><i class="fa-solid fa-angle-right text-red-600 mt-1 mr-2 text-[10px]"></i> Architected dual-interface (customer-facing &amp; staff-facing) system managing complete order-to-payment cycle.</li>
+                                <li class="flex items-start"><i class="fa-solid fa-angle-right text-red-600 mt-1 mr-2 text-[10px]"></i> Configured database connection pooling for low-latency concurrent queries and structured exception handling.</li>
                             </ul>
                         </div>
 
                         <!-- Project 3 -->
-                        <div class="border-l-2 border-theme pl-4 ml-1">
-                            <div class="flex flex-col md:flex-row justify-between mb-1">
-                                <h4 class="font-bold brand-font" style="color: var(--text-main);">
-                                    Word Building Game — Multi-Platform Vocabulary Game
+                        <div class="relative group">
+                            <div class="timeline-dot"></div>
+                            <div class="flex flex-col md:flex-row justify-between mb-2">
+                                <h4 class="text-sm md:text-base font-bold brand-font group-hover:text-red-500 transition-colors" style="color: var(--text-main);">
+                                    Word Building Game <span class="text-theme-muted font-normal text-xs ml-2">— Multi-Platform</span>
                                 </h4>
-                                <span class="text-xs text-theme-muted font-mono">Android Studio, Python, Firebase, HTML5</span>
+                                <span class="text-[10px] text-theme-muted font-mono border border-theme rounded px-2 py-0.5 mt-1 md:mt-0 self-start bg-black/50">Android • Python • Firebase</span>
                             </div>
-                            <ul class="list-disc list-inside text-theme-muted space-y-1">
-                                <li>Created cross-platform vocabulary puzzle game with real-time dictionary validation and live score synchronization via Firebase.</li>
-                                <li>Unified browser and Android APK distribution with intelligent mobile client redirection on Netlify.</li>
+                            <ul class="list-none text-xs md:text-sm text-theme-muted space-y-2 roboto-font">
+                                <li class="flex items-start"><i class="fa-solid fa-angle-right text-red-600 mt-1 mr-2 text-[10px]"></i> Created cross-platform vocabulary puzzle game with real-time dictionary validation and live score synchronization via Firebase.</li>
+                                <li class="flex items-start"><i class="fa-solid fa-angle-right text-red-600 mt-1 mr-2 text-[10px]"></i> Unified browser and Android APK distribution with intelligent mobile client redirection on Netlify.</li>
                             </ul>
                         </div>
 
@@ -303,31 +398,34 @@
                 </div>
 
                 <!-- CERTIFICATIONS & CREDENTIALS -->
-                <div class="mb-8">
-                    <h3 class="text-sm font-bold brand-font tracking-widest text-red-500 mb-4 flex items-center gap-2">
-                        <span class="w-1.5 h-1.5 bg-red-600 rounded-full"></span> KEY CERTIFICATIONS
+                <div class="mb-10">
+                    <h3 class="text-sm font-bold brand-font tracking-widest text-white mb-5 uppercase border-b border-theme pb-2 flex items-center gap-2">
+                        <span class="text-red-600 text-lg leading-none">/</span> Verified Credentials
                     </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs roboto-font text-theme-muted">
-                        <div>• <strong>Python Foundation Certification</strong> — Infosys Springboard</div>
-                        <div>• <strong>Software Engineering &amp; Agile SDLC</strong> — Infosys Springboard</div>
-                        <div>• <strong>Innovating with Google Cloud AI</strong> — Simplilearn / Google Cloud</div>
-                        <div>• <strong>AI for Beginners</strong> — HP LIFE</div>
-                        <div>• <strong>Java Internship Certification (IPI#83440)</strong> — InternPe</div>
-                        <div>• <strong>Turn Ideas Into Prototypes (Vibe Coding)</strong> — IBM SkillsBuild</div>
-                        <div>• <strong>Employability Skills (JobReady)</strong> — Wadhwani Foundation</div>
-                        <div>• <strong>Advanced Python Topics: File Operations</strong> — Infosys Springboard</div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-6 text-xs md:text-sm roboto-font text-theme-muted">
+                        <div class="flex items-center gap-2 group"><i class="fa-solid fa-certificate text-red-600/50 group-hover:text-red-500 transition-colors"></i> <span><strong>Python Foundation</strong> — Infosys</span></div>
+                        <div class="flex items-center gap-2 group"><i class="fa-solid fa-certificate text-red-600/50 group-hover:text-red-500 transition-colors"></i> <span><strong>Agile SDLC</strong> — Infosys</span></div>
+                        <div class="flex items-center gap-2 group"><i class="fa-solid fa-certificate text-red-600/50 group-hover:text-red-500 transition-colors"></i> <span><strong>Google Cloud AI</strong> — Simplilearn</span></div>
+                        <div class="flex items-center gap-2 group"><i class="fa-solid fa-certificate text-red-600/50 group-hover:text-red-500 transition-colors"></i> <span><strong>AI for Beginners</strong> — HP LIFE</span></div>
+                        <div class="flex items-center gap-2 group"><i class="fa-solid fa-certificate text-red-600/50 group-hover:text-red-500 transition-colors"></i> <span><strong>Java Internship (IPI#83440)</strong> — InternPe</span></div>
+                        <div class="flex items-center gap-2 group"><i class="fa-solid fa-certificate text-red-600/50 group-hover:text-red-500 transition-colors"></i> <span><strong>Vibe Coding (AI)</strong> — IBM SkillsBuild</span></div>
+                        <div class="flex items-center gap-2 group"><i class="fa-solid fa-certificate text-red-600/50 group-hover:text-red-500 transition-colors"></i> <span><strong>Employability Skills</strong> — Wadhwani</span></div>
+                        <div class="flex items-center gap-2 group"><i class="fa-solid fa-certificate text-red-600/50 group-hover:text-red-500 transition-colors"></i> <span><strong>Advanced Python IO</strong> — Infosys</span></div>
                     </div>
                 </div>
 
                 <!-- LANGUAGES & ADDITIONAL -->
-                <div class="border-t border-theme pt-6">
-                    <h3 class="text-sm font-bold brand-font tracking-widest text-red-500 mb-2 flex items-center gap-2">
-                        <span class="w-1.5 h-1.5 bg-red-600 rounded-full"></span> LANGUAGES &amp; INTERESTS
-                    </h3>
-                    <p class="text-xs md:text-sm text-theme-muted roboto-font">
-                        <strong>Spoken Languages:</strong> English, Tamil, Malayalam (Native) &nbsp;|&nbsp; 
-                        <strong>Interests:</strong> Clean Architecture, Competitive Coding, UI/UX Interaction Systems, Algorithm Optimization
-                    </p>
+                <div class="pt-6 border-t border-theme">
+                    <div class="flex flex-col md:flex-row gap-6 justify-between">
+                        <div>
+                            <h4 class="text-xs font-bold brand-font text-white mb-2"><i class="fa-solid fa-language text-red-600 mr-2"></i>LANGUAGES</h4>
+                            <p class="text-xs text-theme-muted font-mono">English, Tamil, Malayalam (Native)</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold brand-font text-white mb-2"><i class="fa-solid fa-lightbulb text-red-600 mr-2"></i>INTERESTS</h4>
+                            <p class="text-xs text-theme-muted font-mono">Clean Architecture, UI/UX Systems, Algorithm Optimization</p>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -335,7 +433,7 @@
     </section>
 
     <!-- FOOTER -->
-    <footer id="contact" class="bg-black pt-16 pb-12 overflow-hidden border-t border-theme" style="background-color: var(--bg-secondary);">
+    <footer id="contact" class="bg-black pt-16 pb-12 overflow-hidden border-t border-theme no-print" style="background-color: var(--bg-secondary);">
         <div class="container mx-auto px-4 text-center max-w-4xl">
             <div class="mb-6 text-5xl md:text-6xl font-bold brand-font text-theme-muted hover:text-red-600 transition-colors cursor-default tracking-widest">
                 S<span class="text-red-600">.</span>K
