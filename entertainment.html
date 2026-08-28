@@ -58,6 +58,10 @@
             position: relative;
             z-index: 10;
         }
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -136,6 +140,48 @@
         </div>
     </section>
 
+    <!-- ENTERTAINMENT DETAILS MODAL -->
+    <div id="entertainment-modal" class="fixed inset-0 z-[60] hidden modal-backdrop flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-theme-secondary border border-theme rounded-2xl max-w-3xl w-full p-6 md:p-8 relative max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300" id="entertainment-modal-content" style="background-color: var(--bg-secondary);">
+            <button onclick="closeEntertainmentModal()" class="absolute top-4 right-4 text-theme-muted hover:text-white text-2xl z-20 transition-colors" aria-label="Close Modal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="flex items-center gap-3 mb-5">
+                <span class="w-2.5 h-2.5 bg-red-600 rounded-full animate-pulse"></span>
+                <span id="modal-type" class="text-xs font-bold brand-font text-red-500 tracking-wider">TYPE</span>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-6 lg:gap-8 mb-6">
+                <!-- Image Section -->
+                <div class="w-full md:w-1/3 flex-shrink-0 flex items-center justify-center bg-black/20 rounded-xl p-2 border border-theme">
+                    <img id="modal-image" src="" alt="Poster" class="w-full h-auto max-h-[300px] object-contain rounded-lg shadow-lg">
+                </div>
+                
+                <!-- Details Section -->
+                <div class="w-full md:w-2/3 flex flex-col justify-center">
+                    <h2 id="modal-title" class="text-2xl md:text-3xl font-bold brand-font mb-2 text-white">Title</h2>
+                    <div class="mb-4">
+                        <span id="modal-genre" class="text-xs text-theme-muted font-mono bg-black/40 inline-block px-3 py-1 rounded border border-theme"></span>
+                    </div>
+                    
+                    <h4 class="text-xs font-bold brand-font text-theme-muted tracking-wider mb-2 border-b border-theme pb-2">MY THOUGHTS</h4>
+                    <p id="modal-desc" class="text-sm md:text-base roboto-font text-gray-300 leading-relaxed overflow-y-auto max-h-[200px] pr-2"></p>
+                </div>
+            </div>
+
+            <!-- Footer / Action Area -->
+            <div class="pt-4 border-t border-theme flex flex-wrap justify-between items-center gap-4 mt-4">
+                <div class="text-xs text-theme-muted brand-font flex items-center">
+                    <i class="fa-solid fa-star text-red-500 mr-2"></i> PERSONAL RECOMMENDATION
+                </div>
+                <div class="flex gap-3" id="modal-action-container">
+                    <!-- Dynamic Action Link Injected Here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- FOOTER -->
     <footer id="contact" class="bg-black pt-16 pb-12 overflow-hidden border-t border-theme" style="background-color: var(--bg-secondary);">
         <div class="container mx-auto px-4 text-center max-w-4xl">
@@ -187,105 +233,120 @@
                 type: "Movie",
                 genre: "Psychological Thriller",
                 image: "https://c.saavncdn.com/867/Manichitrathazhu-Malayalam-1993-20250402200537-500x500.jpg",
-                link: "https://www.imdb.com/title/tt0214915/"
+                link: "https://www.imdb.com/title/tt0214915/",
+                desc: "My first horror movie. I watched it when I was very young, and somehow it made me laugh and feel genuinely scared at the same time. The character played by the National Award-winning actress frightened me so much that, for a while, I could barely enjoy her other movies because I associated her with that fear. Looking back, that is exactly what makes this movie special to me. It managed to create fear, humour and unforgettable memories all in one experience."
             },
             {
                 title: "Rocketry: The Nambi Effect",
                 type: "Movie",
                 genre: "Biography / Drama",
                 image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5sAx2It7GtKVauDlgoQAjFqAln1HFbALNkg&s",
-                link: "https://www.imdb.com/title/tt9263550/"
+                link: "https://www.imdb.com/title/tt9263550/",
+                desc: "I love Rocketry because it tells the story of an unsung hero of ISRO and India. Seeing the struggles Nambi Narayanan went through and how much he endured made a strong impression on me. His journey inspired me because it shows how someone can continue fighting for the truth and their work even after facing enormous setbacks."
             },
             {
                 title: "Drishyam",
                 type: "Movie",
                 genre: "Crime / Drama / Thriller",
                 image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7qIaSR-cA-tjiVrFjMouWA2E28umfAcU5Uw&s",
-                link: "https://www.imdb.com/title/tt3417422/"
+                link: "https://www.imdb.com/title/tt3417422/",
+                desc: "Drishyam is one of my favourite crime thrillers because of its unique screenplay and storytelling. What makes it stand out to me is how the entire story revolves around a father's determination to protect his family. The way Georgekutty thinks, plans and handles every situation makes the movie incredibly gripping."
             },
             {
                 title: "Drishyam 2",
                 type: "Movie",
                 genre: "Mystery / Thriller",
                 image: "https://jiotvimages.cdn.jio.com/imagespublic/metadata/297b7c9d19cb9ec65989bc33444633d1.jpg",
-                link: "https://www.imdb.com/title/tt12361178/"
+                link: "https://www.imdb.com/title/tt12361178/",
+                desc: "Drishyam 2 takes everything I loved about the first film and pushes it further. I love how the story continues to explore the pain and pressure of a father who is willing to do anything to protect his family. The screenplay keeps making you question what will happen next while showing how far someone can go when their family's future is at stake."
             },
             {
                 title: "Drishyam 3",
                 type: "Movie",
                 genre: "Mystery / Thriller",
                 image: "https://m.media-amazon.com/images/M/MV5BZTZlYmFiNjctNjA0Mi00OTFjLTg0MTgtNzQxN2IzZTg3YTI5XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-                link: "https://www.imdb.com/title/tt14113634/"
+                link: "https://www.imdb.com/title/tt14113634/",
+                desc: "Drishyam 3 was a satisfying continuation of the Drishyam franchise for me. What stands out most is how the father mentally changes throughout the story. He begins with the same determination to protect his family, but eventually realizes that protecting them does not always mean keeping them untouched by the problem. He understands that he may have to hurt himself, take responsibility and face the consequences to overcome what his family has been going through, even though the situation was never truly their fault. That emotional and psychological change is what made this chapter stand out to me."
             },
             {
                 title: "Maharaja (Tamil)",
                 type: "Movie",
                 genre: "Action / Crime / Drama",
                 image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP4aWFAArN7W6FNSqZAsTNXmGGmjRZTLpLUQ&s",
-                link: "https://www.imdb.com/title/tt26548265/"
+                link: "https://www.imdb.com/title/tt26548265/",
+                desc: "Maharaja affected me psychologically in a way I didn't expect. It is one of those movies that doesn't simply entertain you but stays in your mind afterward. The psychological impact, emotional weight and the way the story breaks you down mentally are what make it one of my most memorable experiences with cinema."
             },
             {
                 title: "Young Sheldon",
                 type: "Series",
                 genre: "Comedy",
                 image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQul-gBYv3KQZdMz_CVWydNbh8MsnebnCNzOQ&s",
-                link: "https://www.imdb.com/title/tt6226232/"
+                link: "https://www.imdb.com/title/tt6226232/",
+                desc: "Young Sheldon is special to me because it shows the life of a highly intelligent child trying to understand a world that doesn't always understand him. I love seeing how his high IQ affects the way society and even his own family treat him. At the same time, Sheldon and the people around him gradually learn from one another and help each other grow."
             },
             {
                 title: "The Big Bang Theory",
                 type: "Series",
                 genre: "Sitcom / Comedy",
                 image: "https://m.media-amazon.com/images/S/pv-target-images/4b63ef0284ce2942556d96bd39cef16f93384e974dabe61ff5e6b0ae1d794194.jpg",
-                link: "https://www.imdb.com/title/tt0898266/"
+                link: "https://www.imdb.com/title/tt0898266/",
+                desc: "The Big Bang Theory feels like the continuation of my connection with Sheldon, even though it was released before Young Sheldon. I love seeing how Sheldon handles work, friendships and relationships with his colleagues while still doing the funny and sometimes ridiculous things that make him who he is. What I especially enjoy is how the group keeps each other together, with Sheldon often becoming the centre of their lives in his own unusual way."
             },
             {
                 title: "Loki",
                 type: "Series",
                 genre: "Sci-Fi / Action / Adventure",
                 image: "https://upload.wikimedia.org/wikipedia/en/4/4e/Loki_%28TV_series%29_logo.png",
-                link: "https://www.imdb.com/title/tt9140554/"
+                link: "https://www.imdb.com/title/tt9140554/",
+                desc: "Loki is the best series I have ever watched. What makes it special to me is the transformation of Loki from the God of Mischief into someone who becomes a true hero. Watching a character who was once seen as a villain ultimately sacrifice himself to save trillions of lives, many of which he will never even know, makes his journey incredibly powerful."
             },
             {
                 title: "Red Dead Redemption",
                 type: "Game",
                 genre: "Action / Adventure",
                 image: "https://gaming-cdn.com/images/products/16200/orig/red-dead-redemption-playstation-4-game-playstation-store-cover.jpg?v=1730298578",
-                link: "https://store.rockstargames.com/game/buy-red-dead-redemption"
+                link: "https://store.rockstargames.com/game/buy-red-dead-redemption",
+                desc: "Red Dead Redemption is one of the greatest games I've played because it taught me about life, struggle and the consequences of the choices people make. It felt like more than just a game to me. John Marston's journey made me experience a story about fighting through difficult circumstances and trying to find meaning when life doesn't go the way you want."
             },
             {
                 title: "Red Dead Redemption 2",
                 type: "Game",
                 genre: "Action / Adventure",
                 image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaq_EMvFbX5PAF3rENBLc_xDpD8QyA8G2Xom-PbC7Wspa0m4rVjPUfVj4&s=10",
-                link: "https://store.rockstargames.com/game/buy-red-dead-redemption-2"
+                link: "https://store.rockstargames.com/game/buy-red-dead-redemption-2",
+                desc: "Red Dead Redemption 2 is one of the greatest games I've experienced. The visuals are incredible, but what stayed with me more was its philosophy about life. Arthur Morgan's journey, the world around him and the way the story explores loyalty, change, regret and redemption made the game feel much deeper than a normal gaming experience."
             },
             {
                 title: "Grand Theft Auto: San Andreas",
                 type: "Game",
                 genre: "Action / Sandbox",
                 image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgkIR03KjaH2-UXpKzMmO-vNiC1-4-3X1BibcaMdZkJw&s=10",
-                link: "https://store.rockstargames.com/game/buy-grand-theft-auto-the-trilogy-the-definitive-edition"
+                link: "https://store.rockstargames.com/game/buy-grand-theft-auto-the-trilogy-the-definitive-edition",
+                desc: "GTA San Andreas was the first game I ever played, so it has a special place in my memory. Beyond being my first game, it taught me things about patience, people and life through the experiences of CJ and the world around him. It became one of those games that I remember not just because I played it, but because of what that first gaming experience meant to me."
             },
             {
                 title: "Grand Theft Auto V",
                 type: "Game",
                 genre: "Action / Sandbox",
                 image: "https://cdn1.epicgames.com/offer/b0cd075465c44f87be3b505ac04a2e46/EGS_GrandTheftAutoVEnhanced_RockstarNorth_S1_2560x1440-906d8ae76a91aafc60b1a54c23fab496",
-                link: "https://store.rockstargames.com/game/buy-gta-v"
+                link: "https://store.rockstargames.com/game/buy-gta-v",
+                desc: "GTA V gave me a completely different experience by following Michael De Santa, Franklin Clinton and Trevor Philips, three characters trying to build wealth while taking completely different paths. I loved experiencing the story through each of them individually and seeing their different personalities, ambitions and problems. Eventually, their lives become connected, and watching how these three very different people try to keep everything together made the game memorable for me."
             },
             {
                 title: "Hogwarts Legacy",
                 type: "Game",
                 genre: "Action RPG / Fantasy",
                 image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1YgxR4ZZTWnnuZEJu13P2NPWC8odoRJdjsMA3ZPlL5EMVgQYy8CJWUy8&s=10",
-                link: "https://store.steampowered.com/app/990080/Hogwarts_Legacy/"
+                link: "https://store.steampowered.com/app/990080/Hogwarts_Legacy/",
+                desc: "Hogwarts Legacy gave me the chance to experience a magical world I had known since childhood. Being able to explore Hogwarts itself and learn magic made me feel like I was finally stepping into the world I had imagined while growing up with Harry Potter. The game brought back a lot of childhood memories and gave me the opportunity to explore Hogwarts in a way I had always wanted to."
             },
             {
                 title: "Detroit: Become Human",
                 type: "Game",
                 genre: "Narrative Adventure",
                 image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA42_sqiyFZta9l3WigY2_hNRfF9ecxUsVyeox-vl6Y337bdyiNKKQSyj5&s=10",
-                link: "https://store.steampowered.com/app/1222140/Detroit_Become_Human/"
+                link: "https://store.steampowered.com/app/1222140/Detroit_Become_Human/",
+                desc: "Detroit: Become Human is one of the toughest games I've experienced psychologically. It constantly made me think about my decisions, identity and what it really means to be human. More than just playing a story, I felt like the game was making me question myself. It changed the way I thought about certain things, which is why it remains one of the most mentally impactful games I've played."
             }
         ];
 
@@ -297,24 +358,25 @@
                 ? recommendations 
                 : recommendations.filter(item => item.type === filter);
 
-            grid.innerHTML = filtered.map(item => {
+            grid.innerHTML = filtered.map((item) => {
+                // Find original index so we can open the right modal data regardless of filtering
+                const originalIndex = recommendations.findIndex(r => r.title === item.title);
+                
                 const isSeries = item.type === 'Series';
                 const isGame = item.type === 'Game';
                 
                 let badgeClass = 'bg-black/80 text-white border-theme';
                 let iconClass = 'fa-film';
-                let actionText = 'VIEW ON IMDB';
                 
                 if (isSeries) {
                     badgeClass = 'bg-red-600/80 text-white border-red-800';
                 } else if (isGame) {
                     badgeClass = 'bg-green-600/80 text-white border-green-800';
                     iconClass = 'fa-gamepad';
-                    actionText = 'VIEW STORE';
                 }
 
                 return `
-                    <div onclick="window.open('${item.link}', '_blank')" class="favorite-card float-anim group">
+                    <div onclick="openEntertainmentModal(${originalIndex})" class="favorite-card float-anim group">
                         <div class="image-container">
                             <div class="absolute top-2 right-2 ${badgeClass} text-[10px] font-bold px-2 py-1 rounded border z-20 tracking-widest brand-font uppercase">
                                 ${item.type}
@@ -326,7 +388,7 @@
                             <h3 class="text-sm md:text-md font-bold brand-font mb-1" style="color: var(--text-main);">${item.title}</h3>
                             <p class="text-[11px] text-theme-muted roboto-font">${item.genre}</p>
                             <span class="mt-2 text-[10px] brand-font text-red-500 opacity-0 group-hover:opacity-100 transition-opacity">
-                                ${actionText} <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                                VIEW DETAILS <i class="fa-solid fa-arrow-right ml-1"></i>
                             </span>
                         </div>
                     </div>
@@ -334,6 +396,61 @@
             }).join('');
         }
 
+        // Modal Logic
+        const modal = document.getElementById('entertainment-modal');
+        const modalContent = document.getElementById('entertainment-modal-content');
+
+        function openEntertainmentModal(index) {
+            const data = recommendations[index];
+            if (!data) return;
+
+            document.getElementById('modal-type').textContent = data.type.toUpperCase();
+            document.getElementById('modal-title').textContent = data.title;
+            document.getElementById('modal-genre').textContent = data.genre;
+            document.getElementById('modal-desc').textContent = data.desc;
+            document.getElementById('modal-image').src = data.image;
+            document.getElementById('modal-image').alt = data.title;
+
+            const isGame = data.type === 'Game';
+            const actionText = isGame ? 'VIEW STORE' : 'VIEW ON IMDB';
+            const iconClass = isGame ? 'fa-arrow-up-right-from-square' : 'fa-imdb';
+
+            document.getElementById('modal-action-container').innerHTML = `
+                <a href="${data.link}" target="_blank" rel="noopener noreferrer" class="px-5 py-2 rounded-full border border-theme text-xs brand-font hover:border-red-600 hover:text-white transition-all text-theme-muted flex items-center gap-2">
+                    ${actionText} <i class="fa-brands ${iconClass} fa-solid text-sm"></i>
+                </a>
+            `;
+
+            modal.classList.remove('hidden');
+            // Trigger reflow for transition
+            void modal.offsetWidth;
+            modal.classList.remove('opacity-0');
+            modalContent.classList.remove('scale-95');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeEntertainmentModal() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.add('scale-95');
+            
+            // Wait for transition to finish before hiding
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        // Close on backdrop click or Escape key
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeEntertainmentModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeEntertainmentModal();
+            }
+        });
+
+        // Initialize grid
         renderRecommendations();
 
         // Tab filter listeners
