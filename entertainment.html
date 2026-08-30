@@ -19,8 +19,8 @@
     <style>
         .favorite-card {
             transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
-            border: 1px solid var(--border-color);
-            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color, #333);
+            background-color: var(--bg-secondary, #1a1a1a);
             border-radius: 0.75rem;
             overflow: hidden;
             display: flex;
@@ -29,8 +29,8 @@
         }
         .favorite-card:hover {
             transform: translateY(-6px) scale(1.03);
-            border-color: var(--text-muted);
-            background-color: var(--card-hover);
+            border-color: var(--text-muted, #9ca3af);
+            background-color: var(--card-hover, #222);
         }
         .image-container {
             display: flex;
@@ -38,7 +38,7 @@
             justify-content: center;
             padding: 1rem;
             background-color: rgba(0, 0, 0, 0.2);
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color, #333);
             position: relative;
             transition: border-color 0.3s ease;
             height: 280px;
@@ -47,7 +47,7 @@
             background-color: rgba(0, 0, 0, 0.05);
         }
         .favorite-card:hover .image-container {
-            border-color: var(--accent-red);
+            border-color: var(--accent-red, #dc2626);
         }
         .image-container img {
             max-height: 250px;
@@ -64,7 +64,7 @@
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased bg-black text-white" style="--bg-primary: #000; --bg-secondary: #111; --text-main: #fff; --text-muted: #9ca3af; --border-color: #333; --theme-muted: #9ca3af;">
 
     <div id="cursor-dot"></div>
     <div id="cursor-outline"></div>
@@ -72,37 +72,39 @@
     <canvas id="glyph-canvas"></canvas>
 
     <!-- NAVIGATION HEADER -->
-    <nav class="w-full py-5 px-4 md:px-8 flex flex-col md:flex-row justify-between items-center border-b border-theme bg-opacity-95 backdrop-blur-sm sticky top-0 z-50 transition-colors duration-300" style="background-color: var(--bg-primary);">
+    <nav class="w-full py-5 px-4 md:px-8 flex flex-col md:flex-row justify-between items-center border-b border-[#333] bg-opacity-95 backdrop-blur-sm sticky top-0 z-50 transition-colors duration-300" style="background-color: var(--bg-primary);">
         <div class="flex items-center justify-between w-full md:w-auto mb-3 md:mb-0">
             <div class="flex items-center gap-4">
-                <a href="index.html" class="text-xl md:text-2xl font-bold brand-font tracking-wider" style="color: var(--text-main);">
+                <a href="index.html" class="text-xl md:text-2xl font-bold font-sans tracking-wider" style="color: var(--text-main);">
                     SIVA KUMAR<span class="text-red-600 animate-pulse">.</span>R
                 </a>
-                <div class="flex items-center gap-2 text-[10px] md:text-xs brand-font text-theme-muted border-l border-theme pl-3 tracking-widest">
+                <div class="flex items-center gap-2 text-[10px] md:text-xs font-sans text-gray-400 border-l border-gray-700 pl-3 tracking-widest">
                     <span class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
                     <span id="system-time">07:14:50 PM</span>
                 </div>
             </div>
-            <button id="mobile-menu-btn" class="md:hidden text-theme-muted hover:text-white text-xl p-1 focus:outline-none" aria-label="Toggle navigation">
+            <button id="mobile-menu-btn" class="md:hidden text-gray-400 hover:text-white text-xl p-1 focus:outline-none" aria-label="Toggle navigation">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
 
-        <div id="nav-menu" class="hidden md:flex flex-col md:flex-row items-center gap-5 lg:gap-7 w-full md:w-auto mt-3 md:mt-0 pt-3 md:pt-0 border-t md:border-t-0 border-theme">
-            <ul class="flex flex-wrap md:flex-nowrap items-center justify-center gap-4 md:gap-5 lg:gap-6 text-xs lg:text-sm brand-font tracking-wider" style="color: var(--text-main);">
-                <li><a href="index.html#about" class="nav-link hover:text-red-600 transition-colors">ABOUT</a></li>
-                <li><a href="index.html#skills" class="nav-link hover:text-red-600 transition-colors">SKILLS</a></li>
-                <li><a href="projects.html" class="nav-link hover:text-red-600 transition-colors">PROJECTS</a></li>
-                <li><a href="certifications.html" class="nav-link hover:text-red-600 transition-colors">CERTIFICATIONS</a></li>
-                <li><a href="resume.html" class="nav-link hover:text-red-600 transition-colors">RESUME</a></li>
-                <li><a href="entertainment.html" class="nav-link text-red-600 font-bold transition-colors">ENTERTAINMENT</a></li>
-                <li><a href="#contact" class="nav-link hover:text-red-600 transition-colors">CONTACT</a></li>
+        <div id="nav-menu" class="hidden md:flex flex-col md:flex-row items-center gap-5 lg:gap-7 w-full md:w-auto mt-3 md:mt-0 pt-3 md:pt-0 border-t md:border-t-0 border-gray-700">
+            <ul class="flex flex-wrap md:flex-nowrap items-center justify-center gap-4 md:gap-5 lg:gap-6 text-xs lg:text-sm font-sans tracking-wider" style="color: var(--text-main);">
+                <li><a href="index.html#about" class="hover:text-red-600 transition-colors">ABOUT</a></li>
+                <li><a href="index.html#skills" class="hover:text-red-600 transition-colors">SKILLS</a></li>
+                <li><a href="projects.html" class="hover:text-red-600 transition-colors">PROJECTS</a></li>
+                <li><a href="certifications.html" class="hover:text-red-600 transition-colors">CERTIFICATIONS</a></li>
+                <li><a href="resume.html" class="hover:text-red-600 transition-colors">RESUME</a></li>
+                <li><a href="entertainment.html" class="text-red-600 font-bold transition-colors">ENTERTAINMENT</a></li>
+                <li><a href="#contact" class="hover:text-red-600 transition-colors">CONTACT</a></li>
             </ul>
 
-            <div class="flex items-center gap-2 border-t md:border-t-0 md:border-l border-theme pt-3 md:pt-0 md:pl-5 mt-2 md:mt-0">
-                <i class="fa-solid fa-moon text-xs text-theme-muted"></i>
-                <div class="toggle-switch" id="theme-toggle" role="button" aria-label="Toggle theme" tabindex="0"></div>
-                <i class="fa-solid fa-sun text-xs text-theme-muted"></i>
+            <div class="flex items-center gap-2 border-t md:border-t-0 md:border-l border-gray-700 pt-3 md:pt-0 md:pl-5 mt-2 md:mt-0">
+                <i class="fa-solid fa-moon text-xs text-gray-400"></i>
+                <div class="w-8 h-4 bg-gray-600 rounded-full relative cursor-pointer" id="theme-toggle" role="button" aria-label="Toggle theme" tabindex="0">
+                    <div class="w-4 h-4 bg-white rounded-full absolute left-0 top-0 transition-transform"></div>
+                </div>
+                <i class="fa-solid fa-sun text-xs text-gray-400"></i>
             </div>
         </div>
     </nav>
@@ -110,23 +112,23 @@
     <!-- PAGE HEADER -->
     <section class="pt-16 pb-12 text-center reveal">
         <div class="container mx-auto px-4 max-w-4xl">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-theme bg-theme-secondary text-xs brand-font text-theme-muted mb-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gray-700 bg-gray-900 text-xs font-sans text-gray-400 mb-4">
                 <span class="w-2 h-2 bg-red-600 rounded-full animate-ping"></span>
                 CINEMA &amp; TELEVISION &amp; GAMING
             </div>
-            <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold brand-font mb-4" style="color: var(--text-main);">
-                PERSONAL ENTERTAINMENT <span class="glitch-text cursor-default">RECOMMENDATIONS</span>
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold font-sans mb-4" style="color: var(--text-main);">
+                PERSONAL ENTERTAINMENT <span class="text-red-600 cursor-default">RECOMMENDATIONS</span>
             </h1>
-            <p class="text-theme-muted text-base md:text-lg max-w-2xl mx-auto roboto-font">
+            <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto font-sans">
                 Curated cinema classics, riveting mystery thrillers, mind-bending sci-fi, intellectual sitcoms, and immersive games.
             </p>
 
             <!-- TABS -->
             <div class="flex flex-wrap justify-center gap-2 md:gap-3 mt-8">
-                <button class="filter-tab active px-4 py-1.5 rounded-full text-xs brand-font border border-red-600 bg-red-600 text-white transition-all" data-type="all">ALL PICKS</button>
-                <button class="filter-tab px-4 py-1.5 rounded-full text-xs brand-font border border-theme text-theme-muted hover:border-red-600 hover:text-white transition-all" data-type="Movie">MOVIES</button>
-                <button class="filter-tab px-4 py-1.5 rounded-full text-xs brand-font border border-theme text-theme-muted hover:border-red-600 hover:text-white transition-all" data-type="Series">SERIES</button>
-                <button class="filter-tab px-4 py-1.5 rounded-full text-xs brand-font border border-theme text-theme-muted hover:border-red-600 hover:text-white transition-all" data-type="Game">GAMES</button>
+                <button class="filter-tab active px-4 py-1.5 rounded-full text-xs font-sans border border-red-600 bg-red-600 text-white transition-all" data-type="all">ALL PICKS</button>
+                <button class="filter-tab px-4 py-1.5 rounded-full text-xs font-sans border border-gray-700 text-gray-400 hover:border-red-600 hover:text-white transition-all" data-type="Movie">MOVIES</button>
+                <button class="filter-tab px-4 py-1.5 rounded-full text-xs font-sans border border-gray-700 text-gray-400 hover:border-red-600 hover:text-white transition-all" data-type="Series">SERIES</button>
+                <button class="filter-tab px-4 py-1.5 rounded-full text-xs font-sans border border-gray-700 text-gray-400 hover:border-red-600 hover:text-white transition-all" data-type="Game">GAMES</button>
             </div>
         </div>
     </section>
@@ -142,37 +144,37 @@
 
     <!-- ENTERTAINMENT DETAILS MODAL -->
     <div id="entertainment-modal" class="fixed inset-0 z-[60] hidden modal-backdrop flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
-        <div class="bg-theme-secondary border border-theme rounded-2xl max-w-3xl w-full p-6 md:p-8 relative max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300" id="entertainment-modal-content" style="background-color: var(--bg-secondary);">
-            <button onclick="closeEntertainmentModal()" class="absolute top-4 right-4 text-theme-muted hover:text-white text-2xl z-20 transition-colors" aria-label="Close Modal">
+        <div class="bg-gray-900 border border-gray-700 rounded-2xl max-w-3xl w-full p-6 md:p-8 relative max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300" id="entertainment-modal-content" style="background-color: var(--bg-secondary);">
+            <button onclick="closeEntertainmentModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl z-20 transition-colors" aria-label="Close Modal">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             
             <div class="flex items-center gap-3 mb-5">
                 <span class="w-2.5 h-2.5 bg-red-600 rounded-full animate-pulse"></span>
-                <span id="modal-type" class="text-xs font-bold brand-font text-red-500 tracking-wider">TYPE</span>
+                <span id="modal-type" class="text-xs font-bold font-sans text-red-500 tracking-wider">TYPE</span>
             </div>
             
             <div class="flex flex-col md:flex-row gap-6 lg:gap-8 mb-6">
                 <!-- Image Section -->
-                <div class="w-full md:w-1/3 flex-shrink-0 flex items-center justify-center bg-black/20 rounded-xl p-2 border border-theme">
+                <div class="w-full md:w-1/3 flex-shrink-0 flex items-center justify-center bg-black/20 rounded-xl p-2 border border-gray-700">
                     <img id="modal-image" src="" alt="Poster" class="w-full h-auto max-h-[300px] object-contain rounded-lg shadow-lg">
                 </div>
                 
                 <!-- Details Section -->
                 <div class="w-full md:w-2/3 flex flex-col justify-center">
-                    <h2 id="modal-title" class="text-2xl md:text-3xl font-bold brand-font mb-2 text-white">Title</h2>
+                    <h2 id="modal-title" class="text-2xl md:text-3xl font-bold font-sans mb-2 text-white">Title</h2>
                     <div class="mb-4">
-                        <span id="modal-genre" class="text-xs text-theme-muted font-mono bg-black/40 inline-block px-3 py-1 rounded border border-theme"></span>
+                        <span id="modal-genre" class="text-xs text-gray-400 font-mono bg-black/40 inline-block px-3 py-1 rounded border border-gray-700"></span>
                     </div>
                     
-                    <h4 class="text-xs font-bold brand-font text-theme-muted tracking-wider mb-2 border-b border-theme pb-2">MY THOUGHTS</h4>
-                    <p id="modal-desc" class="text-sm md:text-base roboto-font text-gray-300 leading-relaxed overflow-y-auto max-h-[200px] pr-2"></p>
+                    <h4 class="text-xs font-bold font-sans text-gray-400 tracking-wider mb-2 border-b border-gray-700 pb-2">MY THOUGHTS</h4>
+                    <p id="modal-desc" class="text-sm md:text-base font-sans text-gray-300 leading-relaxed overflow-y-auto max-h-[200px] pr-2"></p>
                 </div>
             </div>
 
             <!-- Footer / Action Area -->
-            <div class="pt-4 border-t border-theme flex flex-wrap justify-between items-center gap-4 mt-4">
-                <div class="text-xs text-theme-muted brand-font flex items-center">
+            <div class="pt-4 border-t border-gray-700 flex flex-wrap justify-between items-center gap-4 mt-4">
+                <div class="text-xs text-gray-400 font-sans flex items-center">
                     <i class="fa-solid fa-star text-red-500 mr-2"></i> PERSONAL RECOMMENDATION
                 </div>
                 <div class="flex gap-3" id="modal-action-container">
@@ -183,41 +185,41 @@
     </div>
 
     <!-- FOOTER -->
-    <footer id="contact" class="bg-black pt-16 pb-12 overflow-hidden border-t border-theme" style="background-color: var(--bg-secondary);">
+    <footer id="contact" class="bg-black pt-16 pb-12 overflow-hidden border-t border-gray-800" style="background-color: var(--bg-secondary);">
         <div class="container mx-auto px-4 text-center max-w-4xl">
-            <div class="mb-6 text-5xl md:text-6xl font-bold brand-font text-theme-muted hover:text-red-600 transition-colors cursor-default tracking-widest">
+            <div class="mb-6 text-5xl md:text-6xl font-bold font-sans text-gray-400 hover:text-red-600 transition-colors cursor-default tracking-widest">
                 S<span class="text-red-600">.</span>K
             </div>
-            <p class="text-theme-muted text-lg md:text-xl font-light mb-8 italic roboto-font">
+            <p class="text-gray-400 text-lg md:text-xl font-light mb-8 italic font-sans">
                 "Living, learning, &amp; leveling up one day at a time."
             </p>
 
             <div class="flex flex-wrap justify-center items-center gap-6 md:gap-8 mb-10">
-                <a href="https://github.com/Siva-kumar-r16" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="GitHub">
+                <a href="https://github.com/Siva-kumar-r16" target="_blank" rel="noopener noreferrer" class="social-icon text-gray-400 hover:text-white text-2xl transition-all hover:scale-110" title="GitHub">
                     <i class="fa-brands fa-github"></i>
                 </a>
-                <a href="https://www.linkedin.com/in/siva-kumar-r-a90a482b1" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="LinkedIn">
+                <a href="https://www.linkedin.com/in/siva-kumar-r-a90a482b1" target="_blank" rel="noopener noreferrer" class="social-icon text-gray-400 hover:text-white text-2xl transition-all hover:scale-110" title="LinkedIn">
                     <i class="fa-brands fa-linkedin"></i>
                 </a>
-                <a href="https://www.instagram.com/sir_sivakumar?igsh=cng0Mnd1b2ZxczFp" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="Instagram">
+                <a href="https://www.instagram.com/sir_sivakumar?igsh=cng0Mnd1b2ZxczFp" target="_blank" rel="noopener noreferrer" class="social-icon text-gray-400 hover:text-white text-2xl transition-all hover:scale-110" title="Instagram">
                     <i class="fa-brands fa-instagram"></i>
                 </a>
-                <a href="https://leetcode.com/u/cskskjaddu/" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="LeetCode">
+                <a href="https://leetcode.com/u/cskskjaddu/" target="_blank" rel="noopener noreferrer" class="social-icon text-gray-400 hover:text-white text-2xl transition-all hover:scale-110" title="LeetCode">
                     <i class="fa-solid fa-code"></i>
                 </a>
-                <a href="https://www.hackerrank.com/profile/ksuja20" target="_blank" rel="noopener noreferrer" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="HackerRank">
+                <a href="https://www.hackerrank.com/profile/ksuja20" target="_blank" rel="noopener noreferrer" class="social-icon text-gray-400 hover:text-white text-2xl transition-all hover:scale-110" title="HackerRank">
                     <i class="fa-brands fa-hackerrank"></i>
                 </a>
-                <a href="mailto:sirsivakumar@outlook.com" class="social-icon text-theme-muted hover:text-white text-2xl transition-all hover:scale-110" title="Email">
+                <a href="mailto:sirsivakumar@outlook.com" class="social-icon text-gray-400 hover:text-white text-2xl transition-all hover:scale-110" title="Email">
                     <i class="fa-solid fa-envelope"></i>
                 </a>
             </div>
 
-            <div class="text-theme-muted text-sm space-y-2">
-                <p class="brand-font tracking-wider">Handcrafted by Siva Kumar <i class="fa-regular fa-copyright ml-1"></i> 2025</p>
-                <p class="mt-2 text-xs roboto-font opacity-60">Made with Nothing OS vibes.</p>
+            <div class="text-gray-400 text-sm space-y-2">
+                <p class="font-sans tracking-wider">Handcrafted by Siva Kumar <i class="fa-regular fa-copyright ml-1"></i> 2025</p>
+                <p class="mt-2 text-xs font-sans opacity-60">Made with Nothing OS vibes.</p>
                 <div>
-                    <a href="https://github.com/Siva-kumar-r16/Portfolio" target="_blank" rel="noopener noreferrer" class="inline-block mt-3 text-xs brand-font border border-theme px-4 py-2 rounded-full hover:border-red-600 hover:text-white transition-all">
+                    <a href="https://github.com/Siva-kumar-r16/Portfolio" target="_blank" rel="noopener noreferrer" class="inline-block mt-3 text-xs font-sans border border-gray-700 px-4 py-2 rounded-full hover:border-red-600 hover:text-white transition-all">
                         <i class="fa-brands fa-github mr-1"></i> VIEW PORTFOLIO SOURCE
                     </a>
                 </div>
@@ -228,6 +230,14 @@
     <script src="js/main.js"></script>
     <script>
         const recommendations = [
+            {
+                title: "The Prestige",
+                type: "Movie",
+                genre: "Mystery / Sci-Fi / Thriller",
+                image: "https://m.media-amazon.com/images/S/pv-target-images/7502e23a56a6c45347ecd1e2cd2371f44fbd4cde6a69820bc1bf28f2f9fc826f.jpg",
+                link: "https://www.imdb.com/title/tt0482571/",
+                desc: "A movie that I watched till the climax from one perspective, but it completely changed after the ending. The same movie, from the same perspective, but an entirely different story. A true mind game by Christopher Nolan and my favorite Nolan movie."
+            },
             {
                 title: "Manichithrathazhu",
                 type: "Movie",
@@ -365,7 +375,7 @@
                 const isSeries = item.type === 'Series';
                 const isGame = item.type === 'Game';
                 
-                let badgeClass = 'bg-black/80 text-white border-theme';
+                let badgeClass = 'bg-black/80 text-white border-gray-700';
                 let iconClass = 'fa-film';
                 
                 if (isSeries) {
@@ -376,18 +386,18 @@
                 }
 
                 return `
-                    <div onclick="openEntertainmentModal(${originalIndex})" class="favorite-card float-anim group">
+                    <div onclick="openEntertainmentModal(${originalIndex})" class="favorite-card group">
                         <div class="image-container">
-                            <div class="absolute top-2 right-2 ${badgeClass} text-[10px] font-bold px-2 py-1 rounded border z-20 tracking-widest brand-font uppercase">
+                            <div class="absolute top-2 right-2 ${badgeClass} text-[10px] font-bold px-2 py-1 rounded border z-20 tracking-widest font-sans uppercase">
                                 ${item.type}
                             </div>
-                            <i class="fa-solid ${iconClass} text-3xl text-theme-muted absolute z-0"></i>
+                            <i class="fa-solid ${iconClass} text-3xl text-gray-400 absolute z-0"></i>
                             <img src="${item.image}" onerror="this.src='https://placehold.co/400x600/121212/D71921?text=${encodeURIComponent(item.title)}'" alt="${item.title}">
                         </div>
                         <div class="p-4 flex-1 flex flex-col items-center justify-center text-center">
-                            <h3 class="text-sm md:text-md font-bold brand-font mb-1" style="color: var(--text-main);">${item.title}</h3>
-                            <p class="text-[11px] text-theme-muted roboto-font">${item.genre}</p>
-                            <span class="mt-2 text-[10px] brand-font text-red-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <h3 class="text-sm md:text-md font-bold font-sans mb-1" style="color: var(--text-main);">${item.title}</h3>
+                            <p class="text-[11px] text-gray-400 font-sans">${item.genre}</p>
+                            <span class="mt-2 text-[10px] font-sans text-red-500 opacity-0 group-hover:opacity-100 transition-opacity">
                                 VIEW DETAILS <i class="fa-solid fa-arrow-right ml-1"></i>
                             </span>
                         </div>
@@ -416,7 +426,7 @@
             const iconClass = isGame ? 'fa-arrow-up-right-from-square' : 'fa-imdb';
 
             document.getElementById('modal-action-container').innerHTML = `
-                <a href="${data.link}" target="_blank" rel="noopener noreferrer" class="px-5 py-2 rounded-full border border-theme text-xs brand-font hover:border-red-600 hover:text-white transition-all text-theme-muted flex items-center gap-2">
+                <a href="${data.link}" target="_blank" rel="noopener noreferrer" class="px-5 py-2 rounded-full border border-gray-700 text-xs font-sans hover:border-red-600 hover:text-white transition-all text-gray-400 flex items-center gap-2">
                     ${actionText} <i class="fa-brands ${iconClass} fa-solid text-sm"></i>
                 </a>
             `;
@@ -458,9 +468,9 @@
             tab.addEventListener('click', () => {
                 document.querySelectorAll('.filter-tab').forEach(t => {
                     t.classList.remove('bg-red-600', 'text-white', 'border-red-600');
-                    t.classList.add('text-theme-muted', 'border-theme');
+                    t.classList.add('text-gray-400', 'border-gray-700');
                 });
-                tab.classList.remove('text-theme-muted', 'border-theme');
+                tab.classList.remove('text-gray-400', 'border-gray-700');
                 tab.classList.add('bg-red-600', 'text-white', 'border-red-600');
 
                 renderRecommendations(tab.getAttribute('data-type'));
