@@ -51,10 +51,16 @@ Open `index.html` in your preferred web browser or deploy it using GitHub Pages,
 
 ```text
 Portfolio/
-├── assets/
+├── images/
 ├── css/
 ├── js/
 ├── index.html
+├── certifications.html
+├── entertainment.html
+├── project.html
+├── resume.html
+├── robots.txt
+├── sitemap.xml
 ├── README.md
 └── LICENSE
 ```
