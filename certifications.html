@@ -13,11 +13,9 @@
     <meta property="og:image" content="images/avatar.png">
     <meta property="og:type" content="website">
 
-    <!-- Tailwind CDN kept intact as requested to prevent breaking the layout -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Google Fonts for fallback -->
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Inter:wght@300;400;600;700;800&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 
@@ -29,11 +27,6 @@
             --theme: #2a2a2a;
             --theme-muted: #888888;
         }
-
-        /* Fallback if style.css doesn't cover these (No !important, letting style.css take priority) */
-        .brand-font { font-family: 'DotGothic16', monospace; }
-        .roboto-font { font-family: 'Roboto', sans-serif; }
-        .inter-font { font-family: 'Inter', sans-serif; }
 
         .text-theme-muted { color: var(--theme-muted); }
         .border-theme { border-color: var(--theme); }
