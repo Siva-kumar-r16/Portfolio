@@ -69,8 +69,6 @@
                       of source aspect ratio).
            thumb-fg : the real certificate image, fully visible with
                       object-fit: contain, layered on top of the blur.
-           This auto-adapts to landscape AND portrait images with the
-           same markup — no per-image classing needed anymore.
         ----------------------------------------------------------------*/
         .cert-preview-frame img.thumb-bg {
             position: absolute;
@@ -132,6 +130,17 @@
         .modal-backdrop {
             background-color: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(8px);
+        }
+
+        /* --- LIGHT MODE SPECIFIC FIXES FOR CERTIFICATES --- */
+        body.is-light-mode .cert-preview-frame {
+            background-color: var(--bg-secondary) !important;
+        }
+        body.is-light-mode .cert-preview-frame img.thumb-bg {
+            filter: blur(20px) brightness(1) !important; /* Restores normal background brightness */
+        }
+        body.is-light-mode .cert-preview-frame img.thumb-fg {
+            opacity: 1 !important; /* Removes darkness/dimming overlay effect on the actual certificate */
         }
     </style>
 </head>
@@ -600,7 +609,6 @@
                     </div>
                     <div class="p-6 flex-1 flex flex-col justify-between">
                         <div>
-                            <!-- Visually larger and bolder as requested -->
                             <h3 class="text-xl font-extrabold brand-font mb-2" style="color: var(--text-main);">Foundational Course on Applied Machine Learning and AI</h3>
                             <p class="text-sm text-red-500 font-bold brand-font mb-3">ISSUED BY: Confederation of Indian Industry (CII)</p>
                             <p class="text-theme-muted text-xs md:text-sm roboto-font leading-relaxed">
@@ -628,7 +636,6 @@
                     </div>
                     <div class="p-6 flex-1 flex flex-col justify-between">
                         <div>
-                            <!-- Visually larger and bolder as requested -->
                             <h3 class="text-xl font-extrabold brand-font mb-2" style="color: var(--text-main);">Python (Basic)</h3>
                             <p class="text-sm text-red-500 font-bold brand-font mb-3">ISSUED BY: HackerRank</p>
                             <p class="text-theme-muted text-xs md:text-sm roboto-font leading-relaxed">
@@ -973,6 +980,30 @@
             bg.className = 'thumb-bg';
             bg.setAttribute('aria-hidden', 'true');
             img.parentNode.insertBefore(bg, img);
+        });
+
+        // --- Light Mode Detection for Certificates ---
+        function applyLightModeFix() {
+            const bgColor = window.getComputedStyle(document.body).backgroundColor;
+            const match = bgColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+            if (match) {
+                const luminance = (0.299 * parseInt(match[1]) + 0.587 * parseInt(match[2]) + 0.114 * parseInt(match[3]));
+                if (luminance > 128) {
+                    document.body.classList.add('is-light-mode');
+                } else {
+                    document.body.classList.remove('is-light-mode');
+                }
+            }
+        }
+        applyLightModeFix();
+        const themeObserver = new MutationObserver(applyLightModeFix);
+        themeObserver.observe(document.body, { attributes: true, attributeFilter: ['class', 'style'] });
+        themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'style', 'data-theme'] });
+        
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('#theme-toggle') || e.target.closest('.toggle-switch')) {
+                setTimeout(applyLightModeFix, 50);
+            }
         });
     </script>
 </body>
