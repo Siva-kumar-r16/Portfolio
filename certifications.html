@@ -13,8 +13,11 @@
     <meta property="og:image" content="images/avatar.png">
     <meta property="og:type" content="website">
 
+    <!-- Tailwind CDN kept intact as requested to prevent breaking the layout -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts for fallback -->
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Inter:wght@300;400;600;700;800&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 
@@ -27,13 +30,10 @@
             --theme-muted: #888888;
         }
 
-        /* 
-           FONT FIX: Added !important to force the browser to use the Google Fonts loaded in the <head> 
-           instead of any corrupted local OS/2 font files referenced in style.css that cause the OTS parsing error.
-        */
-        .brand-font { font-family: 'DotGothic16', monospace !important; }
-        .roboto-font { font-family: 'Roboto', sans-serif !important; }
-        .inter-font { font-family: 'Inter', sans-serif !important; }
+        /* Fallback if style.css doesn't cover these (No !important, letting style.css take priority) */
+        .brand-font { font-family: 'DotGothic16', monospace; }
+        .roboto-font { font-family: 'Roboto', sans-serif; }
+        .inter-font { font-family: 'Inter', sans-serif; }
 
         .text-theme-muted { color: var(--theme-muted); }
         .border-theme { border-color: var(--theme); }
@@ -198,7 +198,6 @@
 
             <!-- CATEGORY FILTER BUTTONS -->
             <div class="flex flex-wrap justify-center gap-2 md:gap-3 mt-8">
-                <!-- Updated count to 20 -->
                 <button class="filter-btn active px-4 py-1.5 rounded-full text-xs brand-font border border-red-600 bg-red-600 text-white transition-all" data-category="all">ALL (20)</button>
                 <button class="filter-btn px-4 py-1.5 rounded-full text-xs brand-font border border-theme text-theme-muted hover:border-red-600 hover:text-white transition-all" data-category="python">PYTHON</button>
                 <button class="filter-btn px-4 py-1.5 rounded-full text-xs brand-font border border-theme text-theme-muted hover:border-red-600 hover:text-white transition-all" data-category="ai">AI &amp; CLOUD</button>
@@ -762,7 +761,8 @@
     </section>
 
     <!-- FULL SIZE MODAL LIGHTBOX FOR DOCUMENTS -->
-    <div id="cert-modal" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+    <!-- Removed Tailwind `hidden` class to fix CSS priority conflict, using inline `style.display="none"` instead -->
+    <div id="cert-modal" class="fixed inset-0 z-50 modal-backdrop items-center justify-center p-4" style="display: none;">
         <!-- Expanded modal width for document viewing -->
         <div class="bg-theme-secondary border border-theme rounded-2xl max-w-4xl w-full p-4 md:p-6 relative max-h-[95vh] flex flex-col shadow-2xl" style="background-color: var(--bg-secondary);">
             
@@ -792,11 +792,9 @@
                     <i class="fa-solid fa-lock text-green-500 mr-1"></i> VERIFIED CERTIFICATE
                 </div>
                 <div class="flex items-center gap-3">
-                    <!-- Added Verify Online button, initially hidden -->
-                    <a id="modal-verify-btn" href="#" target="_blank" class="hidden px-5 py-2 rounded-full border border-theme text-xs brand-font hover:border-red-600 hover:text-white transition-all text-theme-muted flex items-center gap-2">
+                    <a id="modal-verify-btn" href="#" target="_blank" class="px-5 py-2 rounded-full border border-theme text-xs brand-font hover:border-red-600 hover:text-white transition-all text-theme-muted items-center gap-2" style="display: none;">
                         <i class="fa-solid fa-arrow-up-right-from-square"></i> VERIFY ONLINE
                     </a>
-                    <!-- Standard Download Button -->
                     <a id="modal-download-btn" href="#" download class="px-5 py-2 rounded-full border border-theme text-xs brand-font hover:border-red-600 hover:text-white transition-all text-theme-muted flex items-center gap-2">
                         <i class="fa-solid fa-download"></i> DOWNLOAD
                     </a>
@@ -867,7 +865,6 @@
         // Base path to where your webp images are located
         const basePath = "images/certifications/";
 
-        // Certificate dataset updated with the new certificates, Hackerrank Iframe, and shifted intern positions
         const certData = {
             1: { title: "Advanced Python Topics: File Operations in Python", issuedBy: "Infosys Springboard", filename: "Advanced Python Topic File Operations in Python.webp", type: "image" },
             2: { title: "AI for Beginners", issuedBy: "HP LIFE", filename: "AI for Beginners.webp", type: "image" },
@@ -891,7 +888,7 @@
             20: { title: "App Developer Intern", issuedBy: "Codec Technologies Pvt. Ltd.", filename: "APP DEVELOPMENT.webp", type: "image" }
         };
 
-        // Added robust global bindings and try/catch block to avoid any breakage
+        // Window-bound functions to ensure onclick attributes always hit scope
         window.openCertModal = function(id) {
             try {
                 const data = certData[id];
@@ -911,7 +908,7 @@
                 
                 // Inject Image Viewer
                 container.innerHTML = `
-                    <img src="${fullPath}" alt="${data.title}" class="w-full h-full object-contain p-2 md:p-4 opacity-0 transition-opacity duration-300" onload="this.classList.remove('opacity-0'); this.style.opacity='1';">
+                    <img src="${fullPath}" alt="${data.title}" class="w-full h-full object-contain p-2 md:p-4 opacity-0 transition-opacity duration-300" onload="this.style.opacity='1';">
                 `;
                 
                 // Standard download behavior
@@ -920,24 +917,21 @@
                     downloadBtn.setAttribute('download', data.filename);
                 }
                 
-                // Toggle Verify Online button visibility based on dataset
+                // Toggle Verify Online button visibility dynamically
                 if (verifyBtn) {
                     if (data.verifyUrl) {
                         verifyBtn.href = data.verifyUrl;
-                        verifyBtn.classList.remove('hidden');
                         verifyBtn.style.display = 'inline-flex';
                     } else {
                         verifyBtn.href = "#";
-                        verifyBtn.classList.add('hidden');
                         verifyBtn.style.display = 'none';
                     }
                 }
 
                 const modal = document.getElementById('cert-modal');
                 if (modal) {
-                    modal.classList.remove('hidden');
-                    modal.style.display = 'flex'; // Explicitly forces flex to ignore CSS overwrites
-                    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                    modal.style.display = 'flex'; // Explicit force to display, overriding Tailwind logic
+                    document.body.style.overflow = 'hidden'; 
                 }
             } catch(e) {
                 console.error("Failed to open certificate modal: ", e);
@@ -948,10 +942,10 @@
             try {
                 const modal = document.getElementById('cert-modal');
                 if(modal) {
-                    modal.classList.add('hidden');
-                    modal.style.display = 'none';
+                    modal.style.display = 'none'; // Explicitly hide
                 }
                 document.body.style.overflow = 'auto'; // Restore scrolling
+                
                 // Clear content to stop rendering/memory
                 const container = document.getElementById('modal-content-container');
                 if (container) container.innerHTML = '';
@@ -964,10 +958,11 @@
         document.getElementById('cert-modal').addEventListener('click', (e) => {
             if (e.target.id === 'cert-modal') window.closeCertModal();
         });
+        
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 const modal = document.getElementById('cert-modal');
-                if (modal && (!modal.classList.contains('hidden') || modal.style.display === 'flex')) {
+                if (modal && modal.style.display !== 'none') {
                     window.closeCertModal();
                 }
             }
