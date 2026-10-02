@@ -612,24 +612,24 @@
                     </div>
                 </div>
 
-                <!-- 16. Python (Basic) by HackerRank -->
-                <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="python" onclick="openCertModal(16)">
+                <!-- 16. Problem Solving (Basic) by HackerRank -->
+                <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="software" onclick="openCertModal(16)">
                     <div class="cert-preview-frame">
-                        <img src="images/certifications/Python (Basic) HACKERANK.webp" alt="Siva Kumar R Python Basic HackerRank Certification" loading="lazy" class="thumb-fg opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
+                        <img src="https://s3.us-east-1.amazonaws.com/downloads.hackerrank.com/certificates/10970897a406" alt="Siva Kumar R Problem Solving Basic HackerRank Certification" loading="lazy" class="thumb-fg opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
                         <div class="absolute top-3 left-3 z-10 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/80 px-2 py-0.5 rounded border border-red-800 backdrop-blur-sm">CERTIFICATE PREVIEW</div>
                         <div class="z-10 text-center px-4 group-hover:opacity-0 transition-opacity duration-300">
                             <i class="fa-brands fa-hackerrank text-5xl text-theme-muted mb-2 drop-shadow-lg"></i>
                             <p class="text-xs font-bold brand-font text-white drop-shadow-md">HACKERRANK</p>
-                            <p class="text-[10px] text-theme-muted roboto-font drop-shadow-md">Python Assessment</p>
+                            <p class="text-[10px] text-theme-muted roboto-font drop-shadow-md">Problem Solving</p>
                         </div>
                         <div class="absolute bottom-2 right-2 z-10 text-[10px] text-theme-muted bg-black/80 px-2 py-0.5 rounded border border-theme group-hover:text-white backdrop-blur-sm transition-colors"><i class="fa-solid fa-expand mr-1"></i> VIEW FULL</div>
                     </div>
                     <div class="p-6 flex-1 flex flex-col justify-between">
                         <div>
-                            <h3 class="text-xl font-extrabold brand-font mb-2" style="color: var(--text-main);">Python (Basic)</h3>
+                            <h3 class="text-xl font-extrabold brand-font mb-2" style="color: var(--text-main);">Problem Solving (Basic)</h3>
                             <p class="text-sm text-red-500 font-bold brand-font mb-3">ISSUED BY: HackerRank</p>
                             <p class="text-theme-muted text-xs md:text-sm roboto-font leading-relaxed">
-                                Demonstrates fundamental Python programming skills through standardized assessment.
+                                Demonstrates foundational problem-solving skills, covering basic data structures such as arrays and strings, along with fundamental algorithms including sorting and searching.
                             </p>
                         </div>
                         <div class="mt-4 pt-3 border-t border-theme flex justify-between items-center text-xs brand-font text-theme-muted">
@@ -791,7 +791,7 @@
                     </a>
                     <!-- Standard Download Button -->
                     <a id="modal-download-btn" href="#" download class="px-5 py-2 rounded-full border border-theme text-xs brand-font hover:border-red-600 hover:text-white transition-all text-theme-muted flex items-center gap-2">
-                        <i class="fa-solid fa-download"></i> DOWNLOAD
+                        <i class="fa-solid fa-download"></i> <span id="download-text">DOWNLOAD</span>
                     </a>
                     <button onclick="closeCertModal()" class="px-5 py-2 rounded-full border border-theme text-xs brand-font hover:border-red-600 hover:text-white transition-all text-theme-muted">
                         CLOSE
@@ -876,14 +876,20 @@
             13: { title: "Customer Experience (CX) for Business Success", issuedBy: "HP LIFE", filename: "Customer Experience (CX) for Business Success.webp", type: "image" },
             14: { title: "Strategic Planning in the AI Age", issuedBy: "HP LIFE", filename: "Strategic Planning in the AI Age.webp", type: "image" },
             15: { title: "Foundational Course on Applied Machine Learning and AI", issuedBy: "Confederation of Indian Industry (CII)", filename: "Foundational Course on Applied Machine Learning and Al.webp", type: "image" },
-            16: { title: "Python (Basic)", issuedBy: "HackerRank", filename: "Python (Basic) HACKERANK.webp", type: "image", verifyUrl: "https://www.hackerrank.com/certificates/162d29ce1215" },
+            16: { 
+                title: "Problem Solving (Basic)", 
+                issuedBy: "HackerRank", 
+                type: "hackerrank",
+                verifyUrl: "https://www.hackerrank.com/certificates/10970897a406",
+                iframeUrl: "https://www.hackerrank.com/certificates/iframe/10970897a406",
+                imageUrl: "https://s3.us-east-1.amazonaws.com/downloads.hackerrank.com/certificates/10970897a406"
+            },
             17: { title: "Java Internship", issuedBy: "InternPe", filename: "Java Internship.webp", type: "image" },
             18: { title: "Python Internship", issuedBy: "InternPe", filename: "Python Internship.webp", type: "image" },
             19: { title: "Adobe University Hackathon", issuedBy: "Adobe", filename: "adobe.webp", type: "image" },
             20: { title: "App Developer Intern", issuedBy: "Codec Technologies Pvt. Ltd.", filename: "APP DEVELOPMENT.webp", type: "image" }
         };
 
-        // Standard function declarations matching projects.html structure exactly
         function openCertModal(id) {
             const data = certData[id];
             if (!data) return;
@@ -893,22 +899,87 @@
             document.getElementById('modal-cert-issued').textContent = 'Issued by: ' + data.issuedBy;
             document.getElementById('modal-issuer-badge').textContent = data.issuedBy.toUpperCase();
 
-            // URI encoded to safely handle spaces in files like "APP DEVELOPMENT.webp"
-            const fullPath = encodeURI(basePath + data.filename);
+            // Handle pathing safely in case filename doesn't exist (like HackerRank)
+            const fullPath = data.filename ? encodeURI(basePath + data.filename) : '';
             
             const downloadBtn = document.getElementById('modal-download-btn');
             const verifyBtn = document.getElementById('modal-verify-btn');
             const container = document.getElementById('modal-content-container');
             
-            // Inject Image Viewer
-            container.innerHTML = `
-                <img src="${fullPath}" alt="${data.title}" class="w-full h-full object-contain p-2 md:p-4 opacity-0 transition-opacity duration-300" onload="this.classList.remove('opacity-0')">
-            `;
+            // Inject Iframe Viewer OR Standard Image Viewer
+            if (data.type === "hackerrank") {
+                container.innerHTML = `
+                    <iframe src="${data.iframeUrl}" class="w-full h-full border-0 rounded-lg bg-white" title="${data.title}" allowfullscreen></iframe>
+                `;
+            } else {
+                container.innerHTML = `
+                    <img src="${fullPath}" alt="${data.title}" class="w-full h-full object-contain p-2 md:p-4 opacity-0 transition-opacity duration-300" onload="this.classList.remove('opacity-0')">
+                `;
+            }
             
-            // Standard download behavior
+            // Download / Action Logic
             if (downloadBtn) {
-                downloadBtn.href = fullPath;
-                downloadBtn.setAttribute('download', data.filename);
+                // Clear previously attached handlers
+                downloadBtn.onclick = null;
+
+                if (data.type === "hackerrank") {
+                    // Prevent standard anchor behavior
+                    downloadBtn.removeAttribute('download');
+                    downloadBtn.href = "#";
+                    
+                    downloadBtn.onclick = function(e) {
+                        e.preventDefault();
+                        const img = new Image();
+                        img.crossOrigin = "anonymous";
+                        
+                        const originalContent = downloadBtn.innerHTML;
+                        downloadBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> PROCESSING...';
+                        downloadBtn.style.pointerEvents = 'none';
+
+                        const resetBtn = () => {
+                            downloadBtn.innerHTML = originalContent;
+                            downloadBtn.style.pointerEvents = 'auto';
+                        };
+
+                        img.onload = () => {
+                            try {
+                                const canvas = document.createElement("canvas");
+                                canvas.width = img.naturalWidth;
+                                canvas.height = img.naturalHeight;
+                                const ctx = canvas.getContext("2d");
+                                ctx.drawImage(img, 0, 0);
+
+                                canvas.toBlob((blob) => {
+                                    if (!blob) throw new Error("Canvas export failed");
+                                    const url = URL.createObjectURL(blob);
+                                    const link = document.createElement("a");
+                                    link.href = url;
+                                    link.download = "Siva-Kumar-R-HackerRank-Problem-Solving-Basic.png";
+                                    document.body.appendChild(link);
+                                    link.click();
+                                    link.remove();
+                                    URL.revokeObjectURL(url);
+                                    resetBtn();
+                                }, "image/png");
+                            } catch (err) {
+                                resetBtn();
+                                alert("Direct certificate download is blocked by the certificate host. Please use VERIFY ONLINE to open the official HackerRank certificate.");
+                            }
+                        };
+                        
+                        img.onerror = () => {
+                            resetBtn();
+                            alert("Direct certificate download is blocked by the certificate host. Please use VERIFY ONLINE to open the official HackerRank certificate.");
+                        };
+
+                        img.src = data.imageUrl;
+                    };
+                } else {
+                    // Standard download behavior
+                    downloadBtn.innerHTML = '<i class="fa-solid fa-download"></i> DOWNLOAD';
+                    downloadBtn.href = fullPath;
+                    downloadBtn.setAttribute('download', data.filename);
+                }
             }
             
             // Toggle Verify Online button visibility
@@ -927,7 +998,7 @@
             const modal = document.getElementById('cert-modal');
             if (modal) {
                 modal.classList.remove('hidden');
-                modal.style.display = 'flex'; // Force flex to prevent Tailwind class conflicts
+                modal.style.display = 'flex';
                 document.body.style.overflow = 'hidden'; 
             }
         }
