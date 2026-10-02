@@ -615,7 +615,7 @@
                 <!-- 16. Problem Solving (Basic) by HackerRank -->
                 <div class="cert-card hover-card group flex flex-col float-anim reveal" data-category="software" onclick="openCertModal(16)">
                     <div class="cert-preview-frame">
-                        <img src="https://s3.us-east-1.amazonaws.com/downloads.hackerrank.com/certificates/10970897a406" alt="Siva Kumar R Problem Solving Basic HackerRank Certification" loading="lazy" class="thumb-fg opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
+                        <img src="images/certifications/Problem Solving (Basic).webp" alt="Siva Kumar R Problem Solving Basic HackerRank Certification" loading="lazy" class="thumb-fg opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
                         <div class="absolute top-3 left-3 z-10 text-[10px] brand-font tracking-widest text-red-500 bg-red-950/80 px-2 py-0.5 rounded border border-red-800 backdrop-blur-sm">CERTIFICATE PREVIEW</div>
                         <div class="z-10 text-center px-4 group-hover:opacity-0 transition-opacity duration-300">
                             <i class="fa-brands fa-hackerrank text-5xl text-theme-muted mb-2 drop-shadow-lg"></i>
@@ -879,10 +879,10 @@
             16: { 
                 title: "Problem Solving (Basic)", 
                 issuedBy: "HackerRank", 
-                type: "hackerrank",
+                type: "image",
                 verifyUrl: "https://www.hackerrank.com/certificates/10970897a406",
-                iframeUrl: "https://www.hackerrank.com/certificates/iframe/10970897a406",
-                imageUrl: "https://s3.us-east-1.amazonaws.com/downloads.hackerrank.com/certificates/10970897a406"
+                filename: "Problem Solving (Basic).webp",
+                downloadName: "Siva-Kumar-R-HackerRank-Problem-Solving-Basic.webp"
             },
             17: { title: "Java Internship", issuedBy: "InternPe", filename: "Java Internship.webp", type: "image" },
             18: { title: "Python Internship", issuedBy: "InternPe", filename: "Python Internship.webp", type: "image" },
@@ -899,87 +899,27 @@
             document.getElementById('modal-cert-issued').textContent = 'Issued by: ' + data.issuedBy;
             document.getElementById('modal-issuer-badge').textContent = data.issuedBy.toUpperCase();
 
-            // Handle pathing safely in case filename doesn't exist (like HackerRank)
+            // Handle pathing safely in case filename doesn't exist
             const fullPath = data.filename ? encodeURI(basePath + data.filename) : '';
             
             const downloadBtn = document.getElementById('modal-download-btn');
             const verifyBtn = document.getElementById('modal-verify-btn');
             const container = document.getElementById('modal-content-container');
             
-            // Inject Iframe Viewer OR Standard Image Viewer
-            if (data.type === "hackerrank") {
-                container.innerHTML = `
-                    <iframe src="${data.iframeUrl}" class="w-full h-full border-0 rounded-lg bg-white" title="${data.title}" allowfullscreen></iframe>
-                `;
-            } else {
-                container.innerHTML = `
-                    <img src="${fullPath}" alt="${data.title}" class="w-full h-full object-contain p-2 md:p-4 opacity-0 transition-opacity duration-300" onload="this.classList.remove('opacity-0')">
-                `;
-            }
+            // Inject Standard Image Viewer
+            container.innerHTML = `
+                <img src="${fullPath}" alt="${data.title}" class="w-full h-full object-contain p-2 md:p-4 opacity-0 transition-opacity duration-300" onload="this.classList.remove('opacity-0')">
+            `;
             
             // Download / Action Logic
             if (downloadBtn) {
                 // Clear previously attached handlers
                 downloadBtn.onclick = null;
 
-                if (data.type === "hackerrank") {
-                    // Prevent standard anchor behavior
-                    downloadBtn.removeAttribute('download');
-                    downloadBtn.href = "#";
-                    
-                    downloadBtn.onclick = function(e) {
-                        e.preventDefault();
-                        const img = new Image();
-                        img.crossOrigin = "anonymous";
-                        
-                        const originalContent = downloadBtn.innerHTML;
-                        downloadBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> PROCESSING...';
-                        downloadBtn.style.pointerEvents = 'none';
-
-                        const resetBtn = () => {
-                            downloadBtn.innerHTML = originalContent;
-                            downloadBtn.style.pointerEvents = 'auto';
-                        };
-
-                        img.onload = () => {
-                            try {
-                                const canvas = document.createElement("canvas");
-                                canvas.width = img.naturalWidth;
-                                canvas.height = img.naturalHeight;
-                                const ctx = canvas.getContext("2d");
-                                ctx.drawImage(img, 0, 0);
-
-                                canvas.toBlob((blob) => {
-                                    if (!blob) throw new Error("Canvas export failed");
-                                    const url = URL.createObjectURL(blob);
-                                    const link = document.createElement("a");
-                                    link.href = url;
-                                    link.download = "Siva-Kumar-R-HackerRank-Problem-Solving-Basic.png";
-                                    document.body.appendChild(link);
-                                    link.click();
-                                    link.remove();
-                                    URL.revokeObjectURL(url);
-                                    resetBtn();
-                                }, "image/png");
-                            } catch (err) {
-                                resetBtn();
-                                alert("Direct certificate download is blocked by the certificate host. Please use VERIFY ONLINE to open the official HackerRank certificate.");
-                            }
-                        };
-                        
-                        img.onerror = () => {
-                            resetBtn();
-                            alert("Direct certificate download is blocked by the certificate host. Please use VERIFY ONLINE to open the official HackerRank certificate.");
-                        };
-
-                        img.src = data.imageUrl;
-                    };
-                } else {
-                    // Standard download behavior
-                    downloadBtn.innerHTML = '<i class="fa-solid fa-download"></i> DOWNLOAD';
-                    downloadBtn.href = fullPath;
-                    downloadBtn.setAttribute('download', data.filename);
-                }
+                // Standard download behavior
+                downloadBtn.innerHTML = '<i class="fa-solid fa-download"></i> DOWNLOAD';
+                downloadBtn.href = fullPath;
+                downloadBtn.setAttribute('download', data.downloadName || data.filename);
             }
             
             // Toggle Verify Online button visibility
